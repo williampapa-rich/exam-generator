@@ -1,0 +1,205 @@
+{
+  "$defs": {
+    "SubQuestion": {
+      "description": "장문 세트(41-42, 43-45) 안의 개별 문항",
+      "properties": {
+        "question_text": {
+          "title": "Question Text",
+          "type": "string"
+        },
+        "choices": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Choices",
+          "type": "array"
+        },
+        "answer": {
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Answer",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "question_text",
+        "choices",
+        "answer"
+      ],
+      "title": "SubQuestion",
+      "type": "object"
+    }
+  },
+  "description": "LLM 출력 + renderer 입력 + parser 출력의 공통 모델.",
+  "properties": {
+    "number": {
+      "anyOf": [
+        {
+          "maximum": 45,
+          "minimum": 1,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Number"
+    },
+    "type": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Type"
+    },
+    "points": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Points"
+    },
+    "passage": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Passage",
+      "type": "array"
+    },
+    "question_text": {
+      "default": "",
+      "title": "Question Text",
+      "type": "string"
+    },
+    "choices": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Choices",
+      "type": "array"
+    },
+    "answer": {
+      "default": 1,
+      "maximum": 5,
+      "minimum": 1,
+      "title": "Answer",
+      "type": "integer"
+    },
+    "explanation": {
+      "default": "",
+      "title": "Explanation",
+      "type": "string"
+    },
+    "given_sentence": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Given Sentence"
+    },
+    "sub_passages": {
+      "anyOf": [
+        {
+          "items": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Sub Passages"
+    },
+    "summary": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Summary"
+    },
+    "sub_questions": {
+      "anyOf": [
+        {
+          "items": {
+            "$ref": "#/$defs/SubQuestion"
+          },
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Sub Questions"
+    },
+    "group_label": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Group Label"
+    },
+    "has_passage_box": {
+      "default": false,
+      "title": "Has Passage Box",
+      "type": "boolean"
+    },
+    "has_inline_markers": {
+      "default": false,
+      "title": "Has Inline Markers",
+      "type": "boolean"
+    },
+    "has_blanks": {
+      "default": false,
+      "title": "Has Blanks",
+      "type": "boolean"
+    },
+    "raw_paragraphs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Raw Paragraphs",
+      "type": "array"
+    },
+    "paragraph_indices": {
+      "items": {
+        "type": "integer"
+      },
+      "title": "Paragraph Indices",
+      "type": "array"
+    }
+  },
+  "title": "Question",
+  "type": "object"
+}

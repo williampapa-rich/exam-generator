@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "exam-generator"
+version = "0.1.0"
+description = "수능 영어 시험지 자동 생성기 (FastAPI + Multi-LLM)"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi>=0.110",
+    "uvicorn[standard]>=0.27",
+    "pydantic>=2.5",
+    "python-multipart>=0.0.9",
+    "python-dotenv>=1.0",
+    "httpx>=0.27",
+    "google-genai>=0.3",
+    "openai>=1.40",
+    "anthropic>=0.34",
+]
+
+[project.optional-dependencies]
+parser = []
+dev = [
+    "pytest>=8",
+    "pytest-asyncio>=0.23",
+    "ruff>=0.4",
+    "mypy>=1.10",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["app*", "shared*", "tools*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"

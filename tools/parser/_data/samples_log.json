@@ -1,0 +1,16 @@
+[
+  {
+    "file": "평가원_영어_양식.hwpx",
+    "ingested_at": "2026-04-28T19:48:38.145192",
+    "command": "learn",
+    "mode": "replace",
+    "questions": 45
+  },
+  {
+    "file": "평가원_영어_양식.hwpx",
+    "ingested_at": "2026-04-28T19:48:54.213330",
+    "command": "learn",
+    "mode": "merge",
+    "questions": 45
+  }
+]

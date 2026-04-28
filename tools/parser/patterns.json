@@ -1,0 +1,836 @@
+{
+  "file_count": 1,
+  "regex_lib": {
+    "question_number": "^\\s*(?P<num>\\d{1,2})[.\\)]\\s*",
+    "question_with_pts": "(?P<question>.+?(?:적절한|올바른|일치하지|들어갈|순서로|뜻하는|관계 없는|언급되지 않은|언급된)\\s*(?:것은|곳은|문장은|것을\\s*고르시오|것만을\\s*고르시오)[\\?.])\\s*\\[(?P<pts>\\d+\\.?\\d*)점\\]",
+    "question_only": "(?P<question>.+?(?:적절한|올바른|일치하지|들어갈|순서로|뜻하는|관계\\s*없는|언급되지\\s*않은|언급된)\\s*(?:것은|곳은|문장은|것을\\s*고르시오|것만을\\s*고르시오)[\\?.])",
+    "points": "\\[(?P<pts>\\d+\\.?\\d*)점\\]",
+    "choice_symbol": "[①②③④⑤]",
+    "choice_marker": "(?P<sym>[①②③④⑤])\\s*(?P<text>[^①②③④⑤\\n]*)",
+    "group_label": "^\\s*\\[(?P<range>\\d+\\s*[~∼-]\\s*\\d+)\\]\\s*(?P<instruction>.+)$",
+    "blank": "_{3,}|\\(\\s*[A-D]\\s*\\)\\s*_+|_+\\s*\\([A-D]\\)",
+    "underline_marker": "[①②③④⑤](?:\\s*\\[[^/\\]]+/[^\\]]+\\])?",
+    "abc_choice_inline": "\\((?P<letter>[A-D])\\)\\s*\\[(?P<opt1>[^/\\]]+)/(?P<opt2>[^/\\]]+)\\]",
+    "abc_combination": "\\(A\\)\\s*[\\w\\-]+\\s*[-–·]\\s*\\(B\\)\\s*[\\w\\-]+\\s*[-–·]\\s*\\(C\\)\\s*[\\w\\-]+",
+    "english_sentence": "[A-Za-z][A-Za-z\\s,.;:'\\\"\\-()]+[.!?]"
+  },
+  "type_profiles": {
+    "듣기-목적(1)": {
+      "sample_count": 1,
+      "avg_passage_len": 0,
+      "avg_choice_len": 18,
+      "has_box_ratio": 0.0,
+      "has_blanks_ratio": 0.0,
+      "has_inline_ratio": 0.0,
+      "sample_questions": [
+        "다음을 듣고, 여자가 하는 말의 목적으로 가장 적절한 것을 고르시오."
+      ],
+      "sample_choices": [
+        [
+          "학교 종소리 교체 계획을 알리려고",
+          "학교 수업 시간 단축을 공지하려고",
+          "등교 시간 변경을 안내하려고",
+          "학부모 상담 신청서 제출을 독려하려고",
+          "학교 행사 후 교실 정리 정돈을 당부하려고"
+        ]
+      ]
+    },
+    "듣기-의견(2)": {
+      "sample_count": 1,
+      "avg_passage_len": 0,
+      "avg_choice_len": 29,
+      "has_box_ratio": 0.0,
+      "has_blanks_ratio": 0.0,
+      "has_inline_ratio": 0.0,
+      "sample_questions": [
+        "대화를 듣고, 남자의 의견으로 가장 적절한 것을 고르시오."
+      ],
+      "sample_choices": [
+        [
+          "드라마 캠프는 효율적인 여가 시간 활용 수단이다.",
+          "좋은 연기를 하려면 다른 사람과의 협력이 중요하다.",
+          "드라마에는 독특한 개성을 가진 등장인물이 필요하다.",
+          "원만한 교우 관계를 위해 친구의 말에 귀 기울여야 한다.",
+          "드라마 캠프 참여는 다양한 시각을 갖는 데 도움이 된다."
+        ]
+      ]
+    },
+    "듣기-요지(3)": {
+      "sample_count": 1,
+      "avg_passage_len": 0,
+      "avg_choice_len": 28,
+      "has_box_ratio": 0.0,
+      "has_blanks_ratio": 0.0,
+      "has_inline_ratio": 0.0,
+      "sample_questions": [
+        "다음을 듣고, 여자가 하는 말의 요지로 가장 적절한 것을 고르시오."
+      ],
+      "sample_choices": [
+        [
+          "예술가에 관해 알면 작품을 더 잘 이해할 수 있다.",
+          "지역 사회는 예술가에 대한 지원을 확대해야 한다.",
+          "예술 작품을 전시할 때 조명 효과를 고려해야 한다.",
+          "정기적인 미술관 방문은 작품 감상 능력을 높여 준다.",
+          "예술 작품은 보는 사람에 따라 다양한 해석이 가능하다."
+        ]
+      ]
+    },
+    "듣기-그림(4)": {
+      "sample_count": 1,
+      "avg_passage_len": 75,
+      "avg_choice_len": 0,
+      "has_box_ratio": 0.0,
+      "has_blanks_ratio": 0.0,
+      "has_inline_ratio": 0.0,
+      "sample_questions": [
+        "대화를 듣고, 그림에서 대화의 내용과 일치하지 않는 것을 고르시오."
+      ],
+      "sample_choices": [
+        []
+      ]
+    },
+    "듣기-할일(5)": {
+      "sample_count": 1,
+      "avg_passage_len": 0,
+      "avg_choice_len": 8,
+      "has_box_ratio": 0.0,
+      "has_blanks_ratio": 0.0,
+      "has_inline_ratio": 0.0,
+      "sample_questions": [
+        "대화를 듣고, 남자가 할 일로 가장 적절한 것을 고르시오."
+      ],
+      "sample_choices": [
+        [
+          "트로피 가져오기",
+          "사진 출력하기",
+          "이메일 확인하기",
+          "스티커 주문하기",
+          "게시판 사용 허락받기"
+        ]
+      ]
+    },
+    "듣기-금액(6)": {
+      "sample_count": 1,
+      "avg_passage_len": 0,
+      "avg_choice_len": 4,
+      "has_box_ratio": 0.0,
+      "has_blanks_ratio": 0.0,
+      "has_inline_ratio": 0.0,
+      "sample_questions": [
+        "대화를 듣고, 여자가 지불할 금액을 고르시오."
+      ],
+      "sample_choices": [
+        [
+          "$100",
+          "$150",
+          "$180",
+          "$200",
+          "$220"
+        ]
+      ]
+    },
+    "듣기-이유(7)": {
+      "sample_count": 1,
+      "avg_passage_len": 0,
+      "avg_choice_len": 14,
+      "has_box_ratio": 0.0,
+      "has_blanks_ratio": 0.0,
+      "has_inline_ratio": 0.0,
+      "sample_questions": [
+        "대화를 듣고, 남자가 Streamline Broadcasting Workshop에 갈 수 없는 이유를 고르시오."
+      ],
+      "sample_choices": [
+        [
+          "동아리 공연에 참여해야 해서",
+          "교내 방송 준비를 해야 해서",
+          "야구 경기를 보러 가야 해서",
+          "생일 파티에 참석해야 해서",
+          "선물을 사러 가야 해서"
+        ]
+      ]
+    },
+    "듣기-언급여부(8)": {
+      "sample_count": 1,
+      "avg_passage_len": 0,
+      "avg_choice_len": 3,
+      "has_box_ratio": 0.0,
+      "has_blanks_ratio": 0.0,
+      "has_inline_ratio": 0.0,
+      "sample_questions": [
+        "대화를 듣고, Outstanding Octopuses 행사에 관해 언급되지 않은 것을 고르시오."
+      ],
+      "sample_choices": [
+        [
+          "목적",
+          "프로그램",
+          "후원 기관",
+          "입장료",
+          "기간"
+        ]
+      ]
+    },
+    "듣기-내용일치(9)": {
+      "sample_count": 1,
+      "avg_passage_len": 0,
+      "avg_choice_len": 15,
+      "has_box_ratio": 0.0,
+      "has_blanks_ratio": 0.0,
+      "has_inline_ratio": 0.0,
+      "sample_questions": [
+        "2024 Grand Butterfly Circus에 관한 다음 내용을 듣고, 일치하지 않는 것을 고르시오."
+      ],
+      "sample_choices": [
+        [
+          "5일 동안 진행될 것이다.",
+          "마술 쇼를 포함한다.",
+          "2세 미만의 아이는 무료로 입장한다.",
+          "할인 쿠폰을 웹사이트에서 다운로드할 수 있다.",
+          "지정석이 있다."
+        ]
+      ]
+    },
+    "듣기-도표(10)": {
+      "sample_count": 1,
+      "avg_passage_len": 0,
+      "avg_choice_len": 11,
+      "has_box_ratio": 0.0,
+      "has_blanks_ratio": 0.0,
+      "has_inline_ratio": 0.0,
+      "sample_questions": [
+        "다음 표를 보면서 대화를 듣고, 여자가 구입할 식물 씨앗 키트를 고르시오."
+      ],
+      "sample_choices": [
+        [
+          "A$403Plastic☓",
+          "B$454Wood◯",
+          "C$455Metal☓",
+          "D$505Ceramic◯",
+          "E$606Glass◯"
+        ]
+      ]
+    },
+    "듣기-짧은응답(11~14)": {
+      "sample_count": 4,
+      "avg_passage_len": 2,
+      "avg_choice_len": 47,
+      "has_box_ratio": 0.0,
+      "has_blanks_ratio": 0.0,
+      "has_inline_ratio": 0.0,
+      "sample_questions": [
+        "대화를 듣고, 남자의 마지막 말에 대한 여자의 응답으로 가장 적절한 것을 고르시오.",
+        "대화를 듣고, 여자의 마지막 말에 대한 남자의 응답으로 가장 적절한 것을 고르시오.",
+        "대화를 듣고, 남자의 마지막 말에 대한 여자의 응답으로 가장 적절한 것을 고르시오."
+      ],
+      "sample_choices": [
+        [
+          "Great idea! Let’s ask him to come to the party.",
+          "That’s okay. I’ll check if I can change the order.",
+          "I can’t believe it! We finally won a tennis match.",
+          "No thanks. I don’t really like cakes with nuts on them.",
+          "No problem. I won’t eat foods that cause allergic reactions."
+        ],
+        [
+          "In that case, let’s give it a try.",
+          "I don’t know. It’s a bit expensive.",
+          "That’s the best class we’ve ever taken.",
+          "I’d be happy to teach yoga to beginners.",
+          "You’re right. The hotel’s view is amazing."
+        ],
+        [
+          "Too bad. I hope you can find your lost bike.",
+          "Good job. You’ll get used to riding a bike soon.",
+          "Awesome! Thank you for lending me your new bike.",
+          "I’m sorry. I’m afraid our auction has already finished.",
+          "Excellent! I’m sure your donation will be appreciated."
+        ]
+      ]
+    },
+    "듣기-할말(15)": {
+      "sample_count": 1,
+      "avg_passage_len": 7,
+      "avg_choice_len": 49,
+      "has_box_ratio": 0.0,
+      "has_blanks_ratio": 0.0,
+      "has_inline_ratio": 0.0,
+      "sample_questions": [
+        "다음 상황 설명을 듣고, Sophia가 Jack에게 할 말로 가장 적절한 것을 고르시오."
+      ],
+      "sample_choices": [
+        [
+          "I think it’ll be better to stick to your plan.",
+          "Let’s head out for the concert far in advance.",
+          "We can ask for a seat change so we can sit together.",
+          "Don’t you think we need to rehearse one more time?",
+          "How about leaving the concert early to avoid traffic?"
+        ]
+      ]
+    },
+    "듣기-주제(16)": {
+      "sample_count": 1,
+      "avg_passage_len": 0,
+      "avg_choice_len": 41,
+      "has_box_ratio": 0.0,
+      "has_blanks_ratio": 0.0,
+      "has_inline_ratio": 0.0,
+      "sample_questions": [
+        "여자가 하는 말의 주제로 가장 적절한 것은?"
+      ],
+      "sample_choices": [
+        [
+          "desirable conditions to store food",
+          "importance of having a nutritious diet",
+          "suitable foods to solve future food shortages",
+          "popular dishes made from unusual ingredients",
+          "future technologies to cope with food shortages"
+        ]
+      ]
+    },
+    "듣기-언급된대상(17)": {
+      "sample_count": 1,
+      "avg_passage_len": 0,
+      "avg_choice_len": 7,
+      "has_box_ratio": 0.0,
+      "has_blanks_ratio": 0.0,
+      "has_inline_ratio": 0.0,
+      "sample_questions": [
+        "언급된 음식이 아닌 것은?"
+      ],
+      "sample_choices": [
+        [
+          "seaweed",
+          "beans",
+          "pumpkins",
+          "potatoes",
+          "mushrooms"
+        ]
+      ]
+    },
+    "목적(18)": {
+      "sample_count": 1,
+      "avg_passage_len": 55,
+      "avg_choice_len": 22,
+      "has_box_ratio": 1.0,
+      "has_blanks_ratio": 0.0,
+      "has_inline_ratio": 0.0,
+      "sample_questions": [
+        "다음 글의 목적으로 가장 적절한 것은?"
+      ],
+      "sample_choices": [
+        [
+          "마라톤 경기 취소 사실을 공지하려고",
+          "마라톤 경기 사전 행사 참여를 독려하려고",
+          "마라톤 경기 참가비 환불 절차를 설명하려고",
+          "마라톤 경기 참여 시 규칙 준수를 당부하려고",
+          "마라톤 경기 진행에 따른 도로 통제를 안내하려고"
+        ]
+      ]
+    },
+    "심경(19)": {
+      "sample_count": 1,
+      "avg_passage_len": 697,
+      "avg_choice_len": 19,
+      "has_box_ratio": 0.0,
+      "has_blanks_ratio": 0.0,
+      "has_inline_ratio": 0.0,
+      "sample_questions": [
+        "다음 글에 드러난 Peter의 심경 변화로 가장 적절한 것은?"
+      ],
+      "sample_choices": [
+        [
+          "relaxed→indifferent",
+          "confident→disappointed",
+          "confused→satisfied",
+          "jealous→discouraged",
+          "embarrassed→joyful"
+        ]
+      ]
+    },
+    "주장(20)": {
+      "sample_count": 1,
+      "avg_passage_len": 782,
+      "avg_choice_len": 32,
+      "has_box_ratio": 0.0,
+      "has_blanks_ratio": 0.0,
+      "has_inline_ratio": 0.0,
+      "sample_questions": [
+        "다음 글에서 필자가 주장하는 바로 가장 적절한 것은?"
+      ],
+      "sample_choices": [
+        [
+          "학습 효과 증진에 활용될 수 있는 게임을 개발해야 한다.",
+          "교육 현장에서 학습과 게임 활동을 적절하게 분배해야 한다.",
+          "학습 활동에 게임이 초래하는 집중력 저하를 경계해야 한다.",
+          "여가 시간에 게임을 활용함으로써 학습 효율을 향상해야 한다.",
+          "게임의 부정적 영향을 줄이기 위해 학습 공동체가 노력해야 한다."
+        ]
+      ]
+    },
+    "밑줄함의(21)": {
+      "sample_count": 1,
+      "avg_passage_len": 986,
+      "avg_choice_len": 65,
+      "has_box_ratio": 0.0,
+      "has_blanks_ratio": 0.0,
+      "has_inline_ratio": 0.0,
+      "sample_questions": [
+        "밑줄 친 hunting the shadow, not the substance가 다음 글에서 의미하는 바로 가장 적절한 것은?"
+      ],
+      "sample_choices": [
+        [
+          "seeking abstract knowledge emphasized by architectural tradition",
+          "discounting the subjects necessary to achieve architectural goals",
+          "pursuing the ideals of architecture without the practical skills",
+          "prioritizing architecture’s material aspects over its artistic ones",
+          "following historical precedents without regard to current standards"
+        ]
+      ]
+    },
+    "요지(22)": {
+      "sample_count": 1,
+      "avg_passage_len": 931,
+      "avg_choice_len": 33,
+      "has_box_ratio": 0.0,
+      "has_blanks_ratio": 0.0,
+      "has_inline_ratio": 0.0,
+      "sample_questions": [
+        "다음 글의 요지로 가장 적절한 것은?"
+      ],
+      "sample_choices": [
+        [
+          "집단 구성원 간 갈등 해소를 위해 감정 조절이 중요하다.",
+          "감정 이해 능력은 집단 내 원활한 소통과 협력을 촉진한다.",
+          "타인에 대한 공감 능력은 자신의 감정 표현 능력을 향상한다.",
+          "감정 관련 어휘에 대한 지식은 공감 능력 발달의 기반이 된다.",
+          "자신의 감정 상태에 대한 이해는 사회성 함양에 필수적 요소이다."
+        ]
+      ]
+    },
+    "주제(23)": {
+      "sample_count": 1,
+      "avg_passage_len": 920,
+      "avg_choice_len": 63,
+      "has_box_ratio": 0.0,
+      "has_blanks_ratio": 0.0,
+      "has_inline_ratio": 0.0,
+      "sample_questions": [
+        "다음 글의 주제로 가장 적절한 것은?"
+      ],
+      "sample_choices": [
+        [
+          "shift in the work-time paradigm brought about by industrialization",
+          "effects of standardizing production procedures on labor markets",
+          "influence of industrialization on the machine-human relationship",
+          "efficient ways to increase the value of time in the Industrial Age",
+          "problems that excessive work hours have caused for laborers"
+        ]
+      ]
+    },
+    "제목(24)": {
+      "sample_count": 1,
+      "avg_passage_len": 844,
+      "avg_choice_len": 52,
+      "has_box_ratio": 0.0,
+      "has_blanks_ratio": 0.0,
+      "has_inline_ratio": 0.0,
+      "sample_questions": [
+        "다음 글의 제목으로 가장 적절한 것은?"
+      ],
+      "sample_choices": [
+        [
+          "Are Selfies Just a Temporary Trend in Art History?",
+          "Fantasy or Reality:Your Selfie Is Not the Real You",
+          "The Selfie:A Symbol of Self-oriented Global Culture",
+          "The End of Self-portraits:How Selfies Are Taking Over",
+          "Selfies, the Latest Innovation in Representing Ourselves"
+        ]
+      ]
+    },
+    "도표(25)": {
+      "sample_count": 1,
+      "avg_passage_len": 151,
+      "avg_choice_len": 140,
+      "has_box_ratio": 0.0,
+      "has_blanks_ratio": 0.0,
+      "has_inline_ratio": 0.0,
+      "sample_questions": [
+        "다음 도표의 내용과 일치하지 않는 것은?"
+      ],
+      "sample_choices": [
+        [
+          "For each of the three years, the percentage of women employed as producers on the top 100 U.S. films was the highest as compared with the percentages of each of the other three roles.",
+          "The percentage of women employed as directors on the top 100 U.S. films in 2021 was lower than in 2020 but higher than in 2022.",
+          "The percentage of women employed as writers on the top 100 U.S. films increased by 4 percentage points from 2020 to 2021 and by 1 percentage point from 2021 to 2022.",
+          "The percentage of women employed as editors on the top 100 U.S. films was less than 20% in each of the three years.",
+          "In 2022, the percentage of women employed as producers on the top 100 U.S. films was the same as that in 2020."
+        ]
+      ]
+    },
+    "내용불일치(26)": {
+      "sample_count": 1,
+      "avg_passage_len": 75,
+      "avg_choice_len": 18,
+      "has_box_ratio": 1.0,
+      "has_blanks_ratio": 0.0,
+      "has_inline_ratio": 0.0,
+      "sample_questions": [
+        "Dick Enberg에 관한 다음 글의 내용과 일치하지 않는 것은?"
+      ],
+      "sample_choices": [
+        [
+          "Michigan에서 태어났다.",
+          "대학 야구팀 코치였다.",
+          "중국을 방문한 첫 미국인 스포츠 캐스터였다.",
+          "마지막 생방송 후 3년 뒤에 사망하였다.",
+          "Emmy Awards를 수상하였다."
+        ]
+      ]
+    },
+    "안내문(27)": {
+      "sample_count": 1,
+      "avg_passage_len": 1236,
+      "avg_choice_len": 27,
+      "has_box_ratio": 0.0,
+      "has_blanks_ratio": 0.0,
+      "has_inline_ratio": 0.0,
+      "sample_questions": [
+        "Adenville City Pass Card에 관한 다음 안내문의 내용과 일치하지 않는 것은?"
+      ],
+      "sample_choices": [
+        [
+          "관광객을 위한 대중교통 카드이다.",
+          "시티 투어 버스에는 사용할 수 없다.",
+          "5일 패스 카드에만 주요 관광지 입장료 할인 혜택이 제공된다.",
+          "미사용 카드는 구입일로부터 30일 이내에 환불이 가능하다.",
+          "모바일 카드는 A-Transit 앱에서 구입할 수 있다."
+        ]
+      ]
+    },
+    "어법(28)": {
+      "sample_count": 1,
+      "avg_passage_len": 1286,
+      "avg_choice_len": 14,
+      "has_box_ratio": 0.0,
+      "has_blanks_ratio": 0.0,
+      "has_inline_ratio": 0.0,
+      "sample_questions": [
+        "Luckwood Snow Festival에 관한 다음 안내문의 내용과 일치하는 것은?"
+      ],
+      "sample_choices": [
+        [
+          "2년에 한 번 열린다.",
+          "열흘 동안 진행된다.",
+          "눈 조각 경연에는 11개 팀이 참가할 것이다.",
+          "주차가 가능하다.",
+          "셔틀버스 이용은 무료이다."
+        ]
+      ]
+    },
+    "어휘(29)": {
+      "sample_count": 1,
+      "avg_passage_len": 0,
+      "avg_choice_len": 143,
+      "has_box_ratio": 0.0,
+      "has_blanks_ratio": 0.0,
+      "has_inline_ratio": 0.0,
+      "sample_questions": [
+        "다음 글의 밑줄 친 부분 중, 어법상 틀린 것은?"
+      ],
+      "sample_choices": [
+        [
+          "had to consider every single muscle that needed to be contracted or relaxed just to stand up and walk. It would be tiresome and very slow―as patients recovering from a brain injury affecting the motor system",
+          "knows. The autopilot parts of our brain do it for us automatically,",
+          "freeing up our conscious mind for more important jobs. It is the older parts of our brain",
+          "that support these automatic processes that allow us to move, hear, see, and use many of our social skills. More recently evolved abilities like talking, reading, and writing are far less automated. So, most of the time,",
+          "what you are perceiving, feeling, or thinking is based on a very crude and fast analysis that happens completely without your awareness."
+        ]
+      ]
+    },
+    "빈칸-단어(30)": {
+      "sample_count": 5,
+      "avg_passage_len": 17,
+      "avg_choice_len": 68,
+      "has_box_ratio": 0.0,
+      "has_blanks_ratio": 0.0,
+      "has_inline_ratio": 0.0,
+      "sample_questions": [
+        "[31～34] 다음 빈칸에 들어갈 말로 가장 적절한 것을 고르시오.",
+        "Literature can be helpful in the language learning process because of the  it fosters in readers. Core language teaching",
+        "Education, at its best, teaches more than just knowledge. It teaches critical thinking:the ability to stop and think bef"
+      ],
+      "sample_choices": [
+        [
+          "desire to maintain good relationships with others. When the maintenance of interpersonal relationships is important, with their counterparts in particular or with others generally, competitors experience an",
+          "internal conflict that can harm their desire to achieve their goal and taint the good feeling brought about by winning. Exline and Lobel found that the perception of oneself as a target for upward social comparison often makes people",
+          "uncomfortable. When they believe that others are making envious comparisons with them, people feel uneasiness, distress, or sorrow. Feelings of guilt, an emotion generally associated with high motivation for goal-achievement, lead to",
+          "stronger motivation and performance in the pursuit of competitive goals. Consequences of this emotional state include lower task motivation in a competition and preferences for more cooperative and altruistic outcomes, such as",
+          "diminishing the significance of the outcome or sharing the winner’s reward."
+        ],
+        [
+          "linguistic insight",
+          "artistic imagination",
+          "literary sensibility",
+          "alternative perspective",
+          "personal involvement"
+        ],
+        [
+          "intensifies people’s danger",
+          "enhances our understanding",
+          "frees a person from the burden",
+          "allows us to accept the inevitability",
+          "requires one to have the experience"
+        ]
+      ]
+    },
+    "무관문장(35)": {
+      "sample_count": 1,
+      "avg_passage_len": 0,
+      "avg_choice_len": 181,
+      "has_box_ratio": 0.0,
+      "has_blanks_ratio": 0.0,
+      "has_inline_ratio": 0.0,
+      "sample_questions": [
+        "다음 글에서 전체 흐름과 관계 없는 문장은?"
+      ],
+      "sample_choices": [
+        [
+          "The significance of the car in the development of sport and tourism generally has attracted considerable coverage and it has had no less an impact on sports tourism specifically.",
+          "Although originally invented towards the end of the nineteenth century, it started to become a mass form of transport in the 1920s in the USA and rather later in Britain.",
+          "Apart from its convenience and flexibility, the car has the additional advantages of affording access to many areas not served by public transport, as well as allowing the easy transport of luggage and equipment.",
+          "The expansion of reasonably priced, good quality accommodation associated with tourism growth has also facilitated the growth of locally based restaurants.",
+          "As a result, it was invaluable for the development of many forms of sports tourism but especially those which require the transportation of people and equipment to relatively remote locations."
+        ]
+      ]
+    },
+    "순서배열(36)": {
+      "sample_count": 1,
+      "avg_passage_len": 1172,
+      "avg_choice_len": 11,
+      "has_box_ratio": 0.0,
+      "has_blanks_ratio": 0.0,
+      "has_inline_ratio": 0.0,
+      "sample_questions": [
+        ""
+      ],
+      "sample_choices": [
+        [
+          "(A)－(C)－(B)",
+          "(B)－(A)－(C)",
+          "(B)－(C)－(A)",
+          "(C)－(A)－(B)",
+          "(C)－(B)－(A)"
+        ]
+      ]
+    },
+    "순서배열(37)": {
+      "sample_count": 1,
+      "avg_passage_len": 1224,
+      "avg_choice_len": 11,
+      "has_box_ratio": 0.0,
+      "has_blanks_ratio": 0.0,
+      "has_inline_ratio": 0.0,
+      "sample_questions": [
+        ""
+      ],
+      "sample_choices": [
+        [
+          "(A)－(C)－(B)",
+          "(B)－(A)－(C)",
+          "(B)－(C)－(A)",
+          "(C)－(A)－(B)",
+          "(C)－(B)－(A)"
+        ]
+      ]
+    },
+    "문장삽입(38)": {
+      "sample_count": 1,
+      "avg_passage_len": 335,
+      "avg_choice_len": 156,
+      "has_box_ratio": 0.0,
+      "has_blanks_ratio": 0.0,
+      "has_inline_ratio": 0.0,
+      "sample_questions": [
+        ""
+      ],
+      "sample_choices": [
+        [
+          ")Notwithstanding the advantages of obtaining a patent, many innovators prefer to protect their innovation through secrecy.(",
+          ")They may believe that the cost and delay of seeking a patent are too great or that secrecy better protects their investment and increases their profit.(",
+          ")They might also believe that the invention can best be utilized over a longer period of time than a patent would allow.(",
+          ")Once the idea is released, it will be “free as the air” under the background norms of a free market economy.(",
+          ")Such a predicament would lead any inventor seeking to rely upon secrecy to spend an inordinate amount of resources building high and impassable fences around their research facilities and greatly limiting the number of people with access to the proprietary information.[3점]"
+        ]
+      ]
+    },
+    "문장삽입(39)": {
+      "sample_count": 1,
+      "avg_passage_len": 167,
+      "avg_choice_len": 168,
+      "has_box_ratio": 1.0,
+      "has_blanks_ratio": 0.0,
+      "has_inline_ratio": 0.0,
+      "sample_questions": [
+        ""
+      ],
+      "sample_choices": [
+        [
+          ")The focus in related scholarly discourse often revolves around the lifespan or lifecycle of objects and technologies.(",
+          ")In this context, maintenance and repair are considered practices that have the potential to prolong the existence of objects, ensuring their sustained utilization over an extended period.(",
+          ")Krebs and Weber critically engage with anthropomorphic metaphors that imply a biography of things, appropriately highlighting that conventional understanding of the lifecycle of a technology, from its acquisition to its disposal from the household, provides an incomplete definition.(",
+          ")Additionally, objects may enter recycling or second-hand cycles, leading to a dynamic afterlife marked by diverse applications.(",
+          ")As such, the life of an object exhibits a far more complicated and adaptive path than a simplistic linear progression."
+        ]
+      ]
+    },
+    "요약문(40)": {
+      "sample_count": 1,
+      "avg_passage_len": 221,
+      "avg_choice_len": 23,
+      "has_box_ratio": 1.0,
+      "has_blanks_ratio": 0.0,
+      "has_inline_ratio": 0.0,
+      "sample_questions": [
+        "다음 글의 내용을 한 문장으로 요약하고자 한다. 빈칸 (A), (B)에 들어갈 말로 가장 적절한 것은?"
+      ],
+      "sample_choices": [
+        [
+          "controllability……challenge",
+          "predictability……support",
+          "manageability……intensify",
+          "affordability……reverse",
+          "accessibility……question"
+        ]
+      ]
+    },
+    "장문어법(41-42)": {
+      "sample_count": 2,
+      "avg_passage_len": 0,
+      "avg_choice_len": 24,
+      "has_box_ratio": 0.0,
+      "has_blanks_ratio": 0.0,
+      "has_inline_ratio": 0.0,
+      "sample_questions": [
+        "윗글의 제목으로 가장 적절한 것은?",
+        "밑줄 친 (a)～(e) 중에서 문맥상 낱말의 쓰임이 적절하지 않은 것은? [3점]"
+      ],
+      "sample_choices": [
+        [
+          "Anatomical Distance Between Humans and Other Primates",
+          "Human Hands:A Decisive Leap in the Evolutionary Path",
+          "Our Hands:An Unexpected Outcome of Evolution",
+          "Human Grip:The Dilemma of Human Survival",
+          "Hidden Power of the Daily Use of Tools"
+        ],
+        [
+          "(a)",
+          "(b)",
+          "(c)",
+          "(d)",
+          "(e)"
+        ]
+      ]
+    },
+    "장문독해(43-45)": {
+      "sample_count": 3,
+      "avg_passage_len": 0,
+      "avg_choice_len": 14,
+      "has_box_ratio": 0.0,
+      "has_blanks_ratio": 0.0,
+      "has_inline_ratio": 0.0,
+      "sample_questions": [
+        "주어진 글 (A)에 이어질 내용을 순서에 맞게 배열한 것으로 가장 적절한 것은?",
+        "밑줄 친 (a)～(e) 중에서 가리키는 대상이 나머지 넷과 다른 것은?",
+        "윗글의 내용으로 적절하지 않은 것은?"
+      ],
+      "sample_choices": [
+        [
+          "(B)－(D)－(C)",
+          "(C)－(B)－(D)",
+          "(C)－(D)－(B)",
+          "(D)－(B)－(C)",
+          "(D)－(C)－(B)"
+        ],
+        [
+          "(a)",
+          "(b)",
+          "(c)",
+          "(d)",
+          "(e)"
+        ],
+        [
+          "Grace는 Ethan과 Sean의 관계를 부러워했다고 말했다.",
+          "Grace는 Ethan에게 Sean과 둘이서 하이킹할 것을 권했다.",
+          "Sean의 선글라스가 서랍장 안에 있었다.",
+          "Ethan은 혼자서 세탁소에 하이킹 재킷을 찾으러 갔다.",
+          "Sean은 하이킹하는 도중 돌에 걸려 넘어졌다."
+        ]
+      ]
+    }
+  },
+  "layout": {
+    "page_width": 59528,
+    "page_height": 84188,
+    "col_count": 1,
+    "has_header": false,
+    "has_footer": false,
+    "header_text": "",
+    "footer_text": ""
+  },
+  "id_freq": {
+    "para": {
+      "0": 1,
+      "1": 1,
+      "2": 1,
+      "3": 1,
+      "4": 1,
+      "5": 1,
+      "6": 1,
+      "7": 1,
+      "8": 1,
+      "9": 1,
+      "10": 1,
+      "11": 1,
+      "12": 1,
+      "13": 1,
+      "14": 1,
+      "15": 1,
+      "16": 1,
+      "17": 1,
+      "18": 1,
+      "19": 1
+    },
+    "char": {
+      "0": 1,
+      "1": 1,
+      "2": 1,
+      "3": 1,
+      "4": 1,
+      "5": 1,
+      "6": 1,
+      "7": 1,
+      "8": 1,
+      "9": 1,
+      "10": 1,
+      "11": 1,
+      "12": 1,
+      "13": 1,
+      "14": 1,
+      "15": 1,
+      "16": 1,
+      "17": 1,
+      "18": 1,
+      "19": 1
+    },
+    "border": {
+      "4": 1,
+      "6": 1,
+      "7": 1,
+      "8": 1,
+      "11": 1,
+      "14": 1,
+      "15": 1,
+      "16": 1,
+      "17": 1,
+      "18": 1
+    }
+  }
+}

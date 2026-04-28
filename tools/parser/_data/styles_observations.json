@@ -1,0 +1,39 @@
+{
+  "layouts": [
+    {
+      "source": "평가원_영어_양식.hwpx",
+      "page_width": 59528,
+      "page_height": 84188,
+      "margin_left": 8504,
+      "margin_right": 8504,
+      "margin_top": 5669,
+      "margin_bot": 4252,
+      "header_len": 4252,
+      "footer_len": 2835,
+      "col_count": 1,
+      "col_gap": 0,
+      "has_header": false,
+      "has_footer": false,
+      "header_has_pagenum": false,
+      "footer_has_pagenum": false
+    },
+    {
+      "source": "평가원_영어_양식.hwpx",
+      "page_width": 59528,
+      "page_height": 84188,
+      "margin_left": 8504,
+      "margin_right": 8504,
+      "margin_top": 5669,
+      "margin_bot": 4252,
+      "header_len": 4252,
+      "footer_len": 2835,
+      "col_count": 1,
+      "col_gap": 0,
+      "has_header": false,
+      "has_footer": false,
+      "header_has_pagenum": false,
+      "footer_has_pagenum": false
+    }
+  ],
+  "fonts": {}
+}

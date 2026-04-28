@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>수능 영어 시험지 제작기</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:       #f8f7f4;
+    --surface:  #ffffff;
+    --border:   #e4e2db;
+    --border2:  #c8c5bc;
+    --text:     #1a1a18;
+    --text2:    #6b6a65;
+    --text3:    #9b9a96;
+    --green:    #1D9E75;
+    --green-bg: #e8f7f2;
+    --amber:    #BA7517;
+    --amber-bg: #fef3e2;
+    --red:      #c0392b;
+    --red-bg:   #fdf0ef;
+    --radius:   10px;
+    --radius-sm: 6px;
+  }
+
+  body {
+    font-family: -apple-system, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 2rem 1rem;
+  }
+
+  .page { max-width: 760px; margin: 0 auto; }
+
+  /* ─── 헤더 ─── */
+  .page-header { margin-bottom: 1.75rem; }
+  .page-header h1 { font-size: 1.35rem; font-weight: 700; letter-spacing: -.02em; margin-bottom: .3rem; }
+  .page-header p  { font-size: .85rem; color: var(--text2); }
+
+  /* ─── 카드 ─── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 1rem;
+    overflow: hidden;
+  }
+  .card-header {
+    padding: .85rem 1.1rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fafaf8;
+  }
+  .card-header h2 { font-size: .9rem; font-weight: 600; }
+  .card-body { padding: 1rem 1.1rem; }
+
+  /* ─── 폼 그리드 ─── */
+  .form-grid { display: grid; gap: .75rem; }
+  .form-grid.col2 { grid-template-columns: 1fr 1fr; }
+  .form-grid.col3 { grid-template-columns: 1fr 1fr 1fr; }
+  .form-grid.col4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+  .field { display: flex; flex-direction: column; gap: .3rem; }
+  .field label { font-size: .78rem; color: var(--text2); font-weight: 500; }
+  .field input, .field select {
+    padding: .45rem .65rem;
+    border: 1px solid var(--border2);
+    border-radius: var(--radius-sm);
+    font-size: .88rem;
+    background: var(--surface);
+    color: var(--text);
+    outline: none;
+    transition: border-color .15s;
+  }
+  .field input:focus, .field select:focus { border-color: var(--green); }
+
+  /* ─── 참고 자료 ─── */
+  .upload-zone {
+    border: 1.5px dashed var(--border2);
+    border-radius: var(--radius-sm);
+    padding: 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all .15s;
+    background: #fafaf8;
+  }
+  .upload-zone:hover { border-color: var(--green); background: var(--green-bg); }
+  .upload-zone p { font-size: .85rem; color: var(--text2); margin: .1rem 0; }
+  .upload-zone .hint { font-size: .75rem; color: var(--text3); }
+  #ref-input { display: none; }
+  .file-tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .6rem; }
+  .file-tag {
+    display: inline-flex; align-items: center; gap: .3rem;
+    padding: .2rem .65rem;
+    border-radius: 99px;
+    background: var(--green-bg);
+    border: 1px solid #9FE1CB;
+    font-size: .78rem; color: #0F6E56;
+  }
+  .file-tag button {
+    background: none; border: none; cursor: pointer;
+    color: #0F6E56; font-size: .85rem; line-height: 1; padding: 0;
+  }
+
+  /* ─── 문제 목록 ─── */
+  .q-table-head {
+    display: grid;
+    grid-template-columns: 36px 1fr 130px 70px 34px;
+    gap: .5rem;
+    padding: .4rem .75rem;
+    font-size: .72rem;
+    color: var(--text3);
+    font-weight: 600;
+    letter-spacing: .03em;
+    text-transform: uppercase;
+  }
+  #q-list { display: flex; flex-direction: column; gap: .4rem; padding: .25rem .75rem .75rem; }
+  .q-row {
+    display: grid;
+    grid-template-columns: 36px 1fr 130px 70px 34px;
+    gap: .5rem;
+    align-items: center;
+    padding: .5rem .65rem;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    transition: border-color .15s;
+  }
+  .q-row:hover { border-color: var(--border2); }
+  .q-num {
+    font-size: .85rem; font-weight: 700; color: var(--text);
+    text-align: center;
+    background: var(--surface);
+    border-radius: 5px;
+    padding: .25rem 0;
+    border: 1px solid var(--border);
+  }
+  .q-row select, .q-row input[type=number] {
+    padding: .38rem .55rem;
+    border: 1px solid var(--border2);
+    border-radius: var(--radius-sm);
+    font-size: .85rem;
+    background: var(--surface);
+    color: var(--text);
+    outline: none;
+    width: 100%;
+  }
+  .q-row select:focus, .q-row input[type=number]:focus { border-color: var(--green); }
+  .q-del {
+    background: none; border: none; cursor: pointer;
+    color: var(--text3); font-size: 1rem; padding: .2rem;
+    border-radius: 4px; line-height: 1; transition: all .12s;
+    text-align: center;
+  }
+  .q-del:hover { background: var(--red-bg); color: var(--red); }
+
+  .add-btn {
+    width: 100%;
+    padding: .55rem;
+    margin: .1rem .75rem .75rem;
+    width: calc(100% - 1.5rem);
+    border: 1.5px dashed var(--border2);
+    border-radius: var(--radius-sm);
+    background: none;
+    font-size: .85rem;
+    color: var(--text2);
+    cursor: pointer;
+    transition: all .15s;
+  }
+  .add-btn:hover { border-color: var(--green); color: var(--green); background: var(--green-bg); }
+
+  /* ─── 요약 바 + 생성 버튼 ─── */
+  .action-bar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: .85rem 1.1rem;
+    border-top: 1px solid var(--border);
+    background: #fafaf8;
+    gap: 1rem;
+  }
+  .summary { font-size: .85rem; color: var(--text2); }
+  .summary strong { color: var(--text); }
+  .btn-gen {
+    padding: .55rem 1.5rem;
+    background: var(--green);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: .9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity .15s;
+    white-space: nowrap;
+  }
+  .btn-gen:hover  { opacity: .88; }
+  .btn-gen:disabled { opacity: .45; cursor: default; }
+
+  /* ─── 상태 알림 ─── */
+  .toast {
+    position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%);
+    padding: .65rem 1.2rem;
+    border-radius: var(--radius-sm);
+    font-size: .88rem;
+    font-weight: 500;
+    color: #fff;
+    background: var(--text);
+    box-shadow: 0 4px 16px rgba(0,0,0,.18);
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity .25s;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+  .toast.show { opacity: 1; }
+  .toast.ok   { background: var(--green); }
+  .toast.err  { background: var(--red); }
+
+  /* ─── 로딩 오버레이 ─── */
+  .overlay {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(255,255,255,.72);
+    backdrop-filter: blur(3px);
+    z-index: 9998;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: .75rem;
+  }
+  .overlay.show { display: flex; }
+  .spinner {
+    width: 36px; height: 36px;
+    border: 3px solid var(--border);
+    border-top-color: var(--green);
+    border-radius: 50%;
+    animation: spin .7s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .overlay-msg { font-size: .9rem; color: var(--text2); }
+
+  /* ─── 반응형 ─── */
+  @media (max-width: 600px) {
+    .form-grid.col3 { grid-template-columns: 1fr; }
+    .form-grid.col4 { grid-template-columns: 1fr 1fr; }
+    .q-table-head   { grid-template-columns: 30px 1fr 90px 60px 30px; }
+    .q-row          { grid-template-columns: 30px 1fr 90px 60px 30px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="page-header">
+    <h1>📄 수능 영어 시험지 제작기</h1>
+    <p>문제 유형과 배점을 선택하면 AI가 시험지를 생성합니다 → HWP 파일로 다운로드</p>
+  </div>
+
+  <!-- 시험지 정보 -->
+  <div class="card">
+    <div class="card-header"><h2>시험지 정보</h2></div>
+    <div class="card-body">
+      <div class="form-grid col2" style="margin-bottom:.75rem">
+        <div class="field">
+          <label>시험지 제목</label>
+          <input id="exam-title" value="2025년 1학기 영어 모의고사" placeholder="예: 2025년 1학기 영어 모의고사">
+        </div>
+        <div class="field">
+          <label>학원명</label>
+          <input id="school-name" value="" placeholder="예: 한빛어학원">
+        </div>
+      </div>
+      <div class="form-grid col3" style="margin-bottom:.75rem">
+        <div class="field">
+          <label>과목명 (머릿글 가운데)</label>
+          <input id="subject-name" value="영어 영역" placeholder="예: 영어 영역">
+        </div>
+        <div class="field">
+          <label>머릿글 좌상단</label>
+          <input id="top-left-label" value="" placeholder="예: 2026학년도 5월 학평">
+        </div>
+        <div class="field">
+          <label>머릿글 우상단</label>
+          <input id="top-right-label" value="" placeholder="예: 고3 영어">
+        </div>
+      </div>
+      <div class="form-grid col4">
+        <div class="field">
+          <label>학년 / 수준</label>
+          <select id="grade">
+            <option>고1</option>
+            <option>고2</option>
+            <option selected>고3 (수능)</option>
+            <option>수능 1등급</option>
+            <option>내신 대비</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>시험 날짜</label>
+          <input type="date" id="exam-date">
+        </div>
+        <div class="field">
+          <label>제한 시간</label>
+          <select id="time-limit">
+            <option>30분</option>
+            <option selected>45분</option>
+            <option>60분</option>
+            <option>70분</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>레이아웃</label>
+          <select id="layout">
+            <option selected>2단 (수능형)</option>
+            <option>1단</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 참고 자료 -->
+  <div class="card">
+    <div class="card-header">
+      <h2>참고 자료 <span style="font-weight:400;font-size:.8rem;color:var(--text3)">(선택 — 내신 범위 PDF, 교과서, 직전 시험지)</span></h2>
+    </div>
+    <div class="card-body">
+      <div class="upload-zone" onclick="document.getElementById('ref-input').click()">
+        <p>📎 PDF 파일을 클릭해서 업로드</p>
+        <p class="hint">드래그 앤 드롭도 지원 · 최대 50MB</p>
+      </div>
+      <input type="file" id="ref-input" accept=".pdf" multiple>
+      <div id="file-tags" class="file-tags"></div>
+    </div>
+  </div>
+
+  <!-- 문제 구성 -->
+  <div class="card">
+    <div class="card-header">
+      <h2>문제 구성</h2>
+      <span id="total-badge" style="font-size:.8rem;color:var(--text2)">0문제 · 0점</span>
+    </div>
+    <div class="q-table-head">
+      <div style="text-align:center">번호</div>
+      <div>문제 유형</div>
+      <div>세부 유형</div>
+      <div style="text-align:center">배점</div>
+      <div></div>
+    </div>
+    <div id="q-list"></div>
+    <button class="add-btn" onclick="addQuestion()">+ 문제 추가</button>
+
+    <div class="action-bar">
+      <div class="summary" id="summary">문제를 추가해주세요</div>
+      <button class="btn-gen" id="gen-btn" onclick="generateExam()" disabled>
+        시험지 생성 →
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- 로딩 오버레이 -->
+<div class="overlay" id="overlay">
+  <div class="spinner"></div>
+  <div class="overlay-msg" id="overlay-msg">AI가 문제를 생성하는 중...</div>
+</div>
+
+<!-- 토스트 메시지 -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ─── 문제 유형 목록 ──────────────────────────────────────────────────────────
+// 듣기 1~17 미지원, 도표(25)는 이미지 생성 후속 작업 전까지 비활성.
+// 장문어법(41-42)는 1선택 = 2슬롯 차지, 장문독해(43-45)는 1선택 = 3슬롯 차지.
+const TYPES = {
+  "추론형":    ["목적(18)","심경(19)","주장(20)","밑줄함의(21)","요지(22)","주제(23)","제목(24)"],
+  "사실형":    ["내용불일치(26)","안내문(27)"],
+  "어법·어휘": ["어법(28)","어휘(29)"],
+  "빈칸":      ["빈칸-단어(30)","빈칸-구(31)","빈칸-절(32)","빈칸-절(33)","빈칸-절(34)"],
+  "논리":      ["무관문장(35)","순서배열(36)","순서배열(37)","문장삽입(38)","문장삽입(39)"],
+  "장문":      ["요약문(40)","장문어법(41-42) [2문항]","장문독해(43-45) [3문항]"],
+  "비활성":    ["도표(25) — 미지원"],
+};
+const TYPE_DISABLED = new Set(["도표(25) — 미지원"]);
+// 서버 전송 시 GUI 라벨 → 정식 유형 코드 매핑
+const TYPE_LABEL_TO_CODE = {
+  "장문어법(41-42) [2문항]": "장문어법(41-42)",
+  "장문독해(43-45) [3문항]": "장문독해(43-45)",
+};
+
+function buildTypeOptions() {
+  return Object.entries(TYPES).map(([cat, types]) =>
+    `<optgroup label="${cat}">${types.map(t => {
+      const dis = TYPE_DISABLED.has(t) ? ' disabled' : '';
+      return `<option value="${t}"${dis}>${t}</option>`;
+    }).join('')}</optgroup>`
+  ).join('');
+}
+
+function normalizeType(label) {
+  return TYPE_LABEL_TO_CODE[label] || label;
+}
+
+// ─── 상태 ────────────────────────────────────────────────────────────────────
+let questions    = [];
+let qCounter     = 0;
+let refFiles     = [];   // { name, text } 업로드된 참고자료
+let refTextCache = "";   // 서버에서 추출된 텍스트
+
+// ─── 초기화 ──────────────────────────────────────────────────────────────────
+document.getElementById('exam-date').value = new Date().toISOString().slice(0,10);
+
+// 파일 드롭
+const uploadZone = document.querySelector('.upload-zone');
+uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.style.background='var(--green-bg)'; });
+uploadZone.addEventListener('dragleave', () => { uploadZone.style.background=''; });
+uploadZone.addEventListener('drop', e => { e.preventDefault(); uploadZone.style.background=''; handleFiles(e.dataTransfer.files); });
+document.getElementById('ref-input').addEventListener('change', e => handleFiles(e.target.files));
+
+async function handleFiles(files) {
+  for (const file of files) {
+    if (!file.name.endsWith('.pdf')) { showToast('PDF 파일만 업로드 가능합니다.', 'err'); continue; }
+    showToast(`📎 ${file.name} 업로드 중...`);
+    try {
+      const fd = new FormData();
+      fd.append('file', file);
+      const res  = await fetch('/api/upload-ref', { method: 'POST', body: fd });
+      const data = await res.json();
+      refTextCache += '\n' + (data.reference_text || '');
+      addFileTag(file.name);
+      showToast(`✓ ${file.name} 업로드 완료`, 'ok');
+    } catch {
+      showToast(`${file.name} 업로드 실패`, 'err');
+    }
+  }
+}
+
+function addFileTag(name) {
+  const el  = document.createElement('div');
+  el.className = 'file-tag';
+  el.innerHTML = `📄 ${name} <button onclick="this.parentElement.remove()">×</button>`;
+  document.getElementById('file-tags').appendChild(el);
+}
+
+// ─── 문제 관리 ────────────────────────────────────────────────────────────────
+function addQuestion() {
+  qCounter++;
+  questions.push({ id: qCounter, type: '요지(22)', pts: 3 });
+  renderQuestions();
+}
+
+function deleteQuestion(id) {
+  questions = questions.filter(q => q.id !== id);
+  renderQuestions();
+}
+
+function updateQuestion(id, key, val) {
+  const q = questions.find(q => q.id === id);
+  if (q) q[key] = key === 'pts' ? parseFloat(val) : val;
+  updateSummary();
+}
+
+function renderQuestions() {
+  const list = document.getElementById('q-list');
+  list.innerHTML = '';
+  questions.forEach((q, i) => {
+    const row = document.createElement('div');
+    row.className = 'q-row';
+    row.innerHTML = `
+      <div class="q-num">${i+1}</div>
+      <select onchange="updateQuestion(${q.id},'type',this.value)">${buildTypeOptions()}</select>
+      <select style="font-size:.78rem;" disabled>
+        <option>자동 선택</option>
+      </select>
+      <input type="number" min="1" max="5" step="0.5" value="${q.pts}"
+             onchange="updateQuestion(${q.id},'pts',this.value)" style="text-align:center">
+      <button class="q-del" onclick="deleteQuestion(${q.id})">✕</button>
+    `;
+    row.querySelector('select').value = q.type;
+    list.appendChild(row);
+  });
+  updateSummary();
+}
+
+// 장문 세트가 차지하는 슬롯 수 (서버의 TYPE_SLOT_COUNT와 일치)
+const SLOT_COUNT = {
+  "장문어법(41-42) [2문항]": 2,
+  "장문독해(43-45) [3문항]": 3,
+};
+
+function updateSummary() {
+  const total = questions.reduce((s, q) => {
+    const slots = SLOT_COUNT[q.type] || 1;
+    return s + q.pts * slots;
+  }, 0);
+  const slotTotal = questions.reduce((s, q) => s + (SLOT_COUNT[q.type] || 1), 0);
+  const types = [...new Set(questions.map(q => q.type.replace(/\(.*\)/, '').trim()))];
+  document.getElementById('total-badge').textContent =
+    slotTotal === questions.length
+      ? `${questions.length}문제 · 총 ${total}점`
+      : `${questions.length}항목 → ${slotTotal}문제 · 총 ${total}점`;
+  const btn = document.getElementById('gen-btn');
+  btn.disabled = questions.length === 0;
+  document.getElementById('summary').textContent = questions.length > 0
+    ? `${questions.length}문제 · ${total}점 · ${document.getElementById('grade').value} · ${types.slice(0,3).join(', ')}${types.length>3?'…':''}`
+    : '문제를 추가해주세요';
+}
+
+// ─── 시험지 생성 ──────────────────────────────────────────────────────────────
+async function generateExam() {
+  if (questions.length === 0) return;
+
+  const msgs = [
+    '문제 유형 분석 중...',
+    `AI가 ${questions.length}개 문제 동시 생성 중...`,
+    'HWPX 파일 조립 중...',
+  ];
+  let mi = 0;
+  showOverlay(msgs[mi]);
+  const ticker = setInterval(() => {
+    mi = (mi + 1) % msgs.length;
+    document.getElementById('overlay-msg').textContent = msgs[mi];
+  }, 2500);
+
+  const payload = {
+    meta: {
+      title:           document.getElementById('exam-title').value,
+      subject_name:    document.getElementById('subject-name').value,
+      top_left_label:  document.getElementById('top-left-label').value,
+      top_right_label: document.getElementById('top-right-label').value,
+      school:          document.getElementById('school-name').value,
+      grade:           document.getElementById('grade').value,
+      date:            document.getElementById('exam-date').value,
+      time_limit:      document.getElementById('time-limit').value,
+      layout:     document.getElementById('layout').value,
+    },
+    questions: questions.map((q, i) => ({
+      number: i + 1,
+      type:   normalizeType(q.type),
+      points: q.pts,
+    })),
+    reference_text: refTextCache,
+    export_format:  'hwpx',
+  };
+
+  try {
+    const res = await fetch('/api/generate', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify(payload),
+    });
+
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.detail || `서버 오류 (${res.status})`);
+    }
+
+    // 파일 다운로드
+    const blob = await res.blob();
+    const cd   = res.headers.get('Content-Disposition') || '';
+    const fn   = cd.match(/filename="(.+)"/)?.[1] || '시험지.hwpx';
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href = url; a.download = fn; a.click();
+    URL.revokeObjectURL(url);
+
+    showToast(`✓ ${fn} 다운로드 완료!`, 'ok');
+  } catch (e) {
+    showToast(`생성 실패: ${e.message}`, 'err');
+  } finally {
+    clearInterval(ticker);
+    hideOverlay();
+  }
+}
+
+// ─── UI 헬퍼 ─────────────────────────────────────────────────────────────────
+function showOverlay(msg) {
+  document.getElementById('overlay-msg').textContent = msg;
+  document.getElementById('overlay').classList.add('show');
+}
+function hideOverlay() {
+  document.getElementById('overlay').classList.remove('show');
+}
+
+let toastTimer;
+function showToast(msg, type = '') {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className   = `toast show ${type}`;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('show'), 3000);
+}
+
+// ─── 초기 샘플 문제 ──────────────────────────────────────────────────────────
+addQuestion(); questions[0].type = '요지(22)';     questions[0].pts = 2;
+addQuestion(); questions[1].type = '빈칸-절(32)';  questions[1].pts = 3;
+addQuestion(); questions[2].type = '순서배열(36)'; questions[2].pts = 3;
+renderQuestions();
+</script>
+</body>
+</html>

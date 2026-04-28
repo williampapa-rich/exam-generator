@@ -1,0 +1,1072 @@
+{
+  "듣기-목적(1)": {
+    "samples": 2,
+    "avg_passage_len": 0,
+    "min_passage_len": 0,
+    "max_passage_len": 0,
+    "avg_choice_len": 1,
+    "has_box_ratio": 0.0,
+    "has_blanks_ratio": 0.0,
+    "has_inline_ratio": 0.0,
+    "sample_questions": [
+      "다음을 듣고, 여자가 하는 말의 목적으로 가장 적절한 것을 고르시오.",
+      "다음을 듣고, 여자가 하는 말의 목적으로 가장 적절한 것을 고르시오."
+    ],
+    "sample_choices": [
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ],
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ]
+    ]
+  },
+  "듣기-의견(2)": {
+    "samples": 2,
+    "avg_passage_len": 0,
+    "min_passage_len": 0,
+    "max_passage_len": 0,
+    "avg_choice_len": 1,
+    "has_box_ratio": 0.0,
+    "has_blanks_ratio": 0.0,
+    "has_inline_ratio": 0.0,
+    "sample_questions": [
+      "대화를 듣고, 남자의 의견으로 가장 적절한 것을 고르시오.",
+      "대화를 듣고, 남자의 의견으로 가장 적절한 것을 고르시오."
+    ],
+    "sample_choices": [
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ],
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ]
+    ]
+  },
+  "듣기-요지(3)": {
+    "samples": 2,
+    "avg_passage_len": 0,
+    "min_passage_len": 0,
+    "max_passage_len": 0,
+    "avg_choice_len": 1,
+    "has_box_ratio": 0.0,
+    "has_blanks_ratio": 0.0,
+    "has_inline_ratio": 0.0,
+    "sample_questions": [
+      "다음을 듣고, 여자가 하는 말의 요지로 가장 적절한 것을 고르시오.",
+      "다음을 듣고, 여자가 하는 말의 요지로 가장 적절한 것을 고르시오."
+    ],
+    "sample_choices": [
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ],
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ]
+    ]
+  },
+  "듣기-그림(4)": {
+    "samples": 2,
+    "avg_passage_len": 75,
+    "min_passage_len": 75,
+    "max_passage_len": 75,
+    "avg_choice_len": 1,
+    "has_box_ratio": 0.0,
+    "has_blanks_ratio": 0.0,
+    "has_inline_ratio": 0.0,
+    "sample_questions": [
+      "대화를 듣고, 그림에서 대화의 내용과 일치하지 않는 것을 고르시오.",
+      "대화를 듣고, 그림에서 대화의 내용과 일치하지 않는 것을 고르시오."
+    ],
+    "sample_choices": [
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ],
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ]
+    ]
+  },
+  "듣기-할일(5)": {
+    "samples": 2,
+    "avg_passage_len": 0,
+    "min_passage_len": 0,
+    "max_passage_len": 0,
+    "avg_choice_len": 1,
+    "has_box_ratio": 0.0,
+    "has_blanks_ratio": 0.0,
+    "has_inline_ratio": 0.0,
+    "sample_questions": [
+      "대화를 듣고, 남자가 할 일로 가장 적절한 것을 고르시오.",
+      "대화를 듣고, 남자가 할 일로 가장 적절한 것을 고르시오."
+    ],
+    "sample_choices": [
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ],
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ]
+    ]
+  },
+  "듣기-금액(6)": {
+    "samples": 2,
+    "avg_passage_len": 0,
+    "min_passage_len": 0,
+    "max_passage_len": 0,
+    "avg_choice_len": 1,
+    "has_box_ratio": 0.0,
+    "has_blanks_ratio": 0.0,
+    "has_inline_ratio": 0.0,
+    "sample_questions": [
+      "대화를 듣고, 여자가 지불할 금액을 고르시오.",
+      "대화를 듣고, 여자가 지불할 금액을 고르시오."
+    ],
+    "sample_choices": [
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ],
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ]
+    ]
+  },
+  "듣기-이유(7)": {
+    "samples": 2,
+    "avg_passage_len": 0,
+    "min_passage_len": 0,
+    "max_passage_len": 0,
+    "avg_choice_len": 1,
+    "has_box_ratio": 0.0,
+    "has_blanks_ratio": 0.0,
+    "has_inline_ratio": 0.0,
+    "sample_questions": [
+      "대화를 듣고, 남자가 Streamline Broadcasting Workshop에 갈 수 없는 이유를 고르시오.",
+      "대화를 듣고, 남자가 Streamline Broadcasting Workshop에 갈 수 없는 이유를 고르시오."
+    ],
+    "sample_choices": [
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ],
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ]
+    ]
+  },
+  "듣기-언급여부(8)": {
+    "samples": 2,
+    "avg_passage_len": 0,
+    "min_passage_len": 0,
+    "max_passage_len": 0,
+    "avg_choice_len": 1,
+    "has_box_ratio": 0.0,
+    "has_blanks_ratio": 0.0,
+    "has_inline_ratio": 0.0,
+    "sample_questions": [
+      "대화를 듣고, Outstanding Octopuses 행사에 관해 언급되지 않은 것을 고르시오.",
+      "대화를 듣고, Outstanding Octopuses 행사에 관해 언급되지 않은 것을 고르시오."
+    ],
+    "sample_choices": [
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ],
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ]
+    ]
+  },
+  "듣기-내용일치(9)": {
+    "samples": 2,
+    "avg_passage_len": 0,
+    "min_passage_len": 0,
+    "max_passage_len": 0,
+    "avg_choice_len": 1,
+    "has_box_ratio": 0.0,
+    "has_blanks_ratio": 0.0,
+    "has_inline_ratio": 0.0,
+    "sample_questions": [
+      "2024 Grand Butterfly Circus에 관한 다음 내용을 듣고, 일치하지 않는 것을 고르시오.",
+      "2024 Grand Butterfly Circus에 관한 다음 내용을 듣고, 일치하지 않는 것을 고르시오."
+    ],
+    "sample_choices": [
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ],
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ]
+    ]
+  },
+  "듣기-도표(10)": {
+    "samples": 2,
+    "avg_passage_len": 0,
+    "min_passage_len": 0,
+    "max_passage_len": 0,
+    "avg_choice_len": 1,
+    "has_box_ratio": 0.0,
+    "has_blanks_ratio": 0.0,
+    "has_inline_ratio": 0.0,
+    "sample_questions": [
+      "다음 표를 보면서 대화를 듣고, 여자가 구입할 식물 씨앗 키트를 고르시오.",
+      "다음 표를 보면서 대화를 듣고, 여자가 구입할 식물 씨앗 키트를 고르시오."
+    ],
+    "sample_choices": [
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ],
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ]
+    ]
+  },
+  "듣기-짧은응답(11~14)": {
+    "samples": 8,
+    "avg_passage_len": 2,
+    "min_passage_len": 0,
+    "max_passage_len": 6,
+    "avg_choice_len": 1,
+    "has_box_ratio": 0.0,
+    "has_blanks_ratio": 0.0,
+    "has_inline_ratio": 0.0,
+    "sample_questions": [
+      "대화를 듣고, 남자의 마지막 말에 대한 여자의 응답으로 가장 적절한 것을 고르시오.",
+      "대화를 듣고, 여자의 마지막 말에 대한 남자의 응답으로 가장 적절한 것을 고르시오.",
+      "대화를 듣고, 남자의 마지막 말에 대한 여자의 응답으로 가장 적절한 것을 고르시오."
+    ],
+    "sample_choices": [
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ],
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ],
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ]
+    ]
+  },
+  "듣기-할말(15)": {
+    "samples": 2,
+    "avg_passage_len": 7,
+    "min_passage_len": 7,
+    "max_passage_len": 7,
+    "avg_choice_len": 1,
+    "has_box_ratio": 0.0,
+    "has_blanks_ratio": 0.0,
+    "has_inline_ratio": 0.0,
+    "sample_questions": [
+      "다음 상황 설명을 듣고, Sophia가 Jack에게 할 말로 가장 적절한 것을 고르시오.",
+      "다음 상황 설명을 듣고, Sophia가 Jack에게 할 말로 가장 적절한 것을 고르시오."
+    ],
+    "sample_choices": [
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ],
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ]
+    ]
+  },
+  "듣기-주제(16)": {
+    "samples": 2,
+    "avg_passage_len": 0,
+    "min_passage_len": 0,
+    "max_passage_len": 0,
+    "avg_choice_len": 1,
+    "has_box_ratio": 0.0,
+    "has_blanks_ratio": 0.0,
+    "has_inline_ratio": 0.0,
+    "sample_questions": [
+      "여자가 하는 말의 주제로 가장 적절한 것은?",
+      "여자가 하는 말의 주제로 가장 적절한 것은?"
+    ],
+    "sample_choices": [
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ],
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ]
+    ]
+  },
+  "듣기-언급된대상(17)": {
+    "samples": 2,
+    "avg_passage_len": 0,
+    "min_passage_len": 0,
+    "max_passage_len": 0,
+    "avg_choice_len": 1,
+    "has_box_ratio": 0.0,
+    "has_blanks_ratio": 0.0,
+    "has_inline_ratio": 0.0,
+    "sample_questions": [
+      "언급된 음식이 아닌 것은?",
+      "언급된 음식이 아닌 것은?"
+    ],
+    "sample_choices": [
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ],
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ]
+    ]
+  },
+  "목적(18)": {
+    "samples": 2,
+    "avg_passage_len": 55,
+    "min_passage_len": 55,
+    "max_passage_len": 55,
+    "avg_choice_len": 1,
+    "has_box_ratio": 1.0,
+    "has_blanks_ratio": 0.0,
+    "has_inline_ratio": 0.0,
+    "sample_questions": [
+      "다음 글의 목적으로 가장 적절한 것은?",
+      "다음 글의 목적으로 가장 적절한 것은?"
+    ],
+    "sample_choices": [
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ],
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ]
+    ]
+  },
+  "심경(19)": {
+    "samples": 2,
+    "avg_passage_len": 697,
+    "min_passage_len": 697,
+    "max_passage_len": 697,
+    "avg_choice_len": 1,
+    "has_box_ratio": 0.0,
+    "has_blanks_ratio": 0.0,
+    "has_inline_ratio": 0.0,
+    "sample_questions": [
+      "다음 글에 드러난 Peter의 심경 변화로 가장 적절한 것은?",
+      "다음 글에 드러난 Peter의 심경 변화로 가장 적절한 것은?"
+    ],
+    "sample_choices": [
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ],
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ]
+    ]
+  },
+  "주장(20)": {
+    "samples": 2,
+    "avg_passage_len": 782,
+    "min_passage_len": 782,
+    "max_passage_len": 782,
+    "avg_choice_len": 1,
+    "has_box_ratio": 0.0,
+    "has_blanks_ratio": 0.0,
+    "has_inline_ratio": 0.0,
+    "sample_questions": [
+      "다음 글에서 필자가 주장하는 바로 가장 적절한 것은?",
+      "다음 글에서 필자가 주장하는 바로 가장 적절한 것은?"
+    ],
+    "sample_choices": [
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ],
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ]
+    ]
+  },
+  "밑줄함의(21)": {
+    "samples": 2,
+    "avg_passage_len": 986,
+    "min_passage_len": 986,
+    "max_passage_len": 986,
+    "avg_choice_len": 1,
+    "has_box_ratio": 0.0,
+    "has_blanks_ratio": 0.0,
+    "has_inline_ratio": 0.0,
+    "sample_questions": [
+      "밑줄 친 hunting the shadow, not the substance가 다음 글에서 의미하는 바로 가장 적절한 것은?",
+      "밑줄 친 hunting the shadow, not the substance가 다음 글에서 의미하는 바로 가장 적절한 것은?"
+    ],
+    "sample_choices": [
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ],
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ]
+    ]
+  },
+  "요지(22)": {
+    "samples": 2,
+    "avg_passage_len": 931,
+    "min_passage_len": 931,
+    "max_passage_len": 931,
+    "avg_choice_len": 1,
+    "has_box_ratio": 0.0,
+    "has_blanks_ratio": 0.0,
+    "has_inline_ratio": 0.0,
+    "sample_questions": [
+      "다음 글의 요지로 가장 적절한 것은?",
+      "다음 글의 요지로 가장 적절한 것은?"
+    ],
+    "sample_choices": [
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ],
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ]
+    ]
+  },
+  "주제(23)": {
+    "samples": 2,
+    "avg_passage_len": 920,
+    "min_passage_len": 920,
+    "max_passage_len": 920,
+    "avg_choice_len": 1,
+    "has_box_ratio": 0.0,
+    "has_blanks_ratio": 0.0,
+    "has_inline_ratio": 0.0,
+    "sample_questions": [
+      "다음 글의 주제로 가장 적절한 것은?",
+      "다음 글의 주제로 가장 적절한 것은?"
+    ],
+    "sample_choices": [
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ],
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ]
+    ]
+  },
+  "제목(24)": {
+    "samples": 2,
+    "avg_passage_len": 844,
+    "min_passage_len": 844,
+    "max_passage_len": 844,
+    "avg_choice_len": 1,
+    "has_box_ratio": 0.0,
+    "has_blanks_ratio": 0.0,
+    "has_inline_ratio": 0.0,
+    "sample_questions": [
+      "다음 글의 제목으로 가장 적절한 것은?",
+      "다음 글의 제목으로 가장 적절한 것은?"
+    ],
+    "sample_choices": [
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ],
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ]
+    ]
+  },
+  "도표(25)": {
+    "samples": 2,
+    "avg_passage_len": 151,
+    "min_passage_len": 151,
+    "max_passage_len": 151,
+    "avg_choice_len": 1,
+    "has_box_ratio": 0.0,
+    "has_blanks_ratio": 0.0,
+    "has_inline_ratio": 0.0,
+    "sample_questions": [
+      "다음 도표의 내용과 일치하지 않는 것은?",
+      "다음 도표의 내용과 일치하지 않는 것은?"
+    ],
+    "sample_choices": [
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ],
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ]
+    ]
+  },
+  "내용불일치(26)": {
+    "samples": 2,
+    "avg_passage_len": 75,
+    "min_passage_len": 75,
+    "max_passage_len": 75,
+    "avg_choice_len": 1,
+    "has_box_ratio": 1.0,
+    "has_blanks_ratio": 0.0,
+    "has_inline_ratio": 0.0,
+    "sample_questions": [
+      "Dick Enberg에 관한 다음 글의 내용과 일치하지 않는 것은?",
+      "Dick Enberg에 관한 다음 글의 내용과 일치하지 않는 것은?"
+    ],
+    "sample_choices": [
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ],
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ]
+    ]
+  },
+  "안내문(27)": {
+    "samples": 2,
+    "avg_passage_len": 1236,
+    "min_passage_len": 1236,
+    "max_passage_len": 1236,
+    "avg_choice_len": 1,
+    "has_box_ratio": 0.0,
+    "has_blanks_ratio": 0.0,
+    "has_inline_ratio": 0.0,
+    "sample_questions": [
+      "Adenville City Pass Card에 관한 다음 안내문의 내용과 일치하지 않는 것은?",
+      "Adenville City Pass Card에 관한 다음 안내문의 내용과 일치하지 않는 것은?"
+    ],
+    "sample_choices": [
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ],
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ]
+    ]
+  },
+  "어법(28)": {
+    "samples": 2,
+    "avg_passage_len": 1286,
+    "min_passage_len": 1286,
+    "max_passage_len": 1286,
+    "avg_choice_len": 1,
+    "has_box_ratio": 0.0,
+    "has_blanks_ratio": 0.0,
+    "has_inline_ratio": 0.0,
+    "sample_questions": [
+      "Luckwood Snow Festival에 관한 다음 안내문의 내용과 일치하는 것은?",
+      "Luckwood Snow Festival에 관한 다음 안내문의 내용과 일치하는 것은?"
+    ],
+    "sample_choices": [
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ],
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ]
+    ]
+  },
+  "어휘(29)": {
+    "samples": 2,
+    "avg_passage_len": 0,
+    "min_passage_len": 0,
+    "max_passage_len": 0,
+    "avg_choice_len": 1,
+    "has_box_ratio": 0.0,
+    "has_blanks_ratio": 0.0,
+    "has_inline_ratio": 0.0,
+    "sample_questions": [
+      "다음 글의 밑줄 친 부분 중, 어법상 틀린 것은?",
+      "다음 글의 밑줄 친 부분 중, 어법상 틀린 것은?"
+    ],
+    "sample_choices": [
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ],
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ]
+    ]
+  },
+  "빈칸-단어(30)": {
+    "samples": 10,
+    "avg_passage_len": 17,
+    "min_passage_len": 0,
+    "max_passage_len": 41,
+    "avg_choice_len": 1,
+    "has_box_ratio": 0.0,
+    "has_blanks_ratio": 0.0,
+    "has_inline_ratio": 0.0,
+    "sample_questions": [
+      "[31～34] 다음 빈칸에 들어갈 말로 가장 적절한 것을 고르시오.",
+      "Literature can be helpful in the language learning process because of the  it fosters in readers. Core language teaching",
+      "Education, at its best, teaches more than just knowledge. It teaches critical thinking:the ability to stop and think bef"
+    ],
+    "sample_choices": [
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ],
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ],
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ]
+    ]
+  },
+  "무관문장(35)": {
+    "samples": 2,
+    "avg_passage_len": 0,
+    "min_passage_len": 0,
+    "max_passage_len": 0,
+    "avg_choice_len": 1,
+    "has_box_ratio": 0.0,
+    "has_blanks_ratio": 0.0,
+    "has_inline_ratio": 0.0,
+    "sample_questions": [
+      "다음 글에서 전체 흐름과 관계 없는 문장은?",
+      "다음 글에서 전체 흐름과 관계 없는 문장은?"
+    ],
+    "sample_choices": [
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ],
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ]
+    ]
+  },
+  "순서배열(36)": {
+    "samples": 2,
+    "avg_passage_len": 1172,
+    "min_passage_len": 1172,
+    "max_passage_len": 1172,
+    "avg_choice_len": 1,
+    "has_box_ratio": 0.0,
+    "has_blanks_ratio": 0.0,
+    "has_inline_ratio": 0.0,
+    "sample_questions": [],
+    "sample_choices": [
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ],
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ]
+    ]
+  },
+  "순서배열(37)": {
+    "samples": 2,
+    "avg_passage_len": 1224,
+    "min_passage_len": 1224,
+    "max_passage_len": 1224,
+    "avg_choice_len": 1,
+    "has_box_ratio": 0.0,
+    "has_blanks_ratio": 0.0,
+    "has_inline_ratio": 0.0,
+    "sample_questions": [],
+    "sample_choices": [
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ],
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ]
+    ]
+  },
+  "문장삽입(38)": {
+    "samples": 2,
+    "avg_passage_len": 335,
+    "min_passage_len": 335,
+    "max_passage_len": 335,
+    "avg_choice_len": 1,
+    "has_box_ratio": 0.0,
+    "has_blanks_ratio": 0.0,
+    "has_inline_ratio": 0.0,
+    "sample_questions": [],
+    "sample_choices": [
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ],
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ]
+    ]
+  },
+  "문장삽입(39)": {
+    "samples": 2,
+    "avg_passage_len": 167,
+    "min_passage_len": 167,
+    "max_passage_len": 167,
+    "avg_choice_len": 1,
+    "has_box_ratio": 1.0,
+    "has_blanks_ratio": 0.0,
+    "has_inline_ratio": 0.0,
+    "sample_questions": [],
+    "sample_choices": [
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ],
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ]
+    ]
+  },
+  "요약문(40)": {
+    "samples": 2,
+    "avg_passage_len": 221,
+    "min_passage_len": 221,
+    "max_passage_len": 221,
+    "avg_choice_len": 1,
+    "has_box_ratio": 1.0,
+    "has_blanks_ratio": 0.0,
+    "has_inline_ratio": 0.0,
+    "sample_questions": [
+      "다음 글의 내용을 한 문장으로 요약하고자 한다. 빈칸 (A), (B)에 들어갈 말로 가장 적절한 것은?",
+      "다음 글의 내용을 한 문장으로 요약하고자 한다. 빈칸 (A), (B)에 들어갈 말로 가장 적절한 것은?"
+    ],
+    "sample_choices": [
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ],
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ]
+    ]
+  },
+  "장문어법(41-42)": {
+    "samples": 4,
+    "avg_passage_len": 0,
+    "min_passage_len": 0,
+    "max_passage_len": 0,
+    "avg_choice_len": 1,
+    "has_box_ratio": 0.0,
+    "has_blanks_ratio": 0.0,
+    "has_inline_ratio": 0.0,
+    "sample_questions": [
+      "윗글의 제목으로 가장 적절한 것은?",
+      "밑줄 친 (a)～(e) 중에서 문맥상 낱말의 쓰임이 적절하지 않은 것은? [3점]",
+      "윗글의 제목으로 가장 적절한 것은?"
+    ],
+    "sample_choices": [
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ],
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ],
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ]
+    ]
+  },
+  "장문독해(43-45)": {
+    "samples": 6,
+    "avg_passage_len": 0,
+    "min_passage_len": 0,
+    "max_passage_len": 0,
+    "avg_choice_len": 1,
+    "has_box_ratio": 0.0,
+    "has_blanks_ratio": 0.0,
+    "has_inline_ratio": 0.0,
+    "sample_questions": [
+      "주어진 글 (A)에 이어질 내용을 순서에 맞게 배열한 것으로 가장 적절한 것은?",
+      "밑줄 친 (a)～(e) 중에서 가리키는 대상이 나머지 넷과 다른 것은?",
+      "윗글의 내용으로 적절하지 않은 것은?"
+    ],
+    "sample_choices": [
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ],
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ],
+      [
+        "①",
+        "②",
+        "③",
+        "④",
+        "⑤"
+      ]
+    ]
+  }
+}
