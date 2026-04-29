@@ -132,6 +132,56 @@ class SubQuestion(BaseModel):
     answer:        int = Field(ge=1, le=5)
 
 
+class QuestionPlan(BaseModel):
+    """passage 작성 전 LLM이 강제로 채우는 계획 필드 (Phase 1).
+
+    structured output 토큰 생성 순서상 Question.plan 이 passage 보다 먼저 출력되므로,
+    passage 작성 시점에 모델 자기 입으로 출력한 scope/thesis 가 context 에 남아 있다.
+    이게 길이 통제의 핵심 — 길이를 직접 강제하지 않고 scope 를 좁혀 길이가 부산물이 되게 한다.
+    """
+    topic_scope: str = Field(
+        description=(
+            "이 글이 다룰 주제 한 문장. 다음 조건을 모두 충족해야 함: "
+            "(1) 단 하나의 주장/현상/관찰만 다룬다. "
+            "(2) 예시는 0개 또는 1개. "
+            "(3) 도입-전개-결론을 짧게 끝낼 수 있어야 한다. "
+            "(4) 추상적 큰 개념('the importance of education', 'environmental protection') 금지. "
+            "한 문장으로 좁고 구체적으로 진술. 영어로 작성."
+        )
+    )
+    thesis_sentence: str = Field(
+        description=(
+            "이 글이 도달할 결론 한 문장. 영어로. "
+            "passage 본문은 이 문장을 향해 수렴해야 함. "
+            "이 문장 자체를 본문에 그대로 쓸 필요는 없음."
+        )
+    )
+    structure_plan: str = Field(
+        description=(
+            "도입-전개-결론 구조 계획. 'Hook: ... / Develop: ... / Close: ...' 형식. "
+            "각 부분 1~2개 영어 단어로만. 이 계획에서 벗어난 곁가지 금지."
+        )
+    )
+    target_word_count: int = Field(
+        ge=50, le=400,
+        description=(
+            "목표 영어 단어 수. 유형별 가이드라인을 참고하여 정수로 작성. "
+            "이 값은 자기 인식용이며, 실제 작성 시 ±15% 편차는 허용됨. "
+            "정확한 카운트보다 scope 에 맞는 자연스러운 길이가 우선."
+        ),
+    )
+
+
+# naturalness_check 가 가질 수 있는 값 (validators 가 import 해서 reject 판정)
+NATURALNESS_OK = "OK"
+NATURALNESS_REWRITE_VALUES: tuple[str, ...] = (
+    "REWRITE_SCOPE_TOO_BROAD",
+    "REWRITE_ABRUPT_ENDING",
+    "REWRITE_REPETITIVE",
+    "REWRITE_FORCED_BREVITY",
+)
+
+
 class Question(BaseModel):
     """LLM 출력 + renderer 입력 + parser 출력의 공통 모델."""
 
@@ -139,6 +189,10 @@ class Question(BaseModel):
     number: Optional[int] = Field(default=None, ge=1, le=45)
     type:   Optional[str] = None
     points: Optional[float] = None
+
+    # 1단계: 계획 (LLM 한정 — passage 보다 먼저 출력되도록 위에 배치).
+    # parser/renderer 는 이 필드를 무시. 따라서 default None.
+    plan: Optional[QuestionPlan] = None
 
     passage:       list[str] = Field(default_factory=list)
     question_text: str = ""
@@ -151,6 +205,28 @@ class Question(BaseModel):
     sub_passages:   Optional[list[list[str]]]    = None  # 36, 37
     summary:        Optional[str]                = None  # 40
     sub_questions:  Optional[list[SubQuestion]]  = None  # 41-42, 43-45
+
+    # 3단계: 자가검증 (LLM 한정 — passage/문항이 모두 채워진 뒤 자기 글을 평가).
+    # parser/renderer 는 이 필드를 무시. 따라서 default None.
+    # validators 가 None 또는 'OK' 외의 값을 보면 reject 하여 재시도.
+    naturalness_check: Optional[Literal[
+        "OK",
+        "REWRITE_SCOPE_TOO_BROAD",
+        "REWRITE_ABRUPT_ENDING",
+        "REWRITE_REPETITIVE",
+        "REWRITE_FORCED_BREVITY",
+    ]] = Field(
+        default=None,
+        description=(
+            "passage 를 다시 읽고 평가: "
+            "'OK' = 자연스러움. "
+            "'REWRITE_SCOPE_TOO_BROAD' = 주제가 너무 넓어 글이 늘어짐. "
+            "'REWRITE_ABRUPT_ENDING' = 결론이 갑자기 튀어나옴 / 비약. "
+            "'REWRITE_REPETITIVE' = 같은 주장 반복으로 분량 채움. "
+            "'REWRITE_FORCED_BREVITY' = 분량 줄이느라 논리 끊김."
+        ),
+    )
+
     group_label:    Optional[str]                = None
 
     # parser 메타 (LLM/renderer는 무시 가능)
