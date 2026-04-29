@@ -14,3 +14,15 @@ __pycache__/
 *.egg-info/
 dist/
 build/
+
+# 학습 입력 (평가원 저작물 — 별도 보관)
+samples/KSAT*/
+
+# 임시 검사 산출물
+tmp_inspection/
+
+# parser 학습 리포트 (재생성 가능, 산출물 type_profiles.json 만 추적)
+tools/parser/_data/
+
+# 사용량/비용 누적 로그 (운영 데이터)
+tools/stats/

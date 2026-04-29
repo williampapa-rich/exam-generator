@@ -14,6 +14,7 @@ from fastapi.responses import StreamingResponse, HTMLResponse, JSONResponse
 from dotenv import load_dotenv
 
 from app.renderer.builder import build_hwpx
+from app.llm.base         import get_client
 from app.llm.generator    import generate_all
 from app.llm.pdf          import extract_reference_text
 from shared.schemas.question import GenerateRequest
@@ -48,7 +49,10 @@ async def generate_exam(req: GenerateRequest):
         raise HTTPException(status_code=400, detail="문제를 1개 이상 추가해주세요.")
 
     try:
-        questions = await generate_all(req.questions, req.meta.grade, req.reference_text)
+        client = get_client(req.provider, req.model) if (req.provider or req.model) else None
+        questions = await generate_all(
+            req.questions, req.meta.grade, req.reference_text, client=client,
+        )
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"문제 생성 실패: {e}")
 

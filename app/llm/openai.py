@@ -7,6 +7,8 @@ from typing import TypeVar
 from openai import AsyncOpenAI
 from pydantic import BaseModel
 
+from app.llm.base import UsageInfo
+
 T = TypeVar("T", bound=BaseModel)
 
 DEFAULT_MODEL = "gpt-4o-mini"
@@ -33,7 +35,7 @@ class OpenAIClient:
         schema: type[T],
         max_tokens: int = 2000,
         temperature: float = 0.9,
-    ) -> T:
+    ) -> tuple[T, UsageInfo]:
         # Structured Outputs: schema를 그대로 모델에 강제
         completion = await self._get_client().beta.chat.completions.parse(
             model=self._model,
@@ -48,4 +50,10 @@ class OpenAIClient:
         parsed = completion.choices[0].message.parsed
         if parsed is None:
             raise RuntimeError(f"OpenAI 응답 parsing 실패: {completion.choices[0].message}")
-        return parsed
+        usage = getattr(completion, "usage", None)
+        usage_info = UsageInfo(
+            model=self._model,
+            prompt_tokens=int(getattr(usage, "prompt_tokens", 0) or 0),
+            completion_tokens=int(getattr(usage, "completion_tokens", 0) or 0),
+        )
+        return parsed, usage_info

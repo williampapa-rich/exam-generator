@@ -21,11 +21,12 @@ from __future__ import annotations
 
 import re
 import zipfile
-from functools import lru_cache
 from pathlib import Path
 
 from shared.schemas.question import (
     BLANK_PLACEHOLDER, ExamMeta, Question, UNDERLINE_MARK,
+    TYPES_WITH_BOX_PASSAGE, TYPES_WITH_GIVEN_BOX,
+    TYPES_WITH_SUMMARY_BOX, TYPES_WITH_LONGSET_BOX,
 )
 
 _TEMPLATE_PATH = Path(__file__).resolve().parents[2] / "templates" / "template.hwpx"
@@ -90,9 +91,20 @@ class _Cache:
         return section0[:slots_start] + _Q_SLOT_MARKER + section0[slots_end:]
 
 
-@lru_cache(maxsize=1)
+_cache_state: tuple[float, _Cache] | None = None
+
+
 def _cache() -> _Cache:
-    return _Cache()
+    """template.hwpx 의 mtime 이 바뀌면 자동으로 다시 로드.
+
+    파일이 코드 외부에서 수정될 수 있으므로 (디자인 작업 등) lru_cache 만으로는
+    부족하고 mtime 기반으로 무효화한다.
+    """
+    global _cache_state
+    mtime = _TEMPLATE_PATH.stat().st_mtime
+    if _cache_state is None or _cache_state[0] != mtime:
+        _cache_state = (mtime, _Cache())
+    return _cache_state[1]
 
 
 # ─── XML escape (텍스트 노드용) ───────────────────────────────────────────────
@@ -290,6 +302,73 @@ def _para_group_label(label: str) -> str:
     return _para_text(PARA_GROUP_LABEL, CHAR_BODY_KOR, label)
 
 
+# ─── 박스(네모 테두리) 단락 ──────────────────────────────────────────────────
+# 평가원 양식의 박스는 1×1 hp:tbl, borderFillIDRef=6 (4면 SOLID 0.12mm 검정).
+# treatAsChar=1 + textWrap=TOP_AND_BOTTOM 으로 본문 안에 인라인되어 있다.
+# linesegarray 는 hp 가 자동 재계산하므로 빈 dummy 만 넣어도 된다.
+
+_BOX_BORDER_FILL_ID = 6      # header.xml 의 4면 SOLID 0.12mm 검정 borderFill
+_BOX_WIDTH          = 30614  # 평가원 본문폭 (units = 1/7200 inch)
+_BOX_TBL_PARA       = 21     # 박스를 감싸는 hp:p 의 paraPr (sample 기준)
+_BOX_TBL_RUN_CHAR   = 12     # 박스를 감싸는 hp:run 의 charPr
+_BOX_INNER_PARA     = 27     # 박스 셀 안 본문 paraPr (들여쓰기 없음)
+
+
+def _para_box(lines: list[str], *, kor: bool = False) -> str:
+    """라인들을 1×1 hp:tbl 박스로 감싸 한 단락 XML로 반환.
+
+    box 내부는 paraPr=27 (들여쓰기 없음) + 인라인 마커 분리(_xxx_, ______, ①②③④⑤).
+    줄바꿈은 lines 배열 단위로 분리되며, 각 line 이 박스 안 한 단락이 된다.
+    """
+    charpr = CHAR_BODY_KOR if kor else CHAR_BODY
+    inner_paras: list[str] = []
+    for line in lines:
+        if not line or not line.strip():
+            inner_paras.append(_para(_BOX_INNER_PARA,
+                f'<hp:run charPrIDRef="{charpr}"><hp:t/></hp:run>'))
+            continue
+        runs = _runs_for_text(line, charpr)
+        # 박스 내부 단락은 lineseg 없이도 hp 가 자동 계산
+        inner_paras.append(
+            f'<hp:p id="0" paraPrIDRef="{_BOX_INNER_PARA}" styleIDRef="0" '
+            f'pageBreak="0" columnBreak="0" merged="0">{runs}</hp:p>'
+        )
+    inner_xml = "".join(inner_paras)
+
+    tbl = (
+        f'<hp:tbl id="0" zOrder="0" numberingType="TABLE" '
+        f'textWrap="TOP_AND_BOTTOM" textFlow="BOTH_SIDES" lock="0" '
+        f'dropcapstyle="None" pageBreak="CELL" repeatHeader="1" '
+        f'rowCnt="1" colCnt="1" cellSpacing="0" '
+        f'borderFillIDRef="{_BOX_BORDER_FILL_ID}" noAdjust="0">'
+        f'<hp:sz width="{_BOX_WIDTH}" widthRelTo="ABSOLUTE" '
+        f'height="2000" heightRelTo="ABSOLUTE" protect="0"/>'
+        f'<hp:pos treatAsChar="1" affectLSpacing="0" flowWithText="1" '
+        f'allowOverlap="0" holdAnchorAndSO="0" vertRelTo="PARA" horzRelTo="PARA" '
+        f'vertAlign="TOP" horzAlign="LEFT" vertOffset="0" horzOffset="0"/>'
+        f'<hp:outMargin left="0" right="0" top="0" bottom="0"/>'
+        f'<hp:inMargin left="0" right="0" top="0" bottom="0"/>'
+        f'<hp:tr><hp:tc name="" header="0" hasMargin="1" protect="0" '
+        f'editable="0" dirty="0" borderFillIDRef="{_BOX_BORDER_FILL_ID}">'
+        f'<hp:subList id="" textDirection="HORIZONTAL" lineWrap="BREAK" '
+        f'vertAlign="CENTER" linkListIDRef="0" linkListNextIDRef="0" '
+        f'textWidth="0" textHeight="0" hasTextRef="0" hasNumRef="0">'
+        f'{inner_xml}'
+        f'</hp:subList>'
+        f'<hp:cellAddr colAddr="0" rowAddr="0"/>'
+        f'<hp:cellSpan colSpan="1" rowSpan="1"/>'
+        f'<hp:cellSz width="{_BOX_WIDTH}" height="2000"/>'
+        f'<hp:cellMargin left="850" right="850" top="708" bottom="425"/>'
+        f'</hp:tc></hp:tr></hp:tbl>'
+    )
+
+    # 박스를 한 단락의 hp:run 안에 인라인 (treatAsChar=1)
+    return _para(
+        _BOX_TBL_PARA,
+        f'<hp:run charPrIDRef="{_BOX_TBL_RUN_CHAR}">{tbl}</hp:run>',
+    )
+
+
 # ─── layout 별 단락 시퀀스 빌더 ───────────────────────────────────────────────
 
 def _is_korean_choice(choices: list[str]) -> bool:
@@ -303,14 +382,31 @@ def _is_korean_choice(choices: list[str]) -> bool:
     return kor * 2 >= len(choices)
 
 
-def _build_choices(q: Question) -> list[str]:
-    """보기 5개 단락. 누락분은 빈 ①~⑤ 만 표시."""
-    kor = _is_korean_choice(q.choices)
+_LEADING_CIRCLED_RE = re.compile(r"^\s*[①②③④⑤]\s*")
+
+
+def _strip_leading_circled(text: str) -> str:
+    """LLM이 보기 앞에 '① 본문' 처럼 원문자를 이미 박은 경우 제거.
+
+    렌더러가 _para_choice 에서 표준 원문자(symbol) + nbSpace + 본문 형태로
+    다시 부착하므로, 입력 단계에서 들어온 원문자는 중복을 피하기 위해 제거한다.
+    """
+    if not text:
+        return text
+    return _LEADING_CIRCLED_RE.sub("", text, count=1).strip()
+
+
+def _build_choices(q: Question, *, choices: list[str] | None = None) -> list[str]:
+    """보기 5개 단락. LLM이 이미 ①을 prepend 한 경우 중복 방지.
+
+    choices 인자로 외부에서 보기 리스트를 명시할 수 있음 (sub_questions용).
+    """
+    src = choices if choices is not None else q.choices
+    kor = _is_korean_choice(src)
     out: list[str] = []
     for i in range(5):
         symbol = "①②③④⑤"[i]
-        text = q.choices[i] if i < len(q.choices) else ""
-        # 평가원 양식: '①  text' (원문자 + nbSpace + 본문)
+        text = _strip_leading_circled(src[i] if i < len(src) else "")
         line = f"{symbol} {text}".rstrip() if text else symbol
         out.append(_para_choice(line, kor_body=kor))
     return out
@@ -333,6 +429,17 @@ def _build_passage_letter(passage: list[str]) -> list[str]:
     if not lines:
         return [_para_text(PARA_PASSAGE_PLAIN, CHAR_BODY, "")]
     return [_para_passage(line, indent=False) for line in lines]
+
+
+def _prepend_label(passage: list[str], label: str) -> list[str]:
+    """passage 첫 줄에 라벨이 없으면 'label ' 형태로 부착. 이미 있으면 그대로."""
+    out = [ln for ln in (passage or []) if ln and ln.strip()]
+    if not out:
+        return [label]
+    if out[0].lstrip().startswith(label):
+        return out
+    out[0] = f"{label} {out[0].lstrip()}"
+    return out
 
 
 def _build_segments(
@@ -359,16 +466,20 @@ def _build_segments(
 def _build_question_paragraphs(q: Question) -> list[str]:
     """Question 객체 1개 → 단락 XML 리스트.
 
-    layout_pattern 별 시퀀스:
+    layout_pattern + 박스 부착 분기:
       reasoning         : [group_label?, question, ...passage(indent), choices, blank]
-      letter_box        : [group_label?, question, ...passage(plain), choices, blank]
+      letter_box        : [group_label?, question, BOX(passage), choices, blank]
+                          (목적/안내문 박스 안에 본문 전체)
       blank_inline      : [group_label?, question, ...passage(indent, ______), choices, blank]
-      marker_inline     : [group_label?, question, ...passage(indent, ①②③④⑤), choices, blank]
-      passage_segments  : [group_label?, question, given?, ...segments, summary?, choices, blank]
-      long_set          : [group_label?, question, ...passage+segments, ...sub_questions, blank]
+      marker_inline     : [group_label?, question, BOX(given_sentence)?, ...passage, choices, blank]
+                          (38/39 문장삽입은 given_sentence 박스가 본문 위에 들어감)
+      passage_segments  : [group_label?, question, BOX(given)?, ...segments, BOX(summary)?, choices, blank]
+                          (36/37 주어진 글 박스, 40 요약문 박스)
+      long_set          : [group_label?, question, ...passage+segments, choices, sub_questions...]
     """
     paras: list[str] = []
     pattern = q.layout_pattern
+    qtype   = q.type or ""
     number  = q.number if q.number is not None else 0
 
     # 1) group_label (필요 유형만, 빈 문자열은 skip)
@@ -378,41 +489,70 @@ def _build_question_paragraphs(q: Question) -> list[str]:
     # 2) 질문
     paras.append(_para_question_line(number, q.question_text, q.points))
 
-    # 3) 본문 (유형별 분기)
+    # 3) 본문 (유형별 분기 + 박스 부착)
     if pattern == "letter_box":
-        paras.extend(_build_passage_letter(q.passage))
+        # 목적(18) / 안내문(27,28): 본문 전체를 박스 안에
+        if qtype in TYPES_WITH_BOX_PASSAGE:
+            kor = _is_korean_choice(q.passage) if q.passage else False
+            paras.append(_para_box([ln for ln in q.passage if ln.strip()], kor=kor))
+        else:
+            paras.extend(_build_passage_letter(q.passage))
 
-    elif pattern in ("reasoning", "blank_inline", "marker_inline"):
+    elif pattern == "blank_inline":
+        paras.extend(_build_passage_indented(q.passage))
+
+    elif pattern == "marker_inline":
+        # 문장삽입(38/39): 주어진 문장 박스 → 본문(①②③④⑤)
+        if qtype in TYPES_WITH_GIVEN_BOX and q.given_sentence:
+            paras.append(_para_box([q.given_sentence.strip()]))
         paras.extend(_build_passage_indented(q.passage))
 
     elif pattern == "passage_segments":
-        # 38, 39: 주어진 문장이 있으면 본문 위에 표시
-        if q.given_sentence:
-            paras.append(_para_passage(q.given_sentence.strip(), indent=False))
-        # 본문 (있으면)
-        if q.passage:
-            paras.extend(_build_passage_indented(q.passage))
-        # 36, 37: (A)(B)(C) 분할 단락
-        if q.sub_passages:
-            paras.extend(_build_segments(q.sub_passages, label_offset=0))
-        # 40: 요약문
-        if q.summary:
+        # 순서배열(36,37): 주어진 글(passage) 박스 → (A)(B)(C) 분할 단락
+        if qtype in TYPES_WITH_GIVEN_BOX:
+            if q.passage:
+                paras.append(_para_box([" ".join(ln for ln in q.passage if ln.strip())]))
+            if q.sub_passages:
+                paras.extend(_build_segments(q.sub_passages, label_offset=0))
+        else:
+            # 기존 동작 (다른 passage_segments 유형 대비)
+            if q.given_sentence:
+                paras.append(_para_passage(q.given_sentence.strip(), indent=False))
+            if q.passage:
+                paras.extend(_build_passage_indented(q.passage))
+            if q.sub_passages:
+                paras.extend(_build_segments(q.sub_passages, label_offset=0))
+
+        # 요약문(40): 본문 다음에 요약문 박스
+        if qtype in TYPES_WITH_SUMMARY_BOX and q.summary:
+            paras.append(_para_box([q.summary.strip()]))
+        elif q.summary:
             paras.append(_para_passage(q.summary.strip(), indent=True))
 
     elif pattern == "long_set":
-        # 41-42, 43-45: passage 가 (A) 본문, sub_passages 가 (B)(C)(D)
-        if q.passage:
-            paras.extend(_build_passage_indented(q.passage))
+        # 41-42 / 43-45: 본문은 박스 없이 일반 단락
+        # 장문독해(43-45)는 question_text가 "주어진 글 (A) 다음에..."로 (A)를
+        # 명시적으로 가리키므로 passage 첫 줄에 (A) 라벨을 자동 부착한다
+        # (LLM이 이미 붙였으면 중복 부착하지 않음).
+        passage = q.passage
+        if passage and "장문독해" in qtype:
+            passage = _prepend_label(passage, "(A)")
+        if passage:
+            paras.extend(_build_passage_indented(passage))
         if q.sub_passages:
-            label_offset = 1 if "장문독해" in (q.type or "") else 0
+            label_offset = 1 if "장문독해" in qtype else 0
             paras.extend(_build_segments(q.sub_passages, label_offset=label_offset))
 
     else:
         # fallback
         paras.extend(_build_passage_indented(q.passage))
 
-    # 4) 보기 (long_set 은 sub_questions 가 따로, 메인 choices 만 표시)
-    paras.extend(_build_choices(q))
+    # 4) 보기 (메인 question 의 choices)
+    # marker_inline 유형(어법29/어휘30/무관35/문장삽입38,39)은 본문 안에 ①~⑤가
+    # 이미 박혀있고 그것이 보기를 대신하므로, 본문 뒤 빈 ①~⑤ 단락을 출력하지 않음.
+    # (q.choices 데이터는 채점/답안지용으로 보존)
+    if pattern != "marker_inline":
+        paras.extend(_build_choices(q))
 
     # 5) sub_questions (장문 세트만)
     if pattern == "long_set" and q.sub_questions:
@@ -420,12 +560,7 @@ def _build_question_paragraphs(q: Question) -> list[str]:
             paras.append(_para_blank())
             sub_number = number + 1 + sub_idx  # 41-42: 41+1=42, 43-45: 43+1=44, +2=45
             paras.append(_para_question_line(sub_number, sq.question_text, None))
-            kor = _is_korean_choice(sq.choices)
-            for i in range(5):
-                symbol = "①②③④⑤"[i]
-                text = sq.choices[i] if i < len(sq.choices) else ""
-                line = f"{symbol} {text}".rstrip() if text else symbol
-                paras.append(_para_choice(line, kor_body=kor))
+            paras.extend(_build_choices(q, choices=sq.choices))
 
     # 6) 문항 사이 빈 단락
     paras.append(_para_blank())

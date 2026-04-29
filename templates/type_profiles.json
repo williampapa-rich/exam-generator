@@ -1,1071 +1,1194 @@
 {
-  "듣기-목적(1)": {
-    "samples": 2,
-    "avg_passage_len": 0,
-    "min_passage_len": 0,
-    "max_passage_len": 0,
-    "avg_choice_len": 1,
-    "has_box_ratio": 0.0,
-    "has_blanks_ratio": 0.0,
-    "has_inline_ratio": 0.0,
-    "sample_questions": [
-      "다음을 듣고, 여자가 하는 말의 목적으로 가장 적절한 것을 고르시오.",
-      "다음을 듣고, 여자가 하는 말의 목적으로 가장 적절한 것을 고르시오."
-    ],
-    "sample_choices": [
-      [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
-      ],
-      [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
-      ]
-    ]
-  },
-  "듣기-의견(2)": {
-    "samples": 2,
-    "avg_passage_len": 0,
-    "min_passage_len": 0,
-    "max_passage_len": 0,
-    "avg_choice_len": 1,
-    "has_box_ratio": 0.0,
-    "has_blanks_ratio": 0.0,
-    "has_inline_ratio": 0.0,
-    "sample_questions": [
-      "대화를 듣고, 남자의 의견으로 가장 적절한 것을 고르시오.",
-      "대화를 듣고, 남자의 의견으로 가장 적절한 것을 고르시오."
-    ],
-    "sample_choices": [
-      [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
-      ],
-      [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
-      ]
-    ]
-  },
-  "듣기-요지(3)": {
-    "samples": 2,
-    "avg_passage_len": 0,
-    "min_passage_len": 0,
-    "max_passage_len": 0,
-    "avg_choice_len": 1,
-    "has_box_ratio": 0.0,
-    "has_blanks_ratio": 0.0,
-    "has_inline_ratio": 0.0,
-    "sample_questions": [
-      "다음을 듣고, 여자가 하는 말의 요지로 가장 적절한 것을 고르시오.",
-      "다음을 듣고, 여자가 하는 말의 요지로 가장 적절한 것을 고르시오."
-    ],
-    "sample_choices": [
-      [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
-      ],
-      [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
-      ]
-    ]
-  },
-  "듣기-그림(4)": {
-    "samples": 2,
-    "avg_passage_len": 75,
-    "min_passage_len": 75,
-    "max_passage_len": 75,
-    "avg_choice_len": 1,
-    "has_box_ratio": 0.0,
-    "has_blanks_ratio": 0.0,
-    "has_inline_ratio": 0.0,
-    "sample_questions": [
-      "대화를 듣고, 그림에서 대화의 내용과 일치하지 않는 것을 고르시오.",
-      "대화를 듣고, 그림에서 대화의 내용과 일치하지 않는 것을 고르시오."
-    ],
-    "sample_choices": [
-      [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
-      ],
-      [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
-      ]
-    ]
-  },
-  "듣기-할일(5)": {
-    "samples": 2,
-    "avg_passage_len": 0,
-    "min_passage_len": 0,
-    "max_passage_len": 0,
-    "avg_choice_len": 1,
-    "has_box_ratio": 0.0,
-    "has_blanks_ratio": 0.0,
-    "has_inline_ratio": 0.0,
-    "sample_questions": [
-      "대화를 듣고, 남자가 할 일로 가장 적절한 것을 고르시오.",
-      "대화를 듣고, 남자가 할 일로 가장 적절한 것을 고르시오."
-    ],
-    "sample_choices": [
-      [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
-      ],
-      [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
-      ]
-    ]
-  },
-  "듣기-금액(6)": {
-    "samples": 2,
-    "avg_passage_len": 0,
-    "min_passage_len": 0,
-    "max_passage_len": 0,
-    "avg_choice_len": 1,
-    "has_box_ratio": 0.0,
-    "has_blanks_ratio": 0.0,
-    "has_inline_ratio": 0.0,
-    "sample_questions": [
-      "대화를 듣고, 여자가 지불할 금액을 고르시오.",
-      "대화를 듣고, 여자가 지불할 금액을 고르시오."
-    ],
-    "sample_choices": [
-      [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
-      ],
-      [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
-      ]
-    ]
-  },
-  "듣기-이유(7)": {
-    "samples": 2,
-    "avg_passage_len": 0,
-    "min_passage_len": 0,
-    "max_passage_len": 0,
-    "avg_choice_len": 1,
-    "has_box_ratio": 0.0,
-    "has_blanks_ratio": 0.0,
-    "has_inline_ratio": 0.0,
-    "sample_questions": [
-      "대화를 듣고, 남자가 Streamline Broadcasting Workshop에 갈 수 없는 이유를 고르시오.",
-      "대화를 듣고, 남자가 Streamline Broadcasting Workshop에 갈 수 없는 이유를 고르시오."
-    ],
-    "sample_choices": [
-      [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
-      ],
-      [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
-      ]
-    ]
-  },
-  "듣기-언급여부(8)": {
-    "samples": 2,
-    "avg_passage_len": 0,
-    "min_passage_len": 0,
-    "max_passage_len": 0,
-    "avg_choice_len": 1,
-    "has_box_ratio": 0.0,
-    "has_blanks_ratio": 0.0,
-    "has_inline_ratio": 0.0,
-    "sample_questions": [
-      "대화를 듣고, Outstanding Octopuses 행사에 관해 언급되지 않은 것을 고르시오.",
-      "대화를 듣고, Outstanding Octopuses 행사에 관해 언급되지 않은 것을 고르시오."
-    ],
-    "sample_choices": [
-      [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
-      ],
-      [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
-      ]
-    ]
-  },
-  "듣기-내용일치(9)": {
-    "samples": 2,
-    "avg_passage_len": 0,
-    "min_passage_len": 0,
-    "max_passage_len": 0,
-    "avg_choice_len": 1,
-    "has_box_ratio": 0.0,
-    "has_blanks_ratio": 0.0,
-    "has_inline_ratio": 0.0,
-    "sample_questions": [
-      "2024 Grand Butterfly Circus에 관한 다음 내용을 듣고, 일치하지 않는 것을 고르시오.",
-      "2024 Grand Butterfly Circus에 관한 다음 내용을 듣고, 일치하지 않는 것을 고르시오."
-    ],
-    "sample_choices": [
-      [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
-      ],
-      [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
-      ]
-    ]
-  },
-  "듣기-도표(10)": {
-    "samples": 2,
-    "avg_passage_len": 0,
-    "min_passage_len": 0,
-    "max_passage_len": 0,
-    "avg_choice_len": 1,
-    "has_box_ratio": 0.0,
-    "has_blanks_ratio": 0.0,
-    "has_inline_ratio": 0.0,
-    "sample_questions": [
-      "다음 표를 보면서 대화를 듣고, 여자가 구입할 식물 씨앗 키트를 고르시오.",
-      "다음 표를 보면서 대화를 듣고, 여자가 구입할 식물 씨앗 키트를 고르시오."
-    ],
-    "sample_choices": [
-      [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
-      ],
-      [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
-      ]
-    ]
-  },
-  "듣기-짧은응답(11~14)": {
-    "samples": 8,
-    "avg_passage_len": 2,
-    "min_passage_len": 0,
-    "max_passage_len": 6,
-    "avg_choice_len": 1,
-    "has_box_ratio": 0.0,
-    "has_blanks_ratio": 0.0,
-    "has_inline_ratio": 0.0,
-    "sample_questions": [
-      "대화를 듣고, 남자의 마지막 말에 대한 여자의 응답으로 가장 적절한 것을 고르시오.",
-      "대화를 듣고, 여자의 마지막 말에 대한 남자의 응답으로 가장 적절한 것을 고르시오.",
-      "대화를 듣고, 남자의 마지막 말에 대한 여자의 응답으로 가장 적절한 것을 고르시오."
-    ],
-    "sample_choices": [
-      [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
-      ],
-      [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
-      ],
-      [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
-      ]
-    ]
-  },
-  "듣기-할말(15)": {
-    "samples": 2,
-    "avg_passage_len": 7,
-    "min_passage_len": 7,
-    "max_passage_len": 7,
-    "avg_choice_len": 1,
-    "has_box_ratio": 0.0,
-    "has_blanks_ratio": 0.0,
-    "has_inline_ratio": 0.0,
-    "sample_questions": [
-      "다음 상황 설명을 듣고, Sophia가 Jack에게 할 말로 가장 적절한 것을 고르시오.",
-      "다음 상황 설명을 듣고, Sophia가 Jack에게 할 말로 가장 적절한 것을 고르시오."
-    ],
-    "sample_choices": [
-      [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
-      ],
-      [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
-      ]
-    ]
-  },
-  "듣기-주제(16)": {
-    "samples": 2,
-    "avg_passage_len": 0,
-    "min_passage_len": 0,
-    "max_passage_len": 0,
-    "avg_choice_len": 1,
-    "has_box_ratio": 0.0,
-    "has_blanks_ratio": 0.0,
-    "has_inline_ratio": 0.0,
-    "sample_questions": [
-      "여자가 하는 말의 주제로 가장 적절한 것은?",
-      "여자가 하는 말의 주제로 가장 적절한 것은?"
-    ],
-    "sample_choices": [
-      [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
-      ],
-      [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
-      ]
-    ]
-  },
-  "듣기-언급된대상(17)": {
-    "samples": 2,
-    "avg_passage_len": 0,
-    "min_passage_len": 0,
-    "max_passage_len": 0,
-    "avg_choice_len": 1,
-    "has_box_ratio": 0.0,
-    "has_blanks_ratio": 0.0,
-    "has_inline_ratio": 0.0,
-    "sample_questions": [
-      "언급된 음식이 아닌 것은?",
-      "언급된 음식이 아닌 것은?"
-    ],
-    "sample_choices": [
-      [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
-      ],
-      [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
-      ]
-    ]
-  },
-  "목적(18)": {
-    "samples": 2,
-    "avg_passage_len": 55,
-    "min_passage_len": 55,
-    "max_passage_len": 55,
-    "avg_choice_len": 1,
-    "has_box_ratio": 1.0,
-    "has_blanks_ratio": 0.0,
-    "has_inline_ratio": 0.0,
-    "sample_questions": [
-      "다음 글의 목적으로 가장 적절한 것은?",
-      "다음 글의 목적으로 가장 적절한 것은?"
-    ],
-    "sample_choices": [
-      [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
-      ],
-      [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
-      ]
-    ]
-  },
-  "심경(19)": {
-    "samples": 2,
-    "avg_passage_len": 697,
-    "min_passage_len": 697,
-    "max_passage_len": 697,
-    "avg_choice_len": 1,
-    "has_box_ratio": 0.0,
-    "has_blanks_ratio": 0.0,
-    "has_inline_ratio": 0.0,
-    "sample_questions": [
-      "다음 글에 드러난 Peter의 심경 변화로 가장 적절한 것은?",
-      "다음 글에 드러난 Peter의 심경 변화로 가장 적절한 것은?"
-    ],
-    "sample_choices": [
-      [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
-      ],
-      [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
-      ]
-    ]
-  },
-  "주장(20)": {
-    "samples": 2,
-    "avg_passage_len": 782,
-    "min_passage_len": 782,
-    "max_passage_len": 782,
-    "avg_choice_len": 1,
-    "has_box_ratio": 0.0,
-    "has_blanks_ratio": 0.0,
-    "has_inline_ratio": 0.0,
-    "sample_questions": [
-      "다음 글에서 필자가 주장하는 바로 가장 적절한 것은?",
-      "다음 글에서 필자가 주장하는 바로 가장 적절한 것은?"
-    ],
-    "sample_choices": [
-      [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
-      ],
-      [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
-      ]
-    ]
-  },
-  "밑줄함의(21)": {
-    "samples": 2,
-    "avg_passage_len": 986,
-    "min_passage_len": 986,
-    "max_passage_len": 986,
-    "avg_choice_len": 1,
-    "has_box_ratio": 0.0,
-    "has_blanks_ratio": 0.0,
-    "has_inline_ratio": 0.0,
-    "sample_questions": [
-      "밑줄 친 hunting the shadow, not the substance가 다음 글에서 의미하는 바로 가장 적절한 것은?",
-      "밑줄 친 hunting the shadow, not the substance가 다음 글에서 의미하는 바로 가장 적절한 것은?"
-    ],
-    "sample_choices": [
-      [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
-      ],
-      [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
-      ]
-    ]
-  },
-  "요지(22)": {
-    "samples": 2,
-    "avg_passage_len": 931,
-    "min_passage_len": 931,
-    "max_passage_len": 931,
-    "avg_choice_len": 1,
-    "has_box_ratio": 0.0,
-    "has_blanks_ratio": 0.0,
-    "has_inline_ratio": 0.0,
-    "sample_questions": [
-      "다음 글의 요지로 가장 적절한 것은?",
-      "다음 글의 요지로 가장 적절한 것은?"
-    ],
-    "sample_choices": [
-      [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
-      ],
-      [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
-      ]
-    ]
-  },
-  "주제(23)": {
-    "samples": 2,
-    "avg_passage_len": 920,
-    "min_passage_len": 920,
-    "max_passage_len": 920,
-    "avg_choice_len": 1,
-    "has_box_ratio": 0.0,
-    "has_blanks_ratio": 0.0,
-    "has_inline_ratio": 0.0,
-    "sample_questions": [
-      "다음 글의 주제로 가장 적절한 것은?",
-      "다음 글의 주제로 가장 적절한 것은?"
-    ],
-    "sample_choices": [
-      [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
-      ],
-      [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
-      ]
-    ]
-  },
-  "제목(24)": {
-    "samples": 2,
-    "avg_passage_len": 844,
-    "min_passage_len": 844,
-    "max_passage_len": 844,
-    "avg_choice_len": 1,
-    "has_box_ratio": 0.0,
-    "has_blanks_ratio": 0.0,
-    "has_inline_ratio": 0.0,
-    "sample_questions": [
-      "다음 글의 제목으로 가장 적절한 것은?",
-      "다음 글의 제목으로 가장 적절한 것은?"
-    ],
-    "sample_choices": [
-      [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
-      ],
-      [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
-      ]
-    ]
-  },
   "도표(25)": {
-    "samples": 2,
-    "avg_passage_len": 151,
-    "min_passage_len": 151,
-    "max_passage_len": 151,
-    "avg_choice_len": 1,
+    "samples": 17,
+    "passage_len": {
+      "avg": 199,
+      "min": 118,
+      "max": 693,
+      "p5": 119,
+      "p50": 141,
+      "p95": 518
+    },
+    "choice_len": {
+      "avg": 133,
+      "min": 86,
+      "max": 168
+    },
     "has_box_ratio": 0.0,
     "has_blanks_ratio": 0.0,
     "has_inline_ratio": 0.0,
     "sample_questions": [
       "다음 도표의 내용과 일치하지 않는 것은?",
+      "다음 도표의 내용과 일치하지 않는 것은?",
       "다음 도표의 내용과 일치하지 않는 것은?"
     ],
     "sample_choices": [
       [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
+        "It is projected that the share of the global middle\nclass in Asia Pacific will increase from 46 percent in 2015 to\n60 percent in 2025.",
+        "The projected share of Asia Pacific in\n2025, the largest among the six regions, is more than three\ntimes that of Europe in the same year.",
+        "The shares of\nEurope and North America are both projected to decrease,\nfrom 24 percent in 2015 to 16 percent in 2025 for Europe, and\nfrom 11 percent in 2015 to 8 percent in 2025 for North\nAmerica.",
+        "Central and South America is not expected to\nchange from 2015 to 2025 in its share of the global middle\nclass.",
+        "In 2025, the share of the Middle East and North\nAfrica will be larger than that of sub-Saharan Africa, as it was\nin 2015."
       ],
       [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
+        "It is projected that the share of the global middle\nclass in Asia Pacific will increase from 46 percent in 2015 to\n60 percent in 2025.",
+        "The projected share of Asia Pacific in\n2025, the largest among the six regions, is more than three\ntimes that of Europe in the same year.",
+        "The shares of\nEurope and North America are both projected to decrease,\nfrom 24 percent in 2015 to 16 percent in 2025 for Europe, and\nfrom 11 percent in 2015 to 8 percent in 2025 for North\nAmerica.",
+        "Central and South America is not expected to\nchange from 2015 to 2025 in its share of the global middle\nclass.",
+        "In 2025, the share of the Middle East and North\nAfrica will be larger than that of sub-Saharan Africa, as it was\nin 2015."
+      ],
+      [
+        "In each of the three age groups, Town/Rural Area\nwas the most preferred type of place to live.",
+        "In the 18-34\nyear-olds group, the percentage of those who preferred\nBig/Small City was higher than that of those who preferred\nSuburb of Big/Small City.",
+        "In the 35-54 year-olds group, the\npercentage of those who preferred Suburb of Big/Small City\nexceeded that of those who preferred Big/Small City.",
+        "In the\n55 year-olds and older group, the percentage of those who chose\nBig/Small City among the three preferred types of place to live\nwas the lowest.",
+        "Each percentage of the three preferred types\nof place to live was higher than 20% across the three age\ngroups."
       ]
     ]
   },
-  "내용불일치(26)": {
-    "samples": 2,
-    "avg_passage_len": 75,
-    "min_passage_len": 75,
-    "max_passage_len": 75,
-    "avg_choice_len": 1,
-    "has_box_ratio": 1.0,
-    "has_blanks_ratio": 0.0,
-    "has_inline_ratio": 0.0,
-    "sample_questions": [
-      "Dick Enberg에 관한 다음 글의 내용과 일치하지 않는 것은?",
-      "Dick Enberg에 관한 다음 글의 내용과 일치하지 않는 것은?"
-    ],
-    "sample_choices": [
-      [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
-      ],
-      [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
-      ]
-    ]
-  },
-  "안내문(27)": {
-    "samples": 2,
-    "avg_passage_len": 1236,
-    "min_passage_len": 1236,
-    "max_passage_len": 1236,
-    "avg_choice_len": 1,
+  "목적(18)": {
+    "samples": 17,
+    "passage_len": {
+      "avg": 641,
+      "min": 595,
+      "max": 705,
+      "p5": 606,
+      "p50": 637,
+      "p95": 704
+    },
+    "choice_len": {
+      "avg": 20,
+      "min": 18,
+      "max": 26
+    },
     "has_box_ratio": 0.0,
     "has_blanks_ratio": 0.0,
     "has_inline_ratio": 0.0,
     "sample_questions": [
-      "Adenville City Pass Card에 관한 다음 안내문의 내용과 일치하지 않는 것은?",
-      "Adenville City Pass Card에 관한 다음 안내문의 내용과 일치하지 않는 것은?"
+      "다음 글의 목적으로 가장 적절한 것은?",
+      "다음 글의 목적으로 가장 적절한 것은?",
+      "다음 글의 목적으로 가장 적절한 것은?"
     ],
     "sample_choices": [
       [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
+        "과학 교사 채용 계획을 공지하려고",
+        "과학 교육 프로그램 개발을 요청하려고",
+        "과학 교사 워크숍의 특강을 부탁하려고",
+        "과학 교육 정책 협의회 참여를 독려하려고",
+        "과학 교육 워크숍 일정의 변경을 안내하려고"
       ],
       [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
-      ]
-    ]
-  },
-  "어법(28)": {
-    "samples": 2,
-    "avg_passage_len": 1286,
-    "min_passage_len": 1286,
-    "max_passage_len": 1286,
-    "avg_choice_len": 1,
-    "has_box_ratio": 0.0,
-    "has_blanks_ratio": 0.0,
-    "has_inline_ratio": 0.0,
-    "sample_questions": [
-      "Luckwood Snow Festival에 관한 다음 안내문의 내용과 일치하는 것은?",
-      "Luckwood Snow Festival에 관한 다음 안내문의 내용과 일치하는 것은?"
-    ],
-    "sample_choices": [
-      [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
+        "과학 교육 정책 협의회 참여를 독려하려고",
+        "과학 교사 워크숍의 특강을 부탁하려고",
+        "과학 교사 채용 계획을 공지하려고",
+        "과학 교육 프로그램 개발을 요청하려고",
+        "과학 교육 워크숍 일정의 변경을 안내하려고"
       ],
       [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
-      ]
-    ]
-  },
-  "어휘(29)": {
-    "samples": 2,
-    "avg_passage_len": 0,
-    "min_passage_len": 0,
-    "max_passage_len": 0,
-    "avg_choice_len": 1,
-    "has_box_ratio": 0.0,
-    "has_blanks_ratio": 0.0,
-    "has_inline_ratio": 0.0,
-    "sample_questions": [
-      "다음 글의 밑줄 친 부분 중, 어법상 틀린 것은?",
-      "다음 글의 밑줄 친 부분 중, 어법상 틀린 것은?"
-    ],
-    "sample_choices": [
-      [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
-      ],
-      [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
-      ]
-    ]
-  },
-  "빈칸-단어(30)": {
-    "samples": 10,
-    "avg_passage_len": 17,
-    "min_passage_len": 0,
-    "max_passage_len": 41,
-    "avg_choice_len": 1,
-    "has_box_ratio": 0.0,
-    "has_blanks_ratio": 0.0,
-    "has_inline_ratio": 0.0,
-    "sample_questions": [
-      "[31～34] 다음 빈칸에 들어갈 말로 가장 적절한 것을 고르시오.",
-      "Literature can be helpful in the language learning process because of the  it fosters in readers. Core language teaching",
-      "Education, at its best, teaches more than just knowledge. It teaches critical thinking:the ability to stop and think bef"
-    ],
-    "sample_choices": [
-      [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
-      ],
-      [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
-      ],
-      [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
+        "조류 관찰 클럽에 가입하는 방법을 문의하려고",
+        "조류 관찰 시 주의해야 할 사항을 전달하려고",
+        "조류 관찰 협회의 새로운 규정을 확인하려고",
+        "조류 관찰과 관련된 웹 사이트를 소개하려고",
+        "조류 관찰 시 필요한 장비를 알아보려고"
       ]
     ]
   },
   "무관문장(35)": {
-    "samples": 2,
-    "avg_passage_len": 0,
-    "min_passage_len": 0,
-    "max_passage_len": 0,
-    "avg_choice_len": 1,
+    "samples": 17,
+    "passage_len": {
+      "avg": 1033,
+      "min": 877,
+      "max": 1190,
+      "p5": 878,
+      "p50": 1052,
+      "p95": 1180
+    },
+    "choice_len": {
+      "avg": 160,
+      "min": 129,
+      "max": 207
+    },
     "has_box_ratio": 0.0,
     "has_blanks_ratio": 0.0,
     "has_inline_ratio": 0.0,
     "sample_questions": [
       "다음 글에서 전체 흐름과 관계 없는 문장은?",
+      "다음 글에서 전체 흐름과 관계 없는 문장은?",
       "다음 글에서 전체 흐름과 관계 없는 문장은?"
     ],
     "sample_choices": [
       [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
+        "This is\nparticularly true for business in the shape and form of\ncooperation between firms that involves an integration of value\nchains across multiple units.",
+        "The resulting networks do not\nonly cover the business units of a single firm but typically also\ninclude multiple units from different firms.",
+        "As a consequence,\nfirms do not only need to consider their internal organization\nin order to ensure sustainable business performance; they also\nneed to take into account the entire ecosystem of units\nsurrounding them.",
+        "Many major companies are fundamentally\nchanging their business models by focusing on profitable units\nand cutting off less profitable ones.",
+        "In order to allow these\ndifferent units to cooperate successfully, the existence of a\ncommon platform is crucial."
       ],
       [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
-      ]
-    ]
-  },
-  "순서배열(36)": {
-    "samples": 2,
-    "avg_passage_len": 1172,
-    "min_passage_len": 1172,
-    "max_passage_len": 1172,
-    "avg_choice_len": 1,
-    "has_box_ratio": 0.0,
-    "has_blanks_ratio": 0.0,
-    "has_inline_ratio": 0.0,
-    "sample_questions": [],
-    "sample_choices": [
-      [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
+        "This is\nparticularly true for business in the shape and form of\ncooperation between firms that involves an integration of value\nchains across multiple units.",
+        "The resulting networks do not\nonly cover the business units of a single firm but typically also\ninclude multiple units from different firms.",
+        "As a consequence,\nfirms do not only need to consider their internal organization\nin order to ensure sustainable business performance; they also\nneed to take into account the entire ecosystem of units\nsurrounding them.",
+        "Many major companies are fundamentally\nchanging their business models by focusing on profitable units\nand cutting off less profitable ones.",
+        "In order to allow these\ndifferent units to cooperate successfully, the existence of a\ncommon platform is crucial."
       ],
       [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
-      ]
-    ]
-  },
-  "순서배열(37)": {
-    "samples": 2,
-    "avg_passage_len": 1224,
-    "min_passage_len": 1224,
-    "max_passage_len": 1224,
-    "avg_choice_len": 1,
-    "has_box_ratio": 0.0,
-    "has_blanks_ratio": 0.0,
-    "has_inline_ratio": 0.0,
-    "sample_questions": [],
-    "sample_choices": [
-      [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
-      ],
-      [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
+        "The more confidently you give instructions,\nthe higher the chance of a positive class response.",
+        "There are\ntimes when being able to project your voice loudly will be very\nuseful when working in school, and knowing that you can cut\nthrough a noisy classroom, dinner hall or playground is a great\nskill to have.",
+        "In order to address serious noise issues in\nschool, students, parents and teachers should search for a\nsolution together.",
+        "However, I would always advise that you\nuse your loudest voice incredibly sparingly and avoid shouting\nas much as possible.",
+        "A quiet, authoritative and measured\ntone has so much more impact than slightly panicked shouting."
       ]
     ]
   },
   "문장삽입(38)": {
-    "samples": 2,
-    "avg_passage_len": 335,
-    "min_passage_len": 335,
-    "max_passage_len": 335,
-    "avg_choice_len": 1,
+    "samples": 17,
+    "passage_len": {
+      "avg": 1093,
+      "min": 899,
+      "max": 1299,
+      "p5": 959,
+      "p50": 1084,
+      "p95": 1245
+    },
+    "choice_len": {
+      "avg": 154,
+      "min": 111,
+      "max": 184
+    },
     "has_box_ratio": 0.0,
     "has_blanks_ratio": 0.0,
     "has_inline_ratio": 0.0,
-    "sample_questions": [],
+    "sample_questions": [
+      "글의 흐름으로 보아, 주어진 문장이 들어가기에 가장",
+      "글의 흐름으로 보아, 주어진 문장이 들어가기에 가장",
+      "글의 흐름으로 보아, 주어진 문장이 들어가기에 가장"
+    ],
     "sample_choices": [
       [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
+        ") It is\nthe responsibility of management to prevent or, at least, to ease\nthese fears. (",
+        ") For example, robots could be introduced only\nin new plants rather than replacing humans in existing assembly\nlines. (",
+        ") Workers should be included in the planning for\nnew factories or the introduction of robots into existing plants,\nso they can participate in the process. (",
+        ") It may be that robots\nare needed to reduce manufacturing costs so that the company\nremains competitive, but planning for such cost reductions\nshould be done jointly by labor and management. (",
+        ") Since\nrobots are particularly good at highly repetitive simple motions,\nthe replaced human workers should be moved to positions\nwhere judgment and decisions beyond the abilities of robots\nare required."
       ],
       [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
+        ") It is\nthe responsibility of management to prevent or, at least, to ease\nthese fears. (",
+        ") For example, robots could be introduced only\nin new plants rather than replacing humans in existing assembly\nlines. (",
+        ") Workers should be included in the planning for\nnew factories or the introduction of robots into existing plants,\nso they can participate in the process. (",
+        ") It may be that robots\nare needed to reduce manufacturing costs so that the company\nremains competitive, but planning for such cost reductions\nshould be done jointly by labor and management. (",
+        ") Since\nrobots are particularly good at highly repetitive simple motions,\nthe replaced human workers should be moved to positions\nwhere judgment and decisions beyond the abilities of robots\nare required."
+      ],
+      [
+        ") Indeed, what\ndistinguishes a park from the broader category of public space\nis the representation of nature that parks are meant to embody.\n(",
+        ") Public spaces include parks, concrete plazas, sidewalks,\neven indoor atriums. (",
+        ") Parks typically have trees, grass,\nand other plants as their central features. (",
+        ") When entering\na city park, people often imagine a sharp separation from\nstreets, cars, and buildings. (",
+        ") What’s behind this idea is\nnot only landscape architects’ desire to design aesthetically\nsuggestive park spaces, but a much longer history of Western\nthought that envisions cities and nature as antithetical spaces\nand oppositional forces.\n*aesthetically: 미적으로 **antithetical: 대조적인"
       ]
     ]
   },
   "문장삽입(39)": {
-    "samples": 2,
-    "avg_passage_len": 167,
-    "min_passage_len": 167,
-    "max_passage_len": 167,
-    "avg_choice_len": 1,
-    "has_box_ratio": 1.0,
+    "samples": 17,
+    "passage_len": {
+      "avg": 1099,
+      "min": 993,
+      "max": 1231,
+      "p5": 1001,
+      "p50": 1104,
+      "p95": 1216
+    },
+    "choice_len": {
+      "avg": 159,
+      "min": 108,
+      "max": 191
+    },
+    "has_box_ratio": 0.0,
     "has_blanks_ratio": 0.0,
     "has_inline_ratio": 0.0,
-    "sample_questions": [],
+    "sample_questions": [
+      "글의 흐름으로 보아, 주어진 문장이 들어가기에 가장",
+      "글의 흐름으로 보아, 주어진 문장이 들어가기에 가장",
+      "글의 흐름으로 보아, 주어진 문장이 들어가기에 가장"
+    ],
     "sample_choices": [
       [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
+        ") This is\nwhy, to a person, the first great theorists of film decried the\nintroduction of sound and other technical innovations (such as\ncolor) that pushed film in the direction of realism. (",
+        ") Since\ncinema was an entirely fantasmatic art, these innovations were\ncompletely unnecessary. (",
+        ") And what’s worse, they could\ndo nothing but turn filmmakers and audiences away from the\nfantasmatic dimension of cinema, potentially transforming\nfilm into a mere delivery device for representations of\nreality. (",
+        ") But sound and color threatened to create just\nsuch an illusion, thereby destroying the very essence of film\nart. (",
+        ") As Rudolf Arnheim puts it, “The creative power of\nthe artist can only come into play where reality and the\nmedium of representation do not coincide.” [3점]\n*decry: 공공연히 비난하다 **fantasmatic: 환상의"
       ],
       [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
+        ") This is\nwhy, to a person, the first great theorists of film decried the\nintroduction of sound and other technical innovations (such as\ncolor) that pushed film in the direction of realism. (",
+        ") Since\ncinema was an entirely fantasmatic art, these innovations were\ncompletely unnecessary. (",
+        ") And what’s worse, they could\ndo nothing but turn filmmakers and audiences away from the\nfantasmatic dimension of cinema, potentially transforming\nfilm into a mere delivery device for representations of\nreality. (",
+        ") But sound and color threatened to create just\nsuch an illusion, thereby destroying the very essence of film\nart. (",
+        ") As Rudolf Arnheim puts it, “The creative power of\nthe artist can only come into play where reality and the\nmedium of representation do not coincide.” [3점]\n*decry: 공공연히 비난하다 **fantasmatic: 환상의"
+      ],
+      [
+        ") Issues\nthat can be expressed in quantitative, measurable units are easy\nto slice. (",
+        ") For example, compensation demands can be\ndivided into cents-per-hour increments or lease rates can be\nquoted as dollars per square foot. (",
+        ") When working to\nfractionate issues of principle or precedent, parties may use the\ntime horizon (when the principle goes into effect or how long it\nwill last) as a way to fractionate the issue. (",
+        ") Another\napproach is to vary the number of ways that the principle may\nbe applied. (",
+        ") For example, a company may devise a\nfamily emergency leave plan that allows employees the\nopportunity to be away from the company for a period of no\nlonger than three hours, and no more than once a month, for\nillness in the employee’s immediate family. [3점]\n*increment: 증가 **fractionate: 세분하다"
+      ]
+    ]
+  },
+  "밑줄함의(21)": {
+    "samples": 17,
+    "passage_len": {
+      "avg": 1000,
+      "min": 841,
+      "max": 1099,
+      "p5": 882,
+      "p50": 1013,
+      "p95": 1074
+    },
+    "choice_len": {
+      "avg": 56,
+      "min": 42,
+      "max": 65
+    },
+    "has_box_ratio": 0.0,
+    "has_blanks_ratio": 0.0,
+    "has_inline_ratio": 0.0,
+    "sample_questions": [
+      "밑줄 친 whether to make ready for the morning commute",
+      "밑줄 친 whether to make ready for the morning commute",
+      "밑줄 친 make oneself public to oneself가 다음 글에서 의미"
+    ],
+    "sample_choices": [
+      [
+        "readily applicable information offered by specialized experts",
+        "questionable facts that have been popularized by non-experts",
+        "common knowledge that hardly influences crucial decisions",
+        "practical information produced by both specialists and lay people",
+        "biased knowledge that is widespread in the local community"
+      ],
+      [
+        "questionable facts that have been popularized by non-experts",
+        "readily applicable information offered by specialized experts",
+        "common knowledge that hardly influences crucial decisions",
+        "practical information produced by both specialists and lay people",
+        "biased knowledge that is widespread in the local community"
+      ],
+      [
+        "use writing as a means of reflecting on oneself",
+        "build one’s identity by reading others’ diaries",
+        "exchange feedback in the process of writing",
+        "create an alternate ego to present to others",
+        "develop topics for writing about selfhood"
+      ]
+    ]
+  },
+  "빈칸-구(31)": {
+    "samples": 17,
+    "passage_len": {
+      "avg": 928,
+      "min": 776,
+      "max": 1105,
+      "p5": 785,
+      "p50": 933,
+      "p95": 1041
+    },
+    "choice_len": {
+      "avg": 12,
+      "min": 7,
+      "max": 30
+    },
+    "has_box_ratio": 0.0,
+    "has_blanks_ratio": 0.06,
+    "has_inline_ratio": 0.0,
+    "sample_questions": [
+      "Humour involves not just practical disengagement but",
+      "Humour involves not just practical disengagement but",
+      "There is something deeply paradoxical about the professional"
+    ],
+    "sample_choices": [
+      [
+        "detailed",
+        "accurate",
+        "useful",
+        "additional",
+        "alternative"
+      ],
+      [
+        "accurate",
+        "detailed",
+        "useful",
+        "additional",
+        "alternative"
+      ],
+      [
+        "paid",
+        "admired",
+        "censored",
+        "challenged",
+        "discussed"
+      ]
+    ]
+  },
+  "빈칸-절(32)": {
+    "samples": 17,
+    "passage_len": {
+      "avg": 901,
+      "min": 725,
+      "max": 1091,
+      "p5": 816,
+      "p50": 888,
+      "p95": 1002
+    },
+    "choice_len": {
+      "avg": 42,
+      "min": 18,
+      "max": 60
+    },
+    "has_box_ratio": 0.0,
+    "has_blanks_ratio": 0.0,
+    "has_inline_ratio": 0.0,
+    "sample_questions": [
+      "News, especially in its televised form, is constituted not",
+      "News, especially in its televised form, is constituted not",
+      "People have always wanted to be around other people and"
+    ],
+    "sample_choices": [
+      [
+        "verbal and visual idioms or modes of address",
+        "prompt and full coverage of the latest issues",
+        "educational media contents favoured by producers",
+        "commitment to long-lasting news standards",
+        "coordination with traditional display techniques"
+      ],
+      [
+        "coordination with traditional display techniques",
+        "prompt and full coverage of the latest issues",
+        "educational media contents favoured by producers",
+        "commitment to long-lasting news standards",
+        "verbal and visual idioms or modes of address"
+      ],
+      [
+        "provide rich source materials for artists",
+        "offer the greatest exposure to other people",
+        "cause cultural conflicts among users of slang",
+        "present ideal research environments to linguists",
+        "reduce the social mobility of ambitious outsiders"
+      ]
+    ]
+  },
+  "빈칸-절(33)": {
+    "samples": 17,
+    "passage_len": {
+      "avg": 927,
+      "min": 774,
+      "max": 1091,
+      "p5": 804,
+      "p50": 923,
+      "p95": 1074
+    },
+    "choice_len": {
+      "avg": 42,
+      "min": 29,
+      "max": 64
+    },
+    "has_box_ratio": 0.0,
+    "has_blanks_ratio": 0.0,
+    "has_inline_ratio": 0.0,
+    "sample_questions": [
+      "Elinor Ostrom found that there are several factors critical to",
+      "Elinor Ostrom found that there are several factors critical to",
+      "The entrance to a honeybee colony, often referred to as"
+    ],
+    "sample_choices": [
+      [
+        "request proper distribution based on their merits",
+        "demand free access to the communal resources",
+        "use those resources to maximize their profits",
+        "claim individual ownership of the resources",
+        "participate in decisions to change the rules"
+      ],
+      [
+        "participate in decisions to change the rules",
+        "claim individual ownership of the resources",
+        "use those resources to maximize their profits",
+        "demand free access to the communal resources",
+        "request proper distribution based on their merits"
+      ],
+      [
+        "allow the colony to regulate its workforce",
+        "search for water sources by measuring distance",
+        "decrease the colony’s workload when necessary",
+        "divide tasks according to their respective talents",
+        "train workers to acquire basic communication patterns"
+      ]
+    ]
+  },
+  "빈칸-절(34)": {
+    "samples": 17,
+    "passage_len": {
+      "avg": 1032,
+      "min": 919,
+      "max": 1211,
+      "p5": 935,
+      "p50": 1035,
+      "p95": 1149
+    },
+    "choice_len": {
+      "avg": 52,
+      "min": 32,
+      "max": 64
+    },
+    "has_box_ratio": 0.0,
+    "has_blanks_ratio": 0.0,
+    "has_inline_ratio": 0.0,
+    "sample_questions": [
+      "Precision and determinacy are a necessary requirement for",
+      "Precision and determinacy are a necessary requirement for",
+      "We understand that the segregation of our consciousness"
+    ],
+    "sample_choices": [
+      [
+        "criteria for evaluating historical representations",
+        "certainty and precision seemingly achieved already",
+        "possibilities of alternative interpretations of an event",
+        "coexistence of multiple viewpoints in historical writing",
+        "correctness and reliability of historical evidence collected\n짝수형"
+      ],
+      [
+        "criteria for evaluating historical representations",
+        "certainty and precision seemingly achieved already",
+        "possibilities of alternative interpretations of an event",
+        "coexistence of multiple viewpoints in historical writing",
+        "correctness and reliability of historical evidence collected\n홀수형"
+      ],
+      [
+        "all our efforts prove to be effective and are thus encouraged",
+        "sufficient scientific evidence has been provided to us",
+        "future concerns are more urgent than present needs",
+        "our ancestors maintained a different frame of time",
+        "we face the facts but then deny our responsibility\n홀수형"
+      ]
+    ]
+  },
+  "순서배열(36)": {
+    "samples": 17,
+    "passage_len": {
+      "avg": 1055,
+      "min": 957,
+      "max": 1160,
+      "p5": 961,
+      "p50": 1047,
+      "p95": 1144
+    },
+    "choice_len": {
+      "avg": 14,
+      "min": 14,
+      "max": 14
+    },
+    "has_box_ratio": 0.0,
+    "has_blanks_ratio": 1.0,
+    "has_inline_ratio": 0.0,
+    "sample_questions": [
+      "주어진 글 다음에 이어질 글의 순서로 가장 적절한",
+      "주어진 글 다음에 이어질 글의 순서로 가장 적절한",
+      "주어진 글 다음에 이어질 글의 순서로 가장 적절한"
+    ],
+    "sample_choices": [
+      [
+        "(A) － (C) － (B)",
+        "(B) －(A) － (C)",
+        "(B) － (C) － (A)",
+        "(C) －(A) － (B)",
+        "(C) － (B) － (A)"
+      ],
+      [
+        "(A) － (C) － (B)",
+        "(B) －(A) － (C)",
+        "(B) － (C) － (A)",
+        "(C) －(A) － (B)",
+        "(C) － (B) － (A)"
+      ],
+      [
+        "(A) － (C) － (B)",
+        "(B) －(A) － (C)",
+        "(B) － (C) － (A)",
+        "(C) －(A) － (B)",
+        "(C) － (B) － (A)"
+      ]
+    ]
+  },
+  "순서배열(37)": {
+    "samples": 17,
+    "passage_len": {
+      "avg": 1054,
+      "min": 880,
+      "max": 1221,
+      "p5": 919,
+      "p50": 1037,
+      "p95": 1193
+    },
+    "choice_len": {
+      "avg": 14,
+      "min": 14,
+      "max": 14
+    },
+    "has_box_ratio": 0.0,
+    "has_blanks_ratio": 1.0,
+    "has_inline_ratio": 0.0,
+    "sample_questions": [
+      "주어진 글 다음에 이어질 글의 순서로 가장 적절한",
+      "주어진 글 다음에 이어질 글의 순서로 가장 적절한",
+      "주어진 글 다음에 이어질 글의 순서로 가장 적절한"
+    ],
+    "sample_choices": [
+      [
+        "(A) － (C) － (B)",
+        "(B) －(A) － (C)",
+        "(B) － (C) －(A)",
+        "(C) －(A) － (B)",
+        "(C) － (B) －(A)"
+      ],
+      [
+        "(A) － (C) － (B)",
+        "(B) －(A) － (C)",
+        "(B) － (C) －(A)",
+        "(C) －(A) － (B)",
+        "(C) － (B) －(A)"
+      ],
+      [
+        "(A) － (C) － (B)",
+        "(B) －(A) － (C)",
+        "(B) － (C) －(A)",
+        "(C) －(A) － (B)",
+        "(C) － (B) －(A)"
+      ]
+    ]
+  },
+  "심경(19)": {
+    "samples": 17,
+    "passage_len": {
+      "avg": 668,
+      "min": 594,
+      "max": 771,
+      "p5": 597,
+      "p50": 673,
+      "p95": 726
+    },
+    "choice_len": {
+      "avg": 19,
+      "min": 17,
+      "max": 21
+    },
+    "has_box_ratio": 0.0,
+    "has_blanks_ratio": 0.0,
+    "has_inline_ratio": 0.0,
+    "sample_questions": [
+      "다음 글에 나타난 Evelyn의 심경 변화로 가장 적절한 것은?",
+      "다음 글에 나타난 Evelyn의 심경 변화로 가장 적절한 것은?",
+      "다음 글에 드러난 Jamie의 심경 변화로 가장 적절한 것은?"
+    ],
+    "sample_choices": [
+      [
+        "hopeful → disappointed",
+        "confused → scared",
+        "relaxed → annoyed",
+        "indifferent → depressed",
+        "discouraged → confident"
+      ],
+      [
+        "confused → scared",
+        "discouraged → confident",
+        "relaxed → annoyed",
+        "indifferent → depressed",
+        "hopeful → disappointed"
+      ],
+      [
+        "indifferent → regretful",
+        "pleased → bored",
+        "frustrated → encouraged",
+        "nervous → fearful",
+        "calm → excited"
+      ]
+    ]
+  },
+  "안내문(27)": {
+    "samples": 17,
+    "passage_len": {
+      "avg": 633,
+      "min": 542,
+      "max": 745,
+      "p5": 542,
+      "p50": 632,
+      "p95": 705
+    },
+    "choice_len": {
+      "avg": 21,
+      "min": 16,
+      "max": 27
+    },
+    "has_box_ratio": 0.0,
+    "has_blanks_ratio": 0.0,
+    "has_inline_ratio": 0.0,
+    "sample_questions": [
+      "Cornhill No Paper Cup Challenge에 관한 다음 안내문의",
+      "Cornhill No Paper Cup Challenge에 관한 다음 안내문의",
+      "다음 Renovation Notice의 내용과 일치하지 않는 것은?"
+    ],
+    "sample_choices": [
+      [
+        "참가자는 텀블러를 사용하는 자신의 동영상을 찍는다.",
+        "참가자가 동영상을 업로드할 곳은 학교 웹사이트이다.",
+        "학생회장이 시작할 것이다.",
+        "두 달 동안 진행될 예정이다.",
+        "참가자 전원이 티셔츠를 받을 것이다."
+      ],
+      [
+        "참가자는 텀블러를 사용하는 자신의 동영상을 찍는다.",
+        "참가자가 동영상을 업로드할 곳은 학교 웹사이트이다.",
+        "학생회장이 시작할 것이다.",
+        "두 달 동안 진행될 예정이다.",
+        "참가자 전원이 티셔츠를 받을 것이다."
+      ],
+      [
+        "보수 공사는 2022년 11월 21일에 시작된다.",
+        "보수 공사는 주말에만 진행될 것이다.",
+        "체육관과 실내 수영장은 폐쇄될 것이다.",
+        "모든 야외 레저 활동은 평소와 같이 가능할 것이다.",
+        "손님은 무료로 테니스장을 이용할 수 있다."
+      ]
+    ]
+  },
+  "안내문(28)": {
+    "samples": 17,
+    "passage_len": {
+      "avg": 636,
+      "min": 566,
+      "max": 714,
+      "p5": 573,
+      "p50": 623,
+      "p95": 714
+    },
+    "choice_len": {
+      "avg": 19,
+      "min": 14,
+      "max": 25
+    },
+    "has_box_ratio": 0.0,
+    "has_blanks_ratio": 0.0,
+    "has_inline_ratio": 0.0,
+    "sample_questions": [
+      "Goldbeach SeaWorld Sleepovers에 관한 다음 안내문의",
+      "Goldbeach SeaWorld Sleepovers에 관한 다음 안내문의",
+      "2022 Valestown Recycles Poster Contest에 관한 다음 안내문의"
+    ],
+    "sample_choices": [
+      [
+        "7세 이하의 어린이가 참가할 수 있다.",
+        "평일에 진행된다.",
+        "참가비에 아침 식사가 포함된다.",
+        "모든 활동은 야외에서 진행된다.",
+        "사진 촬영은 언제든지 할 수 있다."
+      ],
+      [
+        "7세 이하의 어린이가 참가할 수 있다.",
+        "평일에 진행된다.",
+        "참가비에 아침 식사가 포함된다.",
+        "모든 활동은 야외에서 진행된다.",
+        "사진 촬영은 언제든지 할 수 있다."
+      ],
+      [
+        "Valestown의 모든 학생들이 참여할 수 있다.",
+        "참가자는 포스터의 주제 선정에 제약을 받지 않는다.",
+        "출품할 파일 양식은 자유롭게 선택 가능하다.",
+        "심사 기준에 창의성이 포함된다.",
+        "1인당 출품할 수 있는 포스터의 수에는 제한이 없다."
+      ]
+    ]
+  },
+  "어법(29)": {
+    "samples": 17,
+    "passage_len": {
+      "avg": 974,
+      "min": 842,
+      "max": 1070,
+      "p5": 886,
+      "p50": 988,
+      "p95": 1063
+    },
+    "choice_len": {
+      "avg": 159,
+      "min": 137,
+      "max": 195
+    },
+    "has_box_ratio": 0.0,
+    "has_blanks_ratio": 0.0,
+    "has_inline_ratio": 0.0,
+    "sample_questions": [
+      "다음 글의 밑줄 친 부분 중, 어법상 틀린 것은? [3점]",
+      "다음 글의 밑줄 친 부분 중, 어법상 틀린 것은? [3점]",
+      "다음 글의 밑줄 친 부분 중, 어법상 틀린 것은?"
+    ],
+    "sample_choices": [
+      [
+        "producing two daughter cells. Each daughter\ncell is smaller than the mother cell, and except for unusual cases,\neach grows until it becomes as large as the mother cell",
+        "was.\nDuring this time, the cell absorbs water, sugars, amino acids,\nand other nutrients and assembles them into new, living\nprotoplasm. After the cell has grown to the proper size, its\nmetabolism shifts as it either prepares to divide or matures and",
+        "differentiates into a specialized cell. Both growth and\ndevelopment require a complex and dynamic set of interactions\ninvolving all cell parts.",
+        "What cell metabolism and structure\nshould be complex would not be surprising, but actually, they\nare rather simple and logical. Even the most complex cell has\nonly a small number of parts, each",
+        "responsible for a distinct,\nwell-defined aspect of cell life.\n*metabolic: 물질대사의 **protoplasm: 원형질"
+      ],
+      [
+        "producing two daughter cells. Each daughter\ncell is smaller than the mother cell, and except for unusual cases,\neach grows until it becomes as large as the mother cell",
+        "was.\nDuring this time, the cell absorbs water, sugars, amino acids,\nand other nutrients and assembles them into new, living\nprotoplasm. After the cell has grown to the proper size, its\nmetabolism shifts as it either prepares to divide or matures and",
+        "differentiates into a specialized cell. Both growth and\ndevelopment require a complex and dynamic set of interactions\ninvolving all cell parts.",
+        "What cell metabolism and structure\nshould be complex would not be surprising, but actually, they\nare rather simple and logical. Even the most complex cell has\nonly a small number of parts, each",
+        "responsible for a distinct,\nwell-defined aspect of cell life.\n*metabolic: 물질대사의 **protoplasm: 원형질"
+      ],
+      [
+        "that it\nconstitutes a kind of theatrical costumery. Clothes are part of\nhow people present",
+        "them to the world, and fashion locates\nthem in the present, relative to what is happening in society\nand to fashion’s own history. As a form of expression, fashion\ncontains a host of ambiguities, enabling individuals to recreate\nthe meanings",
+        "associated with specific pieces of clothing.\nFashion is among the simplest and cheapest methods of\nself-expression: clothes can be",
+        "inexpensively purchased\nwhile making it easy to convey notions of wealth, intellectual\nstature, relaxation or environmental consciousness, even if\nnone of these is true. Fashion can also strengthen agency in\nvarious ways,",
+        "opening up space for action.\n*stature: 능력"
+      ]
+    ]
+  },
+  "어휘(30)": {
+    "samples": 17,
+    "passage_len": {
+      "avg": 1142,
+      "min": 954,
+      "max": 1378,
+      "p5": 1048,
+      "p50": 1107,
+      "p95": 1310
+    },
+    "choice_len": {
+      "avg": 170,
+      "min": 36,
+      "max": 203
+    },
+    "has_box_ratio": 0.0,
+    "has_blanks_ratio": 0.06,
+    "has_inline_ratio": 0.0,
+    "sample_questions": [
+      "다음 글의 밑줄 친 부분 중, 문맥상 낱말의 쓰임이 적절하지",
+      "다음 글의 밑줄 친 부분 중, 문맥상 낱말의 쓰임이 적절하지",
+      "다음 글의 밑줄 친 부분 중, 문맥상 낱말의 쓰임이 적절하지"
+    ],
+    "sample_choices": [
+      [
+        "reduce\nyields and increase production costs for many major crops.\nInorganic nitrogen supplies are",
+        "essential for maintaining\nmoderate to high levels of productivity for many of the\nnon-leguminous crop species, because organic supplies of\nnitrogenous materials often are either limited or more\nexpensive than inorganic nitrogen fertilizers. In addition, there\nare",
+        "benefits to the extensive use of either manure or legumes\nas “green manure” crops. In many cases, weed control can be\nvery difficult or require much hand labor if chemicals cannot\nbe used, and",
+        "fewer people are willing to do this work as\nsocieties become wealthier. Some methods used in “organic”\nfarming, however, such as the sensible use of crop rotations\nand specific combinations of cropping and livestock enterprises,\ncan make important",
+        "contributions to the sustainability of\nrural ecosystems.\n*nitrogen fertilizer: 질소 비료 **manure: 거름\n***legume: 콩과(科) 식물"
+      ],
+      [
+        "reduce\nyields and increase production costs for many major crops.\nInorganic nitrogen supplies are",
+        "essential for maintaining\nmoderate to high levels of productivity for many of the\nnon-leguminous crop species, because organic supplies of\nnitrogenous materials often are either limited or more\nexpensive than inorganic nitrogen fertilizers. In addition, there\nare",
+        "benefits to the extensive use of either manure or legumes\nas “green manure” crops. In many cases, weed control can be\nvery difficult or require much hand labor if chemicals cannot\nbe used, and",
+        "fewer people are willing to do this work as\nsocieties become wealthier. Some methods used in “organic”\nfarming, however, such as the sensible use of crop rotations\nand specific combinations of cropping and livestock enterprises,\ncan make important",
+        "contributions to the sustainability of\nrural ecosystems.\n*nitrogen fertilizer: 질소 비료 **manure: 거름\n***legume: 콩과(科) 식물"
+      ],
+      [
+        "remote motorspace! On the contrary, we\nbrought the motors into our lives, as automobiles, refrigerators,\ndrill presses, and pencil sharpeners. This",
+        "absorption has\nbeen so complete that we refer to all these tools with names that\ndeclare their usage, not their “motorness.” These innovations\nled to a major socioeconomic movement precisely because they\nentered and",
+        "affected profoundly our everyday lives. People\nhave not changed fundamentally in thousands of years.\nTechnology changes constantly. It’s the one that must",
+        "adapt\nto us. That’s exactly what will happen with information technology\nand its devices under human-centric computing. The longer we\ncontinue to believe that computers will take us to a magical new\nworld, the longer we will",
+        "maintain their natural fusion with\nour lives, the hallmark of every major movement that aspires to\nbe called a socioeconomic revolution.\n*hype: 과대광고 **hallmark: 특징"
       ]
     ]
   },
   "요약문(40)": {
-    "samples": 2,
-    "avg_passage_len": 221,
-    "min_passage_len": 221,
-    "max_passage_len": 221,
-    "avg_choice_len": 1,
-    "has_box_ratio": 1.0,
-    "has_blanks_ratio": 0.0,
+    "samples": 17,
+    "passage_len": {
+      "avg": 1237,
+      "min": 1041,
+      "max": 1315,
+      "p5": 1157,
+      "p50": 1227,
+      "p95": 1310
+    },
+    "choice_len": {
+      "avg": 19,
+      "min": 15,
+      "max": 24
+    },
+    "has_box_ratio": 0.0,
+    "has_blanks_ratio": 1.0,
     "has_inline_ratio": 0.0,
     "sample_questions": [
-      "다음 글의 내용을 한 문장으로 요약하고자 한다. 빈칸 (A), (B)에 들어갈 말로 가장 적절한 것은?",
-      "다음 글의 내용을 한 문장으로 요약하고자 한다. 빈칸 (A), (B)에 들어갈 말로 가장 적절한 것은?"
+      "다음 글의 내용을 한 문장으로 요약하고자 한다. 빈칸 (A),",
+      "다음 글의 내용을 한 문장으로 요약하고자 한다. 빈칸 (A),",
+      "다음 글의 내용을 한 문장으로 요약하고자 한다. 빈칸 (A),"
     ],
     "sample_choices": [
       [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
+        "least …patterns",
+        "fixed…features",
+        "limited…functions",
+        "fixed…rules",
+        "least …assumptions"
       ],
       [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
+        "least …patterns",
+        "fixed…features",
+        "limited…functions",
+        "fixed…rules",
+        "least …assumptions"
+      ],
+      [
+        "persisted …limit",
+        "persisted …cultivate",
+        "evolved …accelerate",
+        "diminished…shape",
+        "diminished…restrict"
       ]
     ]
   },
-  "장문어법(41-42)": {
-    "samples": 4,
-    "avg_passage_len": 0,
-    "min_passage_len": 0,
-    "max_passage_len": 0,
-    "avg_choice_len": 1,
+  "요지(22)": {
+    "samples": 17,
+    "passage_len": {
+      "avg": 997,
+      "min": 898,
+      "max": 1138,
+      "p5": 899,
+      "p50": 1005,
+      "p95": 1086
+    },
+    "choice_len": {
+      "avg": 33,
+      "min": 27,
+      "max": 39
+    },
+    "has_box_ratio": 0.0,
+    "has_blanks_ratio": 0.0,
+    "has_inline_ratio": 0.0,
+    "sample_questions": [
+      "다음 글의 요지로 가장 적절한 것은?",
+      "다음 글의 요지로 가장 적절한 것은?",
+      "다음 글의 요지로 가장 적절한 것은?"
+    ],
+    "sample_choices": [
+      [
+        "환경오염으로 인한 피해자들에게 적절한 보상을 하는 것이 바람직하다.",
+        "개인이 피하기 어려운 유해 환경 요인에 대해서는 사회적 대응이 필요하다.",
+        "다수의 건강을 해치는 행위에 대해 도덕적 비난 이상의 조치가 요구된다.",
+        "환경오염 문제를 해결하기 위해서는 사후 대응보다 예방이 중요하다.",
+        "대기오염 문제는 인접 국가들과의 긴밀한 협력을 통해 해결할 수 있다."
+      ],
+      [
+        "개인이 피하기 어려운 유해 환경 요인에 대해서는 사회적 대응이 필요하다.",
+        "환경오염으로 인한 피해자들에게 적절한 보상을 하는 것이 바람직하다.",
+        "다수의 건강을 해치는 행위에 대해 도덕적 비난 이상의 조치가 요구된다.",
+        "환경오염 문제를 해결하기 위해서는 사후 대응보다 예방이 중요하다.",
+        "대기오염 문제는 인접 국가들과의 긴밀한 협력을 통해 해결할 수 있다."
+      ],
+      [
+        "도시에서 자전거는 효율적인 배송 수단으로 사용될 수 있다.",
+        "자전거는 출퇴근 시간을 줄이기 위한 대안으로 선호되고 있다.",
+        "자전거는 배송 수단으로의 경제적 장단점을 모두 가질 수 있다.",
+        "수요자의 요구에 부합하는 다양한 용도의 자전거가 개발되고 있다.",
+        "세계 각국에서는 전기 자전거 사용을 장려하는 정책을 추진하고 있다."
+      ]
+    ]
+  },
+  "인물일치(26)": {
+    "samples": 17,
+    "passage_len": {
+      "avg": 831,
+      "min": 739,
+      "max": 944,
+      "p5": 748,
+      "p50": 828,
+      "p95": 936
+    },
+    "choice_len": {
+      "avg": 25,
+      "min": 19,
+      "max": 30
+    },
+    "has_box_ratio": 0.0,
+    "has_blanks_ratio": 0.0,
+    "has_inline_ratio": 0.0,
+    "sample_questions": [
+      "Donato Bramante에 관한 다음 글의 내용과 일치하지 않는",
+      "Donato Bramante에 관한 다음 글의 내용과 일치하지 않는",
+      "Niklas Luhmann에 관한 다음 글의 내용과 일치하지 않는"
+    ],
+    "sample_choices": [
+      [
+        "Piero della Francesca의 조수로 일했다.",
+        "Milan에서 새로운 양식의 교회들을 건축했다.",
+        "건축에 주된 관심을 갖게 되면서 그림 그리기를 포기했다.",
+        "Pope Julius II의 Rome 재개발 계획에 참여했다.",
+        "그의 건축물들은 다른 건축가들에게 영향을 끼쳤다.\n짝수형"
+      ],
+      [
+        "Piero della Francesca의 조수로 일했다.",
+        "Milan에서 새로운 양식의 교회들을 건축했다.",
+        "건축에 주된 관심을 갖게 되면서 그림 그리기를 포기했다.",
+        "Pope Julius II의 Rome 재개발 계획에 참여했다.",
+        "그의 건축물들은 다른 건축가들에게 영향을 끼쳤다.\n홀수형"
+      ],
+      [
+        "제2차 세계 대전 이후에 법을 공부했다.",
+        "State of Lower Saxony에서 교육 개혁을 담당했다.",
+        "Harvard University에 있을 때 Talcott Parsons의 영향을 받았다.",
+        "다양한 주제에 관해 연구했다.",
+        "그의 책은 번역하기가 쉽다고 알려져 있다.\n홀수형"
+      ]
+    ]
+  },
+  "장문(41-42)": {
+    "samples": 34,
+    "passage_len": {
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "p5": 0,
+      "p50": 0,
+      "p95": 0
+    },
+    "choice_len": {
+      "avg": 26,
+      "min": 3,
+      "max": 56
+    },
     "has_box_ratio": 0.0,
     "has_blanks_ratio": 0.0,
     "has_inline_ratio": 0.0,
     "sample_questions": [
       "윗글의 제목으로 가장 적절한 것은?",
-      "밑줄 친 (a)～(e) 중에서 문맥상 낱말의 쓰임이 적절하지 않은 것은? [3점]",
+      "밑줄 친 (a)～(e) 중에서 문맥상 낱말의 쓰임이 적절하지 않은",
       "윗글의 제목으로 가장 적절한 것은?"
     ],
     "sample_choices": [
       [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
+        "Similarities of Strategies in Sales and Language Learning",
+        "Classification: An Inherent Characteristic of Language",
+        "Exploring Linguistic Issues Through Categorization",
+        "Is a Ready-Made Classification System Truly Better?",
+        "Dilemmas of Using Classification in Language Education"
       ],
       [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
+        "(a)",
+        "(b)",
+        "(c)",
+        "(d)",
+        "(e)"
       ],
       [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
+        "Similarities of Strategies in Sales and Language Learning",
+        "Classification: An Inherent Characteristic of Language",
+        "Exploring Linguistic Issues Through Categorization",
+        "Is a Ready-Made Classification System Truly Better?",
+        "Dilemmas of Using Classification in Language Education"
       ]
-    ]
+    ],
+    "group_passage_len": {
+      "n": 17,
+      "avg": 1536,
+      "min": 1333,
+      "max": 1878,
+      "p5": 1386,
+      "p50": 1496,
+      "p95": 1716
+    }
   },
   "장문독해(43-45)": {
-    "samples": 6,
-    "avg_passage_len": 0,
-    "min_passage_len": 0,
-    "max_passage_len": 0,
-    "avg_choice_len": 1,
+    "samples": 51,
+    "passage_len": {
+      "avg": 0,
+      "min": 0,
+      "max": 0,
+      "p5": 0,
+      "p50": 0,
+      "p95": 0
+    },
+    "choice_len": {
+      "avg": 15,
+      "min": 3,
+      "max": 34
+    },
+    "has_box_ratio": 0.0,
+    "has_blanks_ratio": 0.33,
+    "has_inline_ratio": 0.0,
+    "sample_questions": [
+      "주어진 글 (A)에 이어질 내용을 순서에 맞게 배열한 것으로",
+      "밑줄 친 (a)～(e) 중에서 가리키는 대상이 나머지 넷과 다른",
+      "윗글에 관한 내용으로 적절하지 않은 것은?"
+    ],
+    "sample_choices": [
+      [
+        "(B) －(D) － (C)",
+        "(C) － (B) － (D)",
+        "(C) －(D) － (B)",
+        "(D) － (B) － (C)",
+        "(D) － (C) － (B)"
+      ],
+      [
+        "(a)",
+        "(b)",
+        "(c)",
+        "(d)",
+        "(e)"
+      ],
+      [
+        "Anna는 신입 회원에게 태권도를 가르쳤다.",
+        "Anna와 Jane은 Cora를 보고 놀라지 않았다.",
+        "Anna는 Cora에게 태권도 도복을 사 주었다.",
+        "Cora는 여러 차례 연습에 참여하지 않았다.",
+        "Anna는 Cora를 대다수의 신입 회원과 다를 것이라 생각했다."
+      ]
+    ],
+    "group_passage_len": {
+      "n": 17,
+      "avg": 1999,
+      "min": 1844,
+      "max": 2159,
+      "p5": 1886,
+      "p50": 1986,
+      "p95": 2159
+    }
+  },
+  "제목(24)": {
+    "samples": 17,
+    "passage_len": {
+      "avg": 1036,
+      "min": 845,
+      "max": 1181,
+      "p5": 845,
+      "p50": 1057,
+      "p95": 1175
+    },
+    "choice_len": {
+      "avg": 51,
+      "min": 46,
+      "max": 57
+    },
     "has_box_ratio": 0.0,
     "has_blanks_ratio": 0.0,
     "has_inline_ratio": 0.0,
     "sample_questions": [
-      "주어진 글 (A)에 이어질 내용을 순서에 맞게 배열한 것으로 가장 적절한 것은?",
-      "밑줄 친 (a)～(e) 중에서 가리키는 대상이 나머지 넷과 다른 것은?",
-      "윗글의 내용으로 적절하지 않은 것은?"
+      "다음 글의 제목으로 가장 적절한 것은?",
+      "다음 글의 제목으로 가장 적절한 것은?",
+      "다음 글의 제목으로 가장 적절한 것은?"
     ],
     "sample_choices": [
       [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
+        "Can Industrialization Mend Our Broken Past?",
+        "A Process of Repair: Create, Modify, Transform!",
+        "How to Be a Creative Repairperson: Tips and Ideas",
+        "A Historical Survey of How Repairing Skills Evolved",
+        "Still Left to the Modern Blacksmith: The Art of Repair"
       ],
       [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
+        "Still Left to the Modern Blacksmith: The Art of Repair",
+        "A Historical Survey of How Repairing Skills Evolved",
+        "How to Be a Creative Repairperson: Tips and Ideas",
+        "A Process of Repair: Create, Modify, Transform!",
+        "Can Industrialization Mend Our Broken Past?"
       ],
       [
-        "①",
-        "②",
-        "③",
-        "④",
-        "⑤"
+        "Visual Systems Never Betray Our Trust!",
+        "Secret Missions of Color-Sensitive Brain Cells",
+        "Blind Spots: What Is Still Unknown About the Brain",
+        "Why Brain Cells Exemplify Nature’s Recovery Process",
+        "Separate and Independent: Brain Cells’ Visual Perceptions"
+      ]
+    ]
+  },
+  "주장(20)": {
+    "samples": 17,
+    "passage_len": {
+      "avg": 884,
+      "min": 768,
+      "max": 1018,
+      "p5": 775,
+      "p50": 891,
+      "p95": 978
+    },
+    "choice_len": {
+      "avg": 35,
+      "min": 32,
+      "max": 41
+    },
+    "has_box_ratio": 0.0,
+    "has_blanks_ratio": 0.0,
+    "has_inline_ratio": 0.0,
+    "sample_questions": [
+      "다음 글에서 필자가 주장하는 바로 가장 적절한 것은?",
+      "다음 글에서 필자가 주장하는 바로 가장 적절한 것은?",
+      "다음 글에서 필자가 주장하는 바로 가장 적절한 것은?"
+    ],
+    "sample_choices": [
+      [
+        "기업 이미지에 부합하는 소셜 미디어를 직접 개발하여 운영해야 한다.",
+        "기업은 사회적 가치와 요구를 반영하여 사업 목표를 수립해야 한다.",
+        "소비자의 의견을 수렴하기 위해 소셜 미디어를 적극 활용해야 한다.",
+        "소셜 미디어로 제품을 홍보할 때는 구체적인 정보를 제공해야 한다.",
+        "기업은 소셜 미디어를 활용할 때 사업 목표를 토대로 해야 한다."
+      ],
+      [
+        "기업 이미지에 부합하는 소셜 미디어를 직접 개발하여 운영해야 한다.",
+        "기업은 사회적 가치와 요구를 반영하여 사업 목표를 수립해야 한다.",
+        "기업은 소셜 미디어를 활용할 때 사업 목표를 토대로 해야 한다.",
+        "소셜 미디어로 제품을 홍보할 때는 구체적인 정보를 제공해야 한다.",
+        "소비자의 의견을 수렴하기 위해 소셜 미디어를 적극 활용해야 한다."
+      ],
+      [
+        "성공적인 삶을 위해 미래에 대한 구체적인 계획을 세워야 한다.",
+        "중요한 결정을 내릴 때에는 자신의 직관에 따라 판단해야 한다.",
+        "더 나은 선택을 위해 성공 가능성을 확률적으로 분석해야 한다.",
+        "빠른 목표 달성을 위해 지름길로 가고자 할 때 신중해야 한다.",
+        "인생의 여정에서 선택에 따른 결과를 스스로 책임져야 한다."
+      ]
+    ]
+  },
+  "주제(23)": {
+    "samples": 17,
+    "passage_len": {
+      "avg": 1016,
+      "min": 894,
+      "max": 1192,
+      "p5": 897,
+      "p50": 1018,
+      "p95": 1126
+    },
+    "choice_len": {
+      "avg": 57,
+      "min": 47,
+      "max": 66
+    },
+    "has_box_ratio": 0.0,
+    "has_blanks_ratio": 0.0,
+    "has_inline_ratio": 0.0,
+    "sample_questions": [
+      "다음 글의 주제로 가장 적절한 것은? [3점]",
+      "다음 글의 주제로 가장 적절한 것은? [3점]",
+      "다음 글의 주제로 가장 적절한 것은? [3점]"
+    ],
+    "sample_choices": [
+      [
+        "functional aspects of a paradigm in scientific research",
+        "roles of a paradigm in grouping like-minded researchers",
+        "key factors that promote the rise of innovative paradigms",
+        "significant influence of personal beliefs in scientific fields",
+        "difficulty in drawing novel theories from existing paradigms"
+      ],
+      [
+        "difficulty in drawing novel theories from existing paradigms",
+        "significant influence of personal beliefs in scientific fields",
+        "key factors that promote the rise of innovative paradigms",
+        "roles of a paradigm in grouping like-minded researchers",
+        "functional aspects of a paradigm in scientific research"
+      ],
+      [
+        "steps to make public information accessible to customers",
+        "benefits of publicizing information to ensure free choices",
+        "strategies for companies to increase profits in a free market",
+        "necessities of identifying and analyzing current industry trends",
+        "effects of diversified markets on reasonable customer choices"
       ]
     ]
   }

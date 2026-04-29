@@ -7,6 +7,8 @@ from typing import TypeVar
 from anthropic import AsyncAnthropic
 from pydantic import BaseModel
 
+from app.llm.base import UsageInfo
+
 T = TypeVar("T", bound=BaseModel)
 
 DEFAULT_MODEL = "claude-haiku-4-5-20251001"
@@ -34,7 +36,7 @@ class AnthropicClient:
         schema: type[T],
         max_tokens: int = 2000,
         temperature: float = 0.9,
-    ) -> T:
+    ) -> tuple[T, UsageInfo]:
         # tool_use 강제: 모델이 무조건 emit_question 도구를 호출하게 함
         # input_schema에 Pydantic JSON Schema 그대로 전달
         msg = await self._get_client().messages.create(
@@ -50,7 +52,13 @@ class AnthropicClient:
             tool_choice={"type": "tool", "name": TOOL_NAME},
             messages=[{"role": "user", "content": user}],
         )
+        usage = getattr(msg, "usage", None)
+        usage_info = UsageInfo(
+            model=self._model,
+            prompt_tokens=int(getattr(usage, "input_tokens", 0) or 0),
+            completion_tokens=int(getattr(usage, "output_tokens", 0) or 0),
+        )
         for block in msg.content:
             if block.type == "tool_use" and block.name == TOOL_NAME:
-                return schema.model_validate(block.input)
+                return schema.model_validate(block.input), usage_info
         raise RuntimeError(f"Anthropic 응답에 {TOOL_NAME} tool_use 블록 없음: {msg.content}")

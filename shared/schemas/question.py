@@ -43,11 +43,11 @@ LAYOUT_PATTERN: dict[str, str] = {
     "요지(22)":         "reasoning",
     "주제(23)":         "reasoning",
     "제목(24)":         "reasoning",
-    "내용불일치(26)":   "letter_box",
-    "안내문(27)":       "letter_box",
-    "어법(28)":         "marker_inline",
-    "어휘(29)":         "marker_inline",
-    "빈칸-단어(30)":    "blank_inline",
+    "인물일치(26)":     "reasoning",      # 인물 약력 — 박스 없음, 추론형 본문
+    "안내문(27)":       "letter_box",     # Adventure City Pass 류 박스
+    "안내문(28)":       "letter_box",     # Luckwood Snow Festival 류 박스
+    "어법(29)":         "marker_inline",  # 본문 ①②③④⑤ + 밑줄
+    "어휘(30)":         "marker_inline",  # 본문 단어 ①②③④⑤ + 밑줄
     "빈칸-구(31)":      "blank_inline",
     "빈칸-절(32)":      "blank_inline",
     "빈칸-절(33)":      "blank_inline",
@@ -58,8 +58,8 @@ LAYOUT_PATTERN: dict[str, str] = {
     "문장삽입(38)":     "marker_inline",
     "문장삽입(39)":     "marker_inline",
     "요약문(40)":       "passage_segments",
-    "장문어법(41-42)":  "long_set",
-    "장문독해(43-45)":  "long_set",
+    "장문(41-42)":      "long_set",       # 41=제목 + 42=어휘
+    "장문독해(43-45)":  "long_set",       # 43=순서 + 44=지칭 + 45=일치
 }
 
 
@@ -69,21 +69,59 @@ LAYOUT_PATTERN: dict[str, str] = {
 ACTIVE_TYPES: tuple[str, ...] = (
     "목적(18)", "심경(19)", "주장(20)", "밑줄함의(21)",
     "요지(22)", "주제(23)", "제목(24)",
-    "내용불일치(26)", "안내문(27)",
-    "어법(28)", "어휘(29)",
-    "빈칸-단어(30)", "빈칸-구(31)", "빈칸-절(32)", "빈칸-절(33)", "빈칸-절(34)",
+    "인물일치(26)", "안내문(27)", "안내문(28)",
+    "어법(29)", "어휘(30)",
+    "빈칸-구(31)", "빈칸-절(32)", "빈칸-절(33)", "빈칸-절(34)",
     "무관문장(35)",
     "순서배열(36)", "순서배열(37)",
     "문장삽입(38)", "문장삽입(39)",
     "요약문(40)",
-    "장문어법(41-42)", "장문독해(43-45)",
+    "장문(41-42)", "장문독해(43-45)",
 )
 DISABLED_TYPES: tuple[str, ...] = ("도표(25)",)
 
 # 유형 → 차지하는 슬롯 수 (장문 세트는 자동 확장)
 TYPE_SLOT_COUNT: dict[str, int] = {
-    "장문어법(41-42)":  2,
-    "장문독해(43-45)":  3,
+    "장문(41-42)":     2,
+    "장문독해(43-45)": 3,
+}
+
+
+def type_category(q_type: str | None) -> str:
+    """유형명에서 괄호 앞 대분류만 추출 ('순서배열(36)' → '순서배열').
+
+    그룹 라벨 자동 부착 시 같은 대분류가 연속된 경우만 묶음 라벨을 표시한다.
+    """
+    if not q_type:
+        return ""
+    idx = q_type.find("(")
+    return q_type[:idx] if idx > 0 else q_type
+
+
+# 박스 단락이 필요한 유형 (letter_box / 주어진 글 / 요약문 / 장문 본문)
+TYPES_WITH_BOX_PASSAGE: frozenset[str] = frozenset({
+    "목적(18)", "안내문(27)", "안내문(28)",
+})
+TYPES_WITH_GIVEN_BOX: frozenset[str] = frozenset({
+    "순서배열(36)", "순서배열(37)",   # 주어진 글 박스
+    "문장삽입(38)", "문장삽입(39)",   # 주어진 문장 박스
+})
+TYPES_WITH_SUMMARY_BOX: frozenset[str] = frozenset({
+    "요약문(40)",
+})
+TYPES_WITH_LONGSET_BOX: frozenset[str] = frozenset({
+    "장문(41-42)", "장문독해(43-45)",
+})
+
+
+# 동일 대분류가 연속될 때 자동 부착되는 그룹 라벨 템플릿.
+# {range} 자리에 '36~37' 같은 번호 범위가 들어간다.
+# 장문 세트는 자기 자신만으로 1세트라 항상 라벨 부착.
+GROUP_LABEL_TEMPLATES: dict[str, str] = {
+    "순서배열": "[{range}] 주어진 글 다음에 이어질 글의 순서로 가장 적절한 것을 고르시오.",
+    "문장삽입": "[{range}] 글의 흐름으로 보아, 주어진 문장이 들어가기에 가장 적절한 곳을 고르시오.",
+    "장문":     "[{range}] 다음 글을 읽고, 물음에 답하시오.",
+    "장문독해": "[{range}] 다음 글을 읽고, 물음에 답하시오.",
 }
 
 
@@ -166,3 +204,5 @@ class GenerateRequest(BaseModel):
     questions:      list[QuestionConfig] = Field(..., min_length=1, max_length=MAX_QUESTIONS)
     reference_text: str = ""
     export_format:  Literal["hwpx"] = "hwpx"
+    provider:       Optional[str] = None  # "gemini"/"openai"/"anthropic" — None이면 env LLM_PROVIDER
+    model:          Optional[str] = None  # provider별 모델 ID — None이면 env / DEFAULT_MODEL

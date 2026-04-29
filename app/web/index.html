@@ -67,7 +67,10 @@
   .field { display: flex; flex-direction: column; gap: .3rem; }
   .field label { font-size: .78rem; color: var(--text2); font-weight: 500; }
   .field input, .field select {
-    padding: .45rem .65rem;
+    /* 모든 입력의 height 를 date picker 기준으로 통일 (브라우저 native control 차이 흡수) */
+    height: 2.15rem;
+    line-height: 1.2;
+    padding: 0 .65rem;
     border: 1px solid var(--border2);
     border-radius: var(--radius-sm);
     font-size: .88rem;
@@ -197,6 +200,18 @@
   }
   .btn-gen:hover  { opacity: .88; }
   .btn-gen:disabled { opacity: .45; cursor: default; }
+  .btn-bulk {
+    padding: .55rem 1rem;
+    background: #fff;
+    color: var(--text2);
+    border: 1px solid var(--border2);
+    border-radius: var(--radius-sm);
+    font-size: .85rem;
+    cursor: pointer;
+    transition: all .15s;
+    white-space: nowrap;
+  }
+  .btn-bulk:hover { border-color: var(--green); color: var(--green); background: var(--green-bg); }
 
   /* ─── 상태 알림 ─── */
   .toast {
@@ -285,7 +300,7 @@
           <input id="top-right-label" value="" placeholder="예: 고3 영어">
         </div>
       </div>
-      <div class="form-grid col4">
+      <div class="form-grid col4" style="margin-bottom:.75rem">
         <div class="field">
           <label>학년 / 수준</label>
           <select id="grade">
@@ -314,6 +329,29 @@
           <select id="layout">
             <option selected>2단 (수능형)</option>
             <option>1단</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-grid">
+        <div class="field">
+          <label>LLM 모델</label>
+          <select id="llm-model">
+            <!-- value 는 "provider:model" 포맷 — 빈 값은 서버 기본값 사용 -->
+            <option value="">기본값 (서버 환경변수)</option>
+            <optgroup label="Google Gemini">
+              <option value="gemini:gemini-2.5-flash" selected>Gemini 2.5 Flash (기본)</option>
+              <option value="gemini:gemini-2.5-pro">Gemini 2.5 Pro</option>
+              <option value="gemini:gemini-2.5-flash-lite" disabled>Gemini 2.5 Flash Lite (스키마 미준수로 비활성화 — flash 사용 권장)</option>
+            </optgroup>
+            <optgroup label="Anthropic Claude">
+              <option value="anthropic:claude-opus-4-7">Claude Opus 4.7</option>
+              <option value="anthropic:claude-sonnet-4-6">Claude Sonnet 4.6</option>
+              <option value="anthropic:claude-haiku-4-5-20251001">Claude Haiku 4.5</option>
+            </optgroup>
+            <optgroup label="OpenAI">
+              <option value="openai:gpt-4o">GPT-4o</option>
+              <option value="openai:gpt-4o-mini">GPT-4o mini</option>
+            </optgroup>
           </select>
         </div>
       </div>
@@ -353,6 +391,7 @@
 
     <div class="action-bar">
       <div class="summary" id="summary">문제를 추가해주세요</div>
+      <button class="btn-bulk" onclick="addAllTypes()">+ 전체 유형 일괄 추가</button>
       <button class="btn-gen" id="gen-btn" onclick="generateExam()" disabled>
         시험지 생성 →
       </button>
@@ -372,20 +411,20 @@
 <script>
 // ─── 문제 유형 목록 ──────────────────────────────────────────────────────────
 // 듣기 1~17 미지원, 도표(25)는 이미지 생성 후속 작업 전까지 비활성.
-// 장문어법(41-42)는 1선택 = 2슬롯 차지, 장문독해(43-45)는 1선택 = 3슬롯 차지.
+// 장문(41-42)는 1선택 = 2슬롯 차지, 장문독해(43-45)는 1선택 = 3슬롯 차지.
 const TYPES = {
   "추론형":    ["목적(18)","심경(19)","주장(20)","밑줄함의(21)","요지(22)","주제(23)","제목(24)"],
-  "사실형":    ["내용불일치(26)","안내문(27)"],
-  "어법·어휘": ["어법(28)","어휘(29)"],
-  "빈칸":      ["빈칸-단어(30)","빈칸-구(31)","빈칸-절(32)","빈칸-절(33)","빈칸-절(34)"],
+  "사실형":    ["인물일치(26)","안내문(27)","안내문(28)"],
+  "어법·어휘": ["어법(29)","어휘(30)"],
+  "빈칸":      ["빈칸-구(31)","빈칸-절(32)","빈칸-절(33)","빈칸-절(34)"],
   "논리":      ["무관문장(35)","순서배열(36)","순서배열(37)","문장삽입(38)","문장삽입(39)"],
-  "장문":      ["요약문(40)","장문어법(41-42) [2문항]","장문독해(43-45) [3문항]"],
+  "장문":      ["요약문(40)","장문(41-42) [2문항]","장문독해(43-45) [3문항]"],
   "비활성":    ["도표(25) — 미지원"],
 };
 const TYPE_DISABLED = new Set(["도표(25) — 미지원"]);
 // 서버 전송 시 GUI 라벨 → 정식 유형 코드 매핑
 const TYPE_LABEL_TO_CODE = {
-  "장문어법(41-42) [2문항]": "장문어법(41-42)",
+  "장문(41-42) [2문항]":     "장문(41-42)",
   "장문독해(43-45) [3문항]": "장문독해(43-45)",
 };
 
@@ -450,6 +489,19 @@ function addQuestion() {
   renderQuestions();
 }
 
+function addAllTypes() {
+  // 카테고리 정의 순서대로 (18→45) 활성 유형을 한 개씩 추가.
+  // TYPE_DISABLED(도표 25 등)는 제외.
+  for (const types of Object.values(TYPES)) {
+    for (const t of types) {
+      if (TYPE_DISABLED.has(t)) continue;
+      qCounter++;
+      questions.push({ id: qCounter, type: t, pts: 3 });
+    }
+  }
+  renderQuestions();
+}
+
 function deleteQuestion(id) {
   questions = questions.filter(q => q.id !== id);
   renderQuestions();
@@ -484,8 +536,9 @@ function renderQuestions() {
 }
 
 // 장문 세트가 차지하는 슬롯 수 (서버의 TYPE_SLOT_COUNT와 일치)
+// 키는 GUI 라벨 그대로 (이후 normalizeType이 정식 코드로 변환)
 const SLOT_COUNT = {
-  "장문어법(41-42) [2문항]": 2,
+  "장문(41-42) [2문항]":     2,
   "장문독해(43-45) [3문항]": 3,
 };
 
@@ -523,6 +576,10 @@ async function generateExam() {
     document.getElementById('overlay-msg').textContent = msgs[mi];
   }, 2500);
 
+  // LLM 모델 드롭다운: "provider:model" 형식. 빈 값이면 서버 기본값 사용.
+  const llmRaw = document.getElementById('llm-model').value;
+  const [llmProvider, llmModel] = llmRaw ? llmRaw.split(':', 2) : [null, null];
+
   const payload = {
     meta: {
       title:           document.getElementById('exam-title').value,
@@ -535,11 +592,24 @@ async function generateExam() {
       time_limit:      document.getElementById('time-limit').value,
       layout:     document.getElementById('layout').value,
     },
-    questions: questions.map((q, i) => ({
-      number: i + 1,
-      type:   normalizeType(q.type),
-      points: q.pts,
-    })),
+    provider: llmProvider,
+    model:    llmModel,
+    // number 는 "슬롯 누적" 기준 — 장문(41-42)은 2슬롯, 장문독해(43-45)는 3슬롯 차지하므로
+    // 다음 문항의 시작 번호는 자기 슬롯 만큼 건너뛴다.
+    questions: (() => {
+      const out = [];
+      let cursor = 1;
+      for (const q of questions) {
+        const slots = SLOT_COUNT[q.type] || 1;
+        out.push({
+          number: cursor,
+          type:   normalizeType(q.type),
+          points: q.pts,
+        });
+        cursor += slots;
+      }
+      return out;
+    })(),
     reference_text: refTextCache,
     export_format:  'hwpx',
   };
