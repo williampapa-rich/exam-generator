@@ -20,12 +20,17 @@ from shared.schemas.question import Question
 # 이 상수는 테스트와 fallback 용으로만 유지. 평가원 5년치 분포의 약 95%를 커버하는 폭.
 LENGTH_TOLERANCE = 300
 
-# Phase 1: 비대칭 길이 한계 — overshoot 편향이 강하므로 상한을 더 좁힌다.
+# 비대칭 길이 한계 — overshoot 편향이 강하므로 상한을 더 좁힌다.
 #   하한 = 평균 × LENGTH_LO_RATIO  (너무 짧으면 미달)
 #   상한 = 평균 × LENGTH_HI_RATIO  (너무 길면 초과)
 # scope 가 좁으면 LO 보다 짧아지는 경향, scope 가 넓으면 HI 보다 길어지는 경향.
+#
+# Hotfix 15: HI 1.15 → 1.25 로 완화. 모델이 일관되게 2200~2600자 (평균의 110~130%) 로
+# 풀어쓰는 강한 prior 가 있어 1.15 (=2298) 에선 통과율이 매우 낮음. 평가원 p95(2159) 보다
+# 살짝 길어지나 시험지 사용에 무리 없음. Hotfix 14 의 단락별 검증은 효과 1/9 로 dead code,
+# 함께 제거 (모델은 균등하게 풀어쓰지 한 단락만 비대해지지 않는다는 실측 결과).
 LENGTH_LO_RATIO = 0.70
-LENGTH_HI_RATIO = 1.15
+LENGTH_HI_RATIO = 1.25
 
 CIRCLED_5 = ("①", "②", "③", "④", "⑤")
 ALPHA_5   = ("(a)", "(b)", "(c)", "(d)", "(e)")
@@ -40,6 +45,15 @@ _CIRCLED_UNDERLINE_RE = re.compile(r"([①②③④⑤])_([^_\n][^_\n]*?)_")
 _ALPHA_UNDERLINE_RE   = re.compile(r"\(([a-e])\)\s+_([^_\n][^_\n]*?)_")
 # '_①' 처럼 마커가 밑줄 안으로 들어가버린 잘못된 패턴
 _UNDERLINE_CIRCLED_RE = re.compile(r"_[①②③④⑤]")
+# 본문에 (a)~(e) 외의 알파벳 라벨 (f)~(z) 가 박힌 결함 (시험지-16 1번 사례).
+# 평가원 출제는 (a)~(e) 5개 고정 — (f) 추가 라벨은 dead label 로 본문에 떠도는 출제 결함.
+_EXTRA_ALPHA_LABEL_RE = re.compile(r"\([f-zF-Z]\)")
+
+# 본문 안에 단락 라벨 (A)/(B)/(C)/(D) 가 박힌 결함 (시험지-20 1번 사례).
+# 시스템이 단락 라벨을 자동 부착하므로 LLM 본문에는 평문만 와야 함. 본문에 (B), (C), (D)
+# 가 박히면 학생 시험지에 라벨이 두 번 노출 (시스템 부착 + 본문 잔재) — 출제 결함.
+_PARAGRAPH_LABEL_RE = re.compile(r"\([A-D]\)")
+
 # '_(a) _word_' 처럼 라벨 직전에 여는 _ 가 붙어 라벨이 underline 토큰 안으로 흘러 들어간 패턴.
 # 렌더러 정규식 _([^_\n]+?)_ 가 가장 가까운 짝 ('_(a) _') 을 잡으면서
 # 라벨에 밑줄이 묻고 정작 단어는 평문이 되는 hwpx 출력 결함 (시험지.hwpx 23번 사례).
@@ -203,6 +217,195 @@ def _check_alpha_underline_form(text: str, qtype: str) -> str | None:
     return None
 
 
+# Y 라벨 위치에 사용 금지인 단순 대명사 (가리키는 대상이 모호함).
+# 'X advised (b) him' 같은 구문에서 him 은 청자(주인공) 이지 X 가 아닌데, 모델이
+# 자기 입으로 (b) 가 X 를 가리킨다고 assignments 에 거짓 적으면 5:0 결함이 통과됨.
+# Y 라벨에는 반드시 이름/직함/명사구로 직접 명시해야 cross-check 가능.
+_PRONOUN_FORBIDDEN_AT_Y = frozenset({
+    "he", "she", "him", "her", "his", "hers",
+    "He", "She", "Him", "Her", "His", "Hers",
+})
+
+# 어느 라벨이든 직후에 재귀대명사 단독으로 박히면 비문 (시험지-17 1번/4번 결함).
+# '(a) himself would receive' 처럼 주어 자리에 단독 재귀대명사는 영어로 비문 —
+# 정상은 '(a) he would receive' 또는 '(a) his face frowned' 식. 모델이 시스템 후처리의
+# '단어 1개 underline' 가정에 맞추려다 재귀대명사를 부자연스러운 위치에 넣는 패턴.
+_REFLEXIVE_FORBIDDEN = frozenset({
+    "himself", "herself", "itself", "themselves",
+    "myself", "yourself", "ourselves", "yourselves", "oneself",
+    "Himself", "Herself", "Itself", "Themselves",
+    "Myself", "Yourself", "Ourselves", "Yourselves", "Oneself",
+})
+
+# 시험지-18 4번 결함: '(d) His mentor listened' — His(=Elias 소유격) + mentor(=Davies)
+# 가 한 표현 안에 두 인물을 동시에 가리켜 라벨 지칭이 모호해짐.
+# 라벨 직후 '소유격(his/her/their) + 직위/관계 명사' 패턴 reject.
+_POSSESSIVE_PRONOUNS = ("his", "her", "their", "His", "Her", "Their")
+_RELATION_NOUNS = frozenset({
+    "mentor", "teacher", "professor", "advisor", "supervisor",
+    "father", "mother", "parent", "sister", "brother", "uncle", "aunt",
+    "friend", "colleague", "partner", "boss", "employee", "student",
+    "leader", "follower", "guide", "coach", "trainer",
+    "Mentor", "Teacher", "Professor", "Advisor", "Supervisor",
+    "Father", "Mother", "Parent", "Sister", "Brother", "Uncle", "Aunt",
+    "Friend", "Colleague", "Partner", "Boss", "Employee", "Student",
+    "Leader", "Follower", "Guide", "Coach", "Trainer",
+})
+
+
+def _y_label_word(text: str, label_letter: str) -> str | None:
+    """본문에서 '(letter) word' 의 첫 단어를 추출. 시스템 후처리로 '_word_' 형태가 되어
+    있을 수도 있으니 둘 다 매칭."""
+    pat = re.compile(rf"\({label_letter}\)\s+_?([A-Za-z][A-Za-z']*)_?")
+    m = pat.search(text)
+    return m.group(1) if m else None
+
+
+def _check_no_paragraph_labels(text: str, qtype: str) -> str | None:
+    """본문에 단락 라벨 (A)/(B)/(C)/(D) 가 박힌 결함 reject (시험지-20 1번).
+
+    시스템이 단락 라벨을 자동 부착하므로 본문에는 평문만 와야 함. 본문에 단락 라벨이
+    그대로 남으면 시험지에 라벨이 중복 표시되어 학생 혼란 야기.
+    적용 대상: 순서배열(36, 37), 장문독해(43-45) — 단락 라벨 자동 부착 유형.
+    """
+    m = _PARAGRAPH_LABEL_RE.search(text)
+    if m:
+        return (f"{qtype}: 본문에 단락 라벨 {m.group()!r} 가 박힘 — "
+                f"시스템이 단락 라벨을 자동 부착하므로 본문 텍스트에는 (A)/(B)/(C)/(D) 박지 말 것. "
+                f"본문은 평문 영어 문장으로만.")
+    return None
+
+
+def _check_alpha_labels_unique(text: str, qtype: str) -> str | None:
+    """본문에서 각 라벨 (a)~(e) 가 정확히 1번씩만 등장하는지 검증 (시험지-19 7번 결함).
+
+    LLM 이 한 라벨을 두 번 박으면 — 예: (a) 가 passage 와 sub_passages[0] 양쪽에 —
+    학생 시점에 어느 위치가 진짜 (a) 인지 모호. 평가원 출제는 (a)~(e) 5개가 본문 전체에서
+    각각 정확히 1번. 중복 발견 시 reject.
+    """
+    for letter in "abcde":
+        cnt = text.count(f"({letter})")
+        if cnt > 1:
+            return (f"{qtype}: 본문에 라벨 ({letter}) 가 {cnt}번 등장 — 정확히 1번이어야 함. "
+                    f"평가원 출제는 (a)~(e) 5개가 본문 전체에서 각각 한 번씩만 박혀야 한다.")
+    return None
+
+
+def _check_no_possessive_relation_at_labels(text: str, qtype: str) -> str | None:
+    """라벨 직후 '소유격 + 직위/관계 명사' 패턴 reject (시험지-18 4번).
+
+    '(d) His mentor' 처럼 His(주인공 소유격) + mentor(부수 인물) 가 한 표현에 들어가면
+    라벨이 둘 중 누구를 가리키는지 의미적으로 모호 — 학생이 풀 때 정답이 안 됨.
+    각 라벨 위치에서 '(라벨) 소유격 직위명사' 패턴 매칭 시 reject.
+
+    시스템이 이미 '_His mentor_' 또는 '_His_ mentor' 로 underline 처리했어도 매칭하도록
+    각 토큰 양옆에 _ 가 있을 수도, 사이에 _ 가 있을 수도 허용.
+    """
+    poss = "|".join(_POSSESSIVE_PRONOUNS)
+    # `(label) _?His_? _?mentor_?` 형태 매칭: 각 단어가 _ 로 둘러싸여 있을 수도 있고
+    # underline charPr 변환 결과가 어떤 토큰화였든 통과.
+    pat = re.compile(rf"\(([a-e])\)\s+_?({poss})_?\s+_?([A-Za-z][A-Za-z']*)_?")
+    for m in pat.finditer(text):
+        label, possessive, noun = m.group(1), m.group(2), m.group(3)
+        if noun in _RELATION_NOUNS:
+            return (f"{qtype}: 라벨 ({label}) 직후 '{possessive} {noun}' 패턴 — "
+                    f"소유격({possessive})은 주인공을, 명사({noun})는 부수 인물을 가리켜 "
+                    f"라벨이 둘 중 누구를 지칭하는지 의미적으로 모호. "
+                    f"명시 호칭만 단독 사용할 것 (예: '({label}) Mr. Davies watched' / "
+                    f"'({label}) the mentor stepped closer').")
+    return None
+
+
+def _check_no_reflexive_at_labels(text: str, qtype: str) -> str | None:
+    """라벨 (a)~(e) 직후 재귀대명사 단독 박힌 케이스 reject (시험지-17 1번/4번).
+
+    '(a) himself' 가 주어/목적어 자리에 단독으로 박히면 영어 비문.
+    각 라벨 위치 단어가 재귀대명사면 즉시 reject.
+    """
+    for letter in "abcde":
+        word = _y_label_word(text, letter)
+        if word and word in _REFLEXIVE_FORBIDDEN:
+            return (f"{qtype}: 라벨 ({letter}) 직후 단어가 재귀대명사 {word!r} — "
+                    f"주어/목적어 자리에 단독 재귀대명사는 영어 비문. "
+                    f"정상 형식 예: '({letter}) he aimed to convey' 또는 "
+                    f"'({letter}) his face frowned'. 재귀대명사는 'X teaches himself' "
+                    f"처럼 동사의 목적어 자리에서만 사용 가능 — 라벨이 그 자리에 오는 경우는 "
+                    f"본문 구조를 다시 잡을 것.")
+    return None
+
+
+def _check_referent_assignments(q: Question) -> str | None:
+    """장문독해(43-45) referent_assignments 단일 진실 원천 검증.
+
+    referent_assignments 만 보고 모든 것을 검증:
+      1) 5개 인물명 명시 (인덱스 0=a, 1=b, ..., 4=e)
+      2) 정확히 4:1 분포 (한 이름 4번, 다른 이름 1번)
+      3) '1번 등장 인물' 의 인덱스 + 1 == sub_questions[0].answer
+
+    plan 단계의 referent_distribution + 자가검증 referent_check 은 모두 제거됨 —
+    중복/거짓말로 변질되어 인지 부담만 폭증시킴. 단일 필드라 거짓말 우회 자체가 불가능.
+    """
+    assigns = q.referent_assignments
+    if not assigns:
+        return ("장문독해(43-45): referent_assignments 가 비어있음. "
+                "본문에 박은 (a)~(e) 5개 라벨이 가리키는 인물명을 인덱스 순서대로 "
+                "5개 문자열로 명시할 것 (예: ['Leo','Mr. Harrison','Leo','Leo','Leo']).")
+    if len(assigns) != 5:
+        return (f"장문독해(43-45): referent_assignments 가 정확히 5개여야 함 "
+                f"(현재 {len(assigns)}개). 0=a, 1=b, 2=c, 3=d, 4=e 순서로.")
+
+    # 인물명 정규화 (앞뒤 공백)
+    names = [a.strip() for a in assigns]
+    if any(not n for n in names):
+        return (f"장문독해(43-45): referent_assignments 에 빈 이름이 있음 → {assigns}. "
+                f"5개 모두 인물명이 채워져야 함.")
+
+    # 분포 — 정확히 4:1
+    from collections import Counter
+    counts = Counter(names)
+    sorted_counts = sorted(counts.values())
+    if sorted_counts != [1, 4]:
+        return (f"장문독해(43-45): 지칭 분포가 4:1 이 아님 — assignments={assigns}, "
+                f"분포={dict(counts)}. 평가원 출제 규칙: 4명은 동일 인물 X 지칭, "
+                f"1명만 다른 인물 Y 지칭. 5:0 / 3:2 / 2:2:1 모두 reject.")
+
+    # '1번 등장 인물' 의 라벨 위치 == sub_questions[0].answer
+    if not q.sub_questions or len(q.sub_questions) < 1:
+        return None  # 다른 검사에서 잡힘
+    sole_name = next(name for name, c in counts.items() if c == 1)
+    sole_idx = names.index(sole_name)  # 0..4
+    sole_label = "abcde"[sole_idx]
+    answer_idx = q.sub_questions[0].answer  # 1..5
+    expected_label = "abcde"[answer_idx - 1]
+    if sole_label != expected_label:
+        return (f"장문독해(43-45): 부수 인물 {sole_name!r} 이 ({sole_label}) 위치에 등장하는데 "
+                f"sub_questions[0].answer={answer_idx} 는 ({expected_label}) 를 정답으로 가리킴. "
+                f"부수 인물(1번 등장) 위치와 정답이 반드시 일치해야 함. "
+                f"assignments={assigns}.")
+
+    # Y 라벨 직후 단어가 대명사면 reject (cross-check 불가능 → 5:0 거짓말 우회 차단).
+    # 'X advised (b) him' / '(b) his mentor, Mr. Peterson' 같은 패턴에서 him/his 는 X 를
+    # 가리키는데 모델이 assignments 에 Y 로 거짓 명시하는 케이스가 발생. 본문 라벨 직후
+    # 단어가 단순 대명사이면 의미적으로 Y 를 직접 지칭한다고 단정할 수 없다.
+    all_text = (
+        "\n".join(q.passage or [])
+        + "\n"
+        + "\n".join("\n".join(sp) for sp in (q.sub_passages or []))
+    )
+    y_word = _y_label_word(all_text, sole_label)
+    if y_word is None:
+        return (f"장문독해(43-45): Y 라벨 ({sole_label}) 직후 단어를 본문에서 추출 실패. "
+                f"본문에 '({sole_label}) 단어' 형태가 정확히 있는지 확인.")
+    if y_word in _PRONOUN_FORBIDDEN_AT_Y:
+        return (f"장문독해(43-45): Y 라벨 ({sole_label}) 직후 단어가 대명사 {y_word!r} — "
+                f"부수 인물 {sole_name!r} 가리키는 대상이 모호하다. "
+                f"Y 라벨 위치에는 대명사(he/she/his/her 등) 금지 — Y 의 이름/직함/명시 호칭으로 "
+                f"직접 박을 것 (예: '({sole_label}) Mr. Davies watched' / "
+                f"'({sole_label}) the gallery owner stepped closer'). "
+                f"assignments={assigns}.")
+    return None
+
+
 def _check_alpha_label_order(text: str, qtype: str) -> str | None:
     """(a)~(e) 라벨이 본문 위에서 아래로 알파벳 순으로 등장하는지 검증.
 
@@ -334,6 +537,13 @@ def validate_question(q: Question) -> str | None:
     if t in ("순서배열(36)", "순서배열(37)"):
         if not q.sub_passages or len(q.sub_passages) != 3:
             return f"{t}: sub_passages 가 정확히 3개여야 함 (현재 {len(q.sub_passages or [])}개)"
+        # 본문 단락 라벨 (A)~(C) 노출 차단 (Hotfix 20).
+        order_text = passage + "\n" + "\n".join(
+            "\n".join(sp) for sp in (q.sub_passages or [])
+        )
+        para_err = _check_no_paragraph_labels(order_text, t)
+        if para_err:
+            return para_err
         for i, c in enumerate(q.choices or []):
             if not _ORDER_CHOICE_RE.match((c or "").strip()):
                 return (f"{t}: choices[{i}] 가 '(X)-(Y)-(Z)' 형식이 아님 (괄호 누락?) → {c!r}")
@@ -343,6 +553,19 @@ def validate_question(q: Question) -> str | None:
         miss = _has_all(passage, ALPHA_5)
         if miss:
             return f"장문(41-42): {miss}"
+        unique_err = _check_alpha_labels_unique(passage, "장문(41-42)")
+        if unique_err:
+            return unique_err
+        extra = _EXTRA_ALPHA_LABEL_RE.search(passage)
+        if extra:
+            return (f"장문(41-42): 본문에 (a)~(e) 외 추가 라벨 {extra.group()!r} 발견 — "
+                    f"평가원 출제는 (a)~(e) 5개 고정. (f) 이상 라벨 박지 말 것.")
+        refl_err = _check_no_reflexive_at_labels(passage, "장문(41-42)")
+        if refl_err:
+            return refl_err
+        poss_err = _check_no_possessive_relation_at_labels(passage, "장문(41-42)")
+        if poss_err:
+            return poss_err
         if _LABEL_UNDERLINED_RE.search(passage):
             return ("장문(41-42): 라벨 자체가 밑줄로 감싸진 패턴 '_(x)_' 발견 — "
                     "라벨은 평문, 단어/구만 _..._ 로 밑줄 처리해야 함")
@@ -370,9 +593,27 @@ def validate_question(q: Question) -> str | None:
         all_text = passage + "\n" + "\n".join(
             "\n".join(sp) for sp in (q.sub_passages or [])
         )
+        # 본문 단락 라벨 (A)~(D) 노출 차단 (시험지-20 1번 결함)
+        para_err = _check_no_paragraph_labels(all_text, "장문독해(43-45)")
+        if para_err:
+            return para_err
         miss = _has_all(all_text, ALPHA_5)
         if miss:
             return f"장문독해(43-45): {miss}"
+        unique_err = _check_alpha_labels_unique(all_text, "장문독해(43-45)")
+        if unique_err:
+            return unique_err
+        extra = _EXTRA_ALPHA_LABEL_RE.search(all_text)
+        if extra:
+            return (f"장문독해(43-45): 본문에 (a)~(e) 외 추가 라벨 {extra.group()!r} 발견 — "
+                    f"평가원 출제는 (a)~(e) 5개 고정. (f) 이상 라벨 박지 말 것 "
+                    f"(시험지-16 1번 사례 차단).")
+        refl_err = _check_no_reflexive_at_labels(all_text, "장문독해(43-45)")
+        if refl_err:
+            return refl_err
+        poss_err = _check_no_possessive_relation_at_labels(all_text, "장문독해(43-45)")
+        if poss_err:
+            return poss_err
         if _LABEL_UNDERLINED_RE.search(all_text):
             return ("장문독해(43-45): 라벨 자체가 밑줄로 감싸진 패턴 '_(x)_' 발견 — "
                     "라벨은 평문, 대명사/명사구만 _..._ 로 밑줄 처리해야 함")
@@ -391,6 +632,12 @@ def validate_question(q: Question) -> str | None:
         order_err = _check_alpha_label_order(all_text, "장문독해(43-45)")
         if order_err:
             return order_err
+        # 지칭 4:1 분포 + 정답 위치 검증 (단일 진실 원천 — referent_assignments 만 봄).
+        # plan.referent_distribution + referent_check 은 모두 제거됨 — 중복/거짓말로 변질.
+        # assignments 5개 인물명만 모델이 적으면 분포/answer 일치까지 자동 검증.
+        assign_err = _check_referent_assignments(q)
+        if assign_err:
+            return assign_err
         if not q.sub_questions or len(q.sub_questions) != 2:
             return f"장문독해(43-45): sub_questions 길이 2 필요 (현재 {len(q.sub_questions or [])})"
         # 44번 = 지칭 → choices = (a)~(e), 45번 = 일치 → choices = ①~⑤ 텍스트 5개

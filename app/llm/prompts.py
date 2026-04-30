@@ -252,58 +252,69 @@ TYPE_HINTS: dict[str, str] = {
     ),
     "장문(41-42)": (
         "긴 본문 1개 + 2문항 세트 (41 제목 + 42 어휘). "
-        "passage 는 본문 전체 (제목 + 본문). "
-        "**필수**: 본문 안에 5개 어휘 후보를 정확히 다음 형태로 표기. "
-        "  '... (a) _word1_ ... (b) _word2_ ... (c) _word3_ ... (d) _word4_ ... (e) _word5_ ...' "
-        "(라벨 '(a)~(e)' 는 평문, 바로 뒤 단어/구만 _..._ 로 밑줄 — 라벨 자체 밑줄 금지). "
-        "잘못된 예 1: '_(a)_ word1' (라벨에 밑줄 들어감 → 지칭 대상 모호). "
-        "잘못된 예 2: '... been _(a) _word1_ ...' (라벨 **직전**에 여는 _ 추가 — "
-        "렌더링 시 라벨에 밑줄이 묻고 단어가 평문이 됨). "
-        "**라벨 (a)~(e) 직전·직후 어디에도 추가 _ 절대 금지** — "
-        "각 후보는 정확히 '라벨 + 공백 + _word_' 한 가지 형태만 사용. "
-        "**출력 구조**: "
-        "  - question_text/choices/answer 에는 41번 (제목)을 채울 것: "
-        "    question_text='윗글의 제목으로 가장 적절한 것은?', choices=5개 영어 제목, answer=정수. "
-        "  - sub_questions 길이=1, 42번 (어휘): "
-        "    [{question_text: '윗글의 밑줄 친 (a)~(e) 중에서 문맥상 낱말의 쓰임이 적절하지 않은 것은?', "
-        "      choices: ['(a)','(b)','(c)','(d)','(e)'], answer: 정수}]. "
-        "group_label 은 null. 시스템이 자동으로 [N~M] 다음 글을 읽고 ... 부착."
+        "passage 는 본문 전체 (제목 + 본문).\n"
+        "\n"
+        "[(a)~(e) 어휘 후보 — 본문에 라벨만 박기, 마커는 시스템 담당]\n"
+        "  본문 영어 문장 안에 라벨 5개를 단어 직전에 박는다 — '(a) ', '(b) ', ... 평문 형태.\n"
+        "  예: 'Tradition often (a) confines creative expression. Scholars (b) embrace this view. "
+        "Yet rigid rules can (c) stifle innovation. True artists (d) transcend boundaries, "
+        "finding their voice through (e) experimentation.'\n"
+        "  → '(a) confines' 같은 평문으로만. 시스템이 자동으로 '(a) _confines_' 처럼 underline 변환.\n"
+        "  **금지**: 본문에 직접 _ 또는 *, 다른 마크다운 마커 사용 금지.\n"
+        "  라벨 등장 순서: 본문 위→아래 (a)→(b)→(c)→(d)→(e) 알파벳 순.\n"
+        "\n"
+        "[출력 구조]\n"
+        "  question_text='윗글의 제목으로 가장 적절한 것은?', choices=5개 영어 제목, answer=정수. "
+        "  sub_questions=[{질문:'윗글의 밑줄 친 (a)~(e) 중에서 문맥상 낱말의 쓰임이 적절하지 않은 것은?', "
+        "    choices:['(a)','(b)','(c)','(d)','(e)'], answer:정수}]. "
+        "  group_label 은 null."
     ),
     "장문독해(43-45)": (
         "(A)(B)(C)(D) 4단락 본문 + 3문항 세트 (43 순서 + 44 지칭 + 45 일치). "
-        "passage 는 (A) 단락 본문만 (라벨 제외). "
-        "sub_passages 는 [(B)단락 본문, (C)단락 본문, (D)단락 본문] 각 약 400~500자. "
-        "**중요: passage / sub_passages 안에 (A)~(D) 라벨을 넣지 말고 본문만 넣을 것** (라벨은 시스템이 자동 부착). "
-        "**필수**: 본문 안에 (a)~(e) 지칭 5개를 다음 형태로 표기. "
-        "  '... (a) _pronoun1_ ... (b) _pronoun2_ ... (c) _pronoun3_ ... (d) _pronoun4_ ... (e) _pronoun5_ ...' "
-        "(라벨 '(a)~(e)' 는 평문, 바로 뒤 대명사/명사구만 _..._ 로 밑줄 — 라벨 자체 밑줄 금지). "
-        "잘못된 예 1: '_(a)_ he' (라벨에 밑줄 들어감 → 지칭 대상 모호). "
-        "잘못된 예 2: '... observed _(a) _him_ with ...' (라벨 **직전**에 여는 _ 추가 — "
-        "렌더링 시 라벨에 밑줄이 묻고 대명사가 평문이 됨). "
-        "**라벨 (a)~(e) 직전·직후 어디에도 추가 _ 절대 금지** — "
-        "각 후보는 정확히 '라벨 + 공백 + _pronoun_' 한 가지 형태만 사용. "
-        "**라벨 등장 순서**: (a)~(e) 는 학생이 시험지를 위에서 아래로 읽는 순서대로 "
-        "알파벳 순으로 등장해야 한다. 즉 passage(=A단락) → sub_passages[0](=B단락) → "
-        "sub_passages[1](=C단락) → sub_passages[2](=D단락) 순서로 (a)→(b)→...→(e). "
-        "예: passage 와 sub_passages[0] 합쳐 (a),(b) → sub_passages[1] 에 (c),(d) → "
-        "sub_passages[2] 에 (e). 정답이 (C)-(B)-(D) 같은 순서더라도 라벨은 항상 "
-        "단락 표기 순서를 따른다 (정답 흐름 순서로 라벨 매기지 말 것). "
-        "**지칭 다양성 (44번 변별력)**: 5개 지칭 중 **최소 3개는 동일한 대명사 형태** "
-        "(예: he/his/him 중 하나로 통일된 3개 이상)여야 함. "
-        "she vs he 같은 단순 성별 비교만으로 정답이 풀리는 출제 절대 금지. "
-        "정답을 찾으려면 학생이 본문 의미를 파악해 누구를 지칭하는지 추론해야 한다. "
-        "동성 인물 2명 이상 등장시키거나, 대명사 일부를 명사구·동의어·은유로 대체해 "
-        "형태만 보고는 풀 수 없게 만들 것. "
-        "**출력 구조**: "
-        "  - question_text/choices/answer 에는 43번 (순서 배열): "
-        "    question_text='주어진 글 (A) 다음에 이어질 글의 순서로 가장 적절한 것은?', "
-        "    choices=['(B)-(D)-(C)','(C)-(B)-(D)','(C)-(D)-(B)','(D)-(B)-(C)','(D)-(C)-(B)'], answer=정수. "
-        "  - sub_questions 길이=2 (44번 지칭 + 45번 일치): "
-        "    [{question_text: '밑줄 친 (a)~(e) 중에서 가리키는 대상이 나머지 넷과 다른 것은?', "
-        "      choices: ['(a)','(b)','(c)','(d)','(e)'], answer: 정수}, "
-        "    {question_text: '윗글에 관한 내용으로 적절하지 않은 것은?', "
-        "      choices: 5개 한국어 진술, answer: 정수}]. "
-        "group_label 은 null. 시스템이 자동 부착."
+        "passage = (A) 단락 본문, sub_passages = [(B), (C), (D)]. 4단락 모두 비슷한 분량으로 균형있게. "
+        "passage / sub_passages 안에 (A)~(D) 라벨 넣지 말 것 (시스템이 자동 부착).\n"
+        "\n"
+        "[(a)~(e) 지칭 — 본문에 라벨만 박기, 마커는 시스템 담당]\n"
+        "  본문 영어 문장 안에 라벨 5개를 자연스럽게 박는다 — 단어 직전에 '(a) ', '(b) ', ... 형태.\n"
+        "  예: 'Leo poured tea for (a) himself, lost in thought. Mr. Davies watched quietly. "
+        "(b) He asked gently. Leo paused, weighing (c) his options. (d) He rarely doubted his path. "
+        "But that day, (e) his certainty wavered.'\n"
+        "  → '(a) himself' 같은 평문 형태로만. 시스템이 자동으로 '(a) _himself_' 처럼 underline 변환.\n"
+        "  **금지**: 본문에 직접 _ 또는 *, 다른 마크다운 마커 사용 금지 — 평문 라벨만.\n"
+        "  **라벨 등장 순서**: 본문 위→아래 (a)→(b)→(c)→(d)→(e) 알파벳 순.\n"
+        "  passage(A)+sub_passages[0](B) 에 (a),(b) → sub_passages[1](C) 에 (c),(d) → "
+        "  sub_passages[2](D) 에 (e). 정답 순서와 무관하게 단락 표기 순서대로.\n"
+        "\n"
+        "[44번 정답 구조 — 4:1]\n"
+        "  5개 지칭 중 4개는 주인공 X, 1개는 부수 인물 Y. "
+        "  Y 등장 라벨 위치 + 1 = sub_questions[0].answer. "
+        "  예: assignments=['Leo','Mr.Harrison','Leo','Leo','Leo'], answer=2.\n"
+        "  referent_assignments 5개 인물명을 정확히 명시 (validator 가 자동 4:1 검증, "
+        "  거짓말 즉시 reject). 5:0 / 3:2 분포 금지.\n"
+        "  **Y 라벨 직후 단어 규칙 (반드시)**: 부수 인물 Y 가 등장하는 그 1개 라벨 위치에는 "
+        "  **대명사 (he/she/him/her/his/hers) 사용 금지**. 반드시 Y 의 이름/직함/명시적 호칭을 "
+        "  라벨 직후에 박을 것.\n"
+        "    ✓ 올바른 예: '(b) Mr. Davies watched the canvas thoughtfully.'\n"
+        "    ✓ 올바른 예: '(b) the gallery owner stepped closer.'\n"
+        "    ✓ 올바른 예: '(b) Professor Petrova nodded slowly.'\n"
+        "    ❌ 잘못된 예: '(b) his mentor, Mr. Peterson, paid a visit.'  ← 'his' 는 X(Elias) 지칭\n"
+        "    ❌ 잘못된 예: '(b) he watched quietly.'                      ← 누구 지칭인지 모호\n"
+        "  X 가 등장하는 4개 라벨은 대명사(he/she/his/her) 자유 허용 — 위 규칙은 Y 1개만.\n"
+        "  이유: 모델이 'X advised (b) him' 처럼 박으면 him 은 청자(=X) 가 되어 5:0 결함 발생. "
+        "  Y 자체를 동작 주체/명시 호칭으로 박아야 모호성 제거.\n"
+        "\n"
+        "[지칭 변별력]\n"
+        "  같은 성별 동성 2명으로 X, Y 를 잡아 단순 성별 비교로 안 풀리게. "
+        "  'X advised (b) him' 에서 him 은 청자(주인공) — Y 지칭하게 하려면 "
+        "  'X watched as (b) he frowned' 처럼 Y 자체를 동작 주체로.\n"
+        "\n"
+        "[출력 구조]\n"
+        "  question_text='주어진 글 (A) 다음에 이어질 글의 순서로 가장 적절한 것은?', "
+        "  choices=['(B)-(D)-(C)','(C)-(B)-(D)','(C)-(D)-(B)','(D)-(B)-(C)','(D)-(C)-(B)'], answer=정수. "
+        "  sub_questions=[{질문:'밑줄 친 (a)~(e) 중에서 가리키는 대상이 나머지 넷과 다른 것은?', "
+        "    choices:['(a)','(b)','(c)','(d)','(e)'], answer:정수}, "
+        "  {질문:'윗글에 관한 내용으로 적절하지 않은 것은?', choices:5개 한국어 진술, answer:정수}]. "
+        "  group_label 은 null."
     ),
 }
 
@@ -365,10 +376,167 @@ def length_directive(q_type: str) -> str:
 _length_hint = length_directive
 
 
+def _recent_answers_directive(q_type: str) -> str:
+    """순서배열(36,37) / 장문독해(43-45) 정답 분포 편향 회피 (Hotfix 17-2).
+
+    측정 결과 장문독해 정답이 ①(B-D-C) 편향 — 13건 중 7건(54%, 평가원 기대 20%×2.7).
+    Hotfix 7-3 의 강제 명령 버전은 9/9 실패라 폐기. 이번엔 약한 신호:
+      · 최근 5건 success 의 sub_questions[0].answer 만 user 에 노출
+      · '최근 정답이 X 였으니 이번엔 다른 번호로' 단순 명령
+      · 본문 흐름 강제는 안 함 (인지 부담 회피)
+    """
+    if q_type not in ("순서배열(36)", "순서배열(37)", "장문독해(43-45)"):
+        return ""
+    import os
+    log_path = os.environ.get("USAGE_LOG_PATH")
+    if log_path:
+        path = Path(log_path)
+    else:
+        path = Path(__file__).resolve().parents[2] / "tools" / "stats" / "usage_log.jsonl"
+    if not path.exists():
+        return ""
+    try:
+        recent: list[int] = []
+        for line in reversed(path.read_text(encoding="utf-8").splitlines()):
+            if not line.strip():
+                continue
+            try:
+                rec = json.loads(line)
+            except Exception:
+                continue
+            if rec.get("type") != q_type or not rec.get("success"):
+                continue
+            ans = rec.get("answer")
+            if isinstance(ans, int) and 1 <= ans <= 5:
+                recent.append(ans)
+            if len(recent) >= 5:
+                break
+        if not recent:
+            return ""
+    except Exception:
+        return ""
+
+    # 정답 라벨로 변환
+    if q_type == "장문독해(43-45)":
+        labels = ['(B)-(D)-(C)','(C)-(B)-(D)','(C)-(D)-(B)','(D)-(B)-(C)','(D)-(C)-(B)']
+    else:
+        labels = ['(A)-(C)-(B)','(B)-(A)-(C)','(B)-(C)-(A)','(C)-(A)-(B)','(C)-(B)-(A)']
+    listed = ", ".join(f"①②③④⑤"[a-1] + labels[a-1] for a in recent)
+    return (
+        f"\n\n[최근 정답 회피 — 약한 신호]\n"
+        f"  최근 success 5건 정답: {listed}\n"
+        f"  같은 번호로만 쏠리지 않게 위와 다른 정답 번호로 출제 권장 (강제 아님)."
+    )
+
+
 def _ref_context(reference_text: str) -> str:
     if not reference_text:
         return ""
     return f"\n\n[참고 자료 - 이 내용을 바탕으로 관련 주제/어휘를 활용하세요]\n{reference_text[:2000]}"
+
+
+# 최근 출제된 scope 회피 — 동일 유형에서 narrative 수렴(예: 장문독해의 'young artist'
+# modal pattern) 을 자동으로 깨기 위한 메커니즘.
+_RECENT_SCOPE_LIMIT = 5  # 최근 N건 scope 를 user 메시지에 노출
+
+
+def _answer_diversity_directive(q_type: str) -> str:
+    """순서배열(36,37) / 장문독해(43-45) 의 정답 다양성 강제 — 강력 명령형 버전.
+
+    Hotfix 8 에서 비활성됐던 함수. 강제 명령("자연스럽게 이어지도록")이 인지 부담 폭증
+    시켜 9/9 실패. 현재 비활성 상태 — prompt_for_type 에서 호출 안 함. 보존만.
+    """
+    import random
+    if q_type in ("순서배열(36)", "순서배열(37)"):
+        # 보기: ①(A)-(C)-(B), ②(B)-(A)-(C), ③(B)-(C)-(A), ④(C)-(A)-(B), ⑤(C)-(B)-(A)
+        # ①은 5개 옵션 중 하나일 뿐 — 5개 균등 분포로 무작위 선택
+        target = random.randint(1, 5)
+        circled = "①②③④⑤"[target - 1]
+        choices = [
+            "(A)-(C)-(B)", "(B)-(A)-(C)", "(B)-(C)-(A)",
+            "(C)-(A)-(B)", "(C)-(B)-(A)",
+        ]
+        return (
+            f"\n\n[이번 호출 정답 분포 강제]\n"
+            f"  · 이 문제의 정답은 **{circled} {choices[target-1]}** 으로 만들 것 (answer={target}).\n"
+            f"  · sub_passages 는 (A)/(B)/(C) 순서로 입력되지만, 자연스러운 흐름은 "
+            f"위 정답 순서대로 읽어야 성립해야 한다.\n"
+            f"  · 즉 sub_passages 자체는 (A)→(B)→(C) 인데 학생이 정답을 따라 읽으면 "
+            f"{choices[target-1]} 흐름이 자연스럽게 이어지도록 작성.\n"
+            f"  · 모델 편향상 항상 ①(B-C-D) 으로 수렴하는 경향이 있어 이번 호출은 "
+            f"강제로 다른 정답 분포로 출제."
+        )
+    if q_type == "장문독해(43-45)":
+        # 보기: ①(B)-(D)-(C), ②(C)-(B)-(D), ③(C)-(D)-(B), ④(D)-(B)-(C), ⑤(D)-(C)-(B)
+        target = random.randint(1, 5)
+        circled = "①②③④⑤"[target - 1]
+        choices = [
+            "(B)-(D)-(C)", "(C)-(B)-(D)", "(C)-(D)-(B)",
+            "(D)-(B)-(C)", "(D)-(C)-(B)",
+        ]
+        return (
+            f"\n\n[이번 호출 정답 분포 강제]\n"
+            f"  · 43번 (순서) 의 정답은 **{circled} {choices[target-1]}** 으로 만들 것 (answer={target}).\n"
+            f"  · sub_passages 는 [(B)본문, (C)본문, (D)본문] 순서로 입력되지만, "
+            f"학생이 (A) 다음에 정답대로 읽으면 자연스러운 흐름이 되도록 본문을 설계.\n"
+            f"  · sub_passages 자체는 (B)/(C)/(D) 순서지만 그 안의 내용은 "
+            f"(A)→{choices[target-1]} 흐름이 자연스럽도록 분배.\n"
+            f"  · 모델 편향(항상 ①) 을 이번 호출은 강제로 다른 분포로 출제."
+        )
+    return ""
+
+
+def _recent_scopes_directive(q_type: str) -> str:
+    """usage_log.jsonl 에서 동일 유형 최근 성공 호출의 plan_topic_scope 를 읽어
+    user 메시지에 회피 가이드로 첨부.
+
+    설계:
+      - 같은 type 에서 success=True 인 호출만 (실패한 scope 는 회피 대상 아님).
+      - 최신 N건 (역순으로 읽되 중복 scope 는 dedup).
+      - 로그 파일 없거나 읽기 실패 → 빈 문자열 반환 (안전).
+      - plan 필드가 없는 baseline 행은 자동 무시 (plan_topic_scope 키 없음).
+    """
+    import os
+    log_path = os.environ.get("USAGE_LOG_PATH")
+    if log_path:
+        path = Path(log_path)
+    else:
+        path = Path(__file__).resolve().parents[2] / "tools" / "stats" / "usage_log.jsonl"
+    if not path.exists():
+        return ""
+    try:
+        scopes: list[str] = []
+        seen: set[str] = set()
+        # 파일 끝에서부터 읽기 (최신 우선)
+        for line in reversed(path.read_text(encoding="utf-8").splitlines()):
+            if not line.strip():
+                continue
+            try:
+                rec = json.loads(line)
+            except Exception:
+                continue
+            if rec.get("type") != q_type or not rec.get("success"):
+                continue
+            scope = rec.get("plan_topic_scope")
+            if not scope or scope in seen:
+                continue
+            seen.add(scope)
+            scopes.append(scope)
+            if len(scopes) >= _RECENT_SCOPE_LIMIT:
+                break
+        if not scopes:
+            return ""
+    except Exception:
+        return ""
+
+    # 길이 한도 — 너무 길면 user 메시지가 부풀어 attention 분산
+    listed = "\n".join(f"  · {s[:200]}" for s in scopes)
+    return (
+        f"\n\n[최근 출제된 주제 — 이와 다른 narrative 로 작성할 것]\n"
+        f"{listed}\n"
+        f"위 주제·등장인물·setting 과 겹치지 않는 새로운 scope 로 plan.topic_scope 를 잡을 것. "
+        f"같은 직업군(예: 예술가)·같은 plot 구조(예: 슬럼프→멘토→깨달음) 반복 금지."
+    )
 
 
 def _base_system() -> str:
@@ -396,11 +564,16 @@ def prompt_for_type(
     type_hint  = TYPE_HINTS[q_type]
     length     = _length_hint(q_type)
     ref        = _ref_context(reference_text)
+    avoid      = _recent_scopes_directive(q_type)       # 동일 유형 최근 scope 회피
+    ans_avoid  = _recent_answers_directive(q_type)      # 정답 편향 회피 (Hotfix 17-2)
+
+    # _answer_diversity_directive (Hotfix 7-3) 는 영구 비활성. 본문 흐름 강제 명령이
+    # 인지 부담 폭증으로 9/9 실패. 이번엔 _recent_answers_directive 만 사용 (약한 신호).
 
     user = (
         f"수능 영어 '{q_type}' 유형 문제를 1개 생성해주세요.\n"
         f"난이도: {grade_hint}\n"
         f"배점: {points}점\n\n"
-        f"유형 가이드: {type_hint}{length}{ref}"
+        f"유형 가이드: {type_hint}{length}{avoid}{ans_avoid}{ref}"
     )
     return SYSTEM_PROMPT, user

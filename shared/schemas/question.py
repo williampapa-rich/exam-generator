@@ -227,6 +227,22 @@ class Question(BaseModel):
         ),
     )
 
+    # 장문독해(43-45) 전용 — 본문 (a)~(e) 5개 라벨이 실제로 가리키는 인물명을 인덱스 순서대로
+    # 명시. 이게 4:1 분포의 단일 진실 원천 — validator 가 Counter 로 4:1 / answer 일치 자동 검증.
+    # plan 단계의 사전 분포 commit (referent_distribution) + 자가검증 (referent_check) 은
+    # 모두 제거 — 모델 인지 부담만 폭증시키고 honesty 거짓말로 우회됨. 단일 필드면 거짓말 불가.
+    referent_assignments: Optional[list[str]] = Field(
+        default=None,
+        description=(
+            "장문독해(43-45) 전용. (a)~(e) 5개 라벨이 가리키는 인물을 5개 문자열로 적기 "
+            "(인덱스 0=a, 1=b, 2=c, 3=d, 4=e). "
+            "예: ['Leo', 'Mr. Harrison', 'Leo', 'Leo', 'Leo']. "
+            "**필수**: 정확히 4:1 분포 (한 인물 4번, 다른 인물 1번). "
+            "**필수**: '1번 등장 인물' 의 인덱스 + 1 이 sub_questions[0].answer 와 일치. "
+            "주의: 'X advised (b) him' 에서 him 은 청자(주인공) 이지 X 가 아님."
+        ),
+    )
+
     group_label:    Optional[str]                = None
 
     # parser 메타 (LLM/renderer는 무시 가능)
